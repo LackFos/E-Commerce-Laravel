@@ -20,3 +20,5 @@ Route::get('/', function () {
 
 Route::get('/login', [AuthController::class, 'loginPage']);
 Route::post('/login', [AuthController::class, 'authenticate']);
+
+Route::post('/register', [AuthController::class, 'register']);
