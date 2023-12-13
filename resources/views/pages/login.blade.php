@@ -13,7 +13,13 @@
                 
                  <div class='flex flex-col gap-4'>
                      <input class='px-6 py-3 bg-white border border-gray-100 border-solid focus:border-primary focus:outline-none focus:shadow-input w-96 h-14 rounded-2xl' name="email" type="text" placeholder='Email'>
+                     @error('email')
+                            <p class="text-red-600">{{ $message }}</p>
+                        @enderror
                      <input class='px-6 py-3 bg-white border border-gray-100 border-solid focus:border-primary focus:outline-none focus:shadow-input w-96 h-14 rounded-2xl' name="password" type="password" placeholder='Password'>
+                     @error('email')
+                            <p class="text-red-600">{{ $message }}</p>
+                        @enderror
                 </div>
 
                 <div class='flex flex-col gap-8'>
@@ -30,12 +36,8 @@
                     </div>
                     
                     <div class='flex flex-col justify-center'>
-                        
-                        @error('email')
-                            <p class="text-red-600">{{ $message }}</p>
-                        @enderror
 
-                        <button type="submit" class='text-base'>Belum punya akun? <span class='text-base font-semibold text-primary'>Daftar Sekarang</span></button>
+                        <button href="/register" type="submit" class='text-base'>Belum punya akun? <span href='/register' class='text-base font-semibold text-primary'>Daftar Sekarang</span></button>
                     </div>
                 </div>
             </form>
