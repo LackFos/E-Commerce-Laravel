@@ -5,7 +5,17 @@ module.exports = {
         "./resources/**/*.vue",
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                primary: {
+                    light: "#F6C3C5",
+                    DEFAULT: "#FF696E",
+                },
+            },
+            boxShadow: {
+                input: "0px 0px 0px 3px #F6C3C5;",
+            },
+        },
     },
     plugins: [],
 };
