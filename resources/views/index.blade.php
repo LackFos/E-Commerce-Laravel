@@ -13,7 +13,7 @@
 
     <!-- Styles -->
     @vite('resources/css/app.css')
-        </head>
+    </head>
 
 <body>
     @yield('page')
