@@ -35,9 +35,8 @@
                         <button class='text-base font-semibold text-white hover:bg-opacity-75 w-96 h-14 rounded-2xl bg-primary'>Masuk</button>
                     </div>
                     
-                    <div class='flex flex-col justify-center'>
-
-                        <button href="/register" type="submit" class='text-base'>Belum punya akun? <span href='/register' class='text-base font-semibold text-primary'>Daftar Sekarang</span></button>
+                    <div class='flex justify-center'>
+                        <a class='text-base'>Belum punya akun?   <a href='/register' class='text-base font-semibold text-primary'>Daftar Sekarang</a></a>
                     </div>
                 </div>
             </form>
