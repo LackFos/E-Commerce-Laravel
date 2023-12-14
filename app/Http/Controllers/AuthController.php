@@ -47,7 +47,8 @@ class AuthController extends Controller
         $credentials = $request->validate([
             'username' => 'bail|required|string',
             'email' => 'bail|required|unique:users,email|email',
-            'phone_number' => 'bail|required|unique:users,phone_number',
+            'phone_number' =>
+                'bail|required|unique:users,phone_number|max_digits:13',
             'password' => 'bail|required|min:8|string',
             'confirm_password' => 'bail|required|same:password|string',
         ]);
