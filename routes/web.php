@@ -1,7 +1,13 @@
 <?php
 
+use App\Http\Middleware\AdminOnly;
+use App\Http\Middleware\RequireAuth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,20 +22,21 @@ use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('pages.home');
+})->name('home');
+
+Route::middleware(RedirectIfAuthenticated::class)->group(function () {
+    Route::controller(AuthController::class)->group(function () {
+        Route::get('/login', 'showLoginForm')->name('login.show');
+        Route::post('/login', 'authenticate');
+        Route::get('/register', 'showRegisterForm');
+        Route::post('/register', 'register');
+    });
 });
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name(
-    'login.show'
+Route::get('/order', [OrderController::class, 'store'])->middleware(
+    RequireAuth::class
 );
-Route::post('/login', [AuthController::class, 'authenticate']);
 
-<<<<<<< Updated upstream
-Route::get('/register', [AuthController::class, 'showRegisterForm']);
-Route::post('/register', [AuthController::class, 'register']);
-
-Route::get('/profile', function () {
-    return view('pages.profile');
-=======
 Route::prefix('profile')->group(function () {
     Route::get('/', function () {
         return view('pages.profileAccount');
@@ -50,5 +57,24 @@ Route::prefix('profile')->group(function () {
     Route::get('/transaction/done', function () {
         return view('pages.done');
     })->name('profile.transaction.done');
->>>>>>> Stashed changes
 });
+
+Route::prefix('dashboard')
+    ->middleware(AdminOnly::class)
+    ->group(function () {
+        Route::controller(ProductController::class)->group(function () {
+            Route::get('/products', 'index');
+            Route::get('/product/{product:slug}', 'show');
+            Route::post('/product/{product:slug}', 'store');
+            Route::patch('/product/{product:slug}', 'update');
+            Route::delete('/product/{product:slug}', 'destroy');
+        });
+
+        Route::controller(CategoryController::class)->group(function () {
+            Route::get('/categories', 'index');
+            Route::get('/category/{category:slug}', 'show');
+            Route::post('/category/{category:slug}', 'store');
+            Route::patch('/category/{category:slug}', 'update');
+            Route::delete('/category/{category:slug}/delete', 'destroy');
+        });
+    });

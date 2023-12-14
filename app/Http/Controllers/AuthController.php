@@ -24,13 +24,12 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+            'email' => 'bail|required|email',
+            'password' => 'bail|required|string',
         ]);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
         }
 
         return back()
@@ -46,16 +45,19 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $credentials = $request->validate([
-            'username' => 'bail|required',
-            'email' => 'bail|required|unique:users,email',
-            'password' => 'bail|required|min:8',
-            'confirm_password' => 'bail|required|same:password',
+            'username' => 'bail|required|string',
+            'email' => 'bail|required|unique:users,email|email',
+            'phone_number' => 'bail|required|unique:users,phone_number',
+            'password' => 'bail|required|min:8|string',
+            'confirm_password' => 'bail|required|same:password|string',
         ]);
 
-        $user = new User();
-        $user->username = $credentials['username'];
-        $user->email = $credentials['email'];
-        $user->password = $credentials['password'];
+        $user = new User([
+            'username' => $credentials['username'],
+            'email' => $credentials['email'],
+            'phone_number' => $credentials['phone_number'],
+            'password' => $credentials['password'],
+        ]);
         $user->save();
 
         return redirect()->route('login.show');

@@ -14,8 +14,10 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->integer('price');
             $table->string('image');
             $table->string('color');
+            $table->string('size');
             $table->integer('stock');
             $table->string('description');
             $table->foreignId('category_id');

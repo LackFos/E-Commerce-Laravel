@@ -29,12 +29,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $request->input('name');
-        $slug = Str::of($name)->slug('-');
+        $validated = $request->validate([
+            'name' => 'bail|required|unique:categories|string',
+        ]);
 
         Category::create([
-            'name' => $name,
-            'slug' => $slug,
+            'name' => $validated['name'],
+            'slug' => Str::slug($validated['name'], '-'),
         ]);
     }
 
@@ -58,7 +59,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'bail|required|unique:categories,name|string',
+        ]);
+
+        $category->update([
+            'name' => $validated['name'],
+            'slug' => Str::slug($validated['name'], '-'),
+        ]);
     }
 
     /**
@@ -66,6 +74,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
     }
 }
