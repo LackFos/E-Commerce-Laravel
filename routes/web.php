@@ -42,21 +42,9 @@ Route::prefix('profile')->group(function () {
         return view('pages.profileAccount');
     })->name('profile.account');
 
-    Route::get('/transaction', function () {
+    Route::get('/transaction/{slug}', function () {
         return view('pages.transaction');
     })->name('profile.transaction');
-
-    Route::get('/transaction/waitingValidation', function () {
-        return view('pages.waitingValidation');
-    })->name('profile.transaction.waitingValidation');
-
-    Route::get('/transaction/onGoing', function () {
-        return view('pages.onGoing');
-    })->name('profile.transaction.onGoing');
-
-    Route::get('/transaction/done', function () {
-        return view('pages.done');
-    })->name('profile.transaction.done');
 });
 
 Route::prefix('dashboard')
