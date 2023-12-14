@@ -32,8 +32,8 @@
          <div class='flex flex-col justify-start w-1/4 gap-6'>
             <div class='flex flex-col w-full bg-white border border-gray-100 border-solid rounded-2xl'>
                 <div class='flex items-center justify-start h-32 gap-6 p-6'><div class='w-20 h-20 bg-gray-300 rounded-full'></div><span>John Doe</span></div>
-                <div class='flex items-center justify-start h-16 gap-4 px-6 py-4'><img src="{{ asset('icons/profile.svg') }}" alt=""><a href="{{ route('profile.account') }}"  class='text-base text-black'>Profil Akun</a></div>
-                <div class='flex items-center justify-start h-16 gap-4 px-6 py-4'><img src="{{ asset('icons/document.svg') }}" alt=""><a href="{{ route('profile.transaction') }}" class='text-base text-black'>Detail Transaksi</a></div>
+                <div class='flex items-center justify-start h-16 gap-4 px-6 py-4'><x-profile-icon/><a href="{{ route('profile.account') }}"  class='text-base text-black'>Profil Akun</a></div>
+                <div class='flex items-center justify-start h-16 gap-4 px-6 py-4'><img src="{{ asset('icons/document.svg') }}" alt=""><a href="/profile/transaction/a" class='text-base text-black'>Detail Transaksi</a></div>
             </div>
             <div class='flex items-center justify-start h-16 gap-4 px-6 py-4 bg-white rounded-2xl'><img src="{{ asset('icons/logout.svg') }}" alt=""><a href='/' class='text-base text-red-500'>Keluar akun</a></div>
          </div>
