@@ -8,12 +8,16 @@
                 <span>+62 812-2045-6789</span>
             </div>
         </div>
-        <div class="flex items-center justify-center gap-10">
+        <div class="flex items-start justify-center gap-10">
             <div class="flex flex-col gap-2">
                 <span class="text-xl font-bold">PEMBELI</span>
                 <a href="">Akun Saya</a>
                 <a href="">Wishlish Saya</a>
                 <a href="">Riwayat Pesanan</a>
+            </div>
+            <div class="flex flex-col gap-2">
+                <span class="text-xl font-bold">BANTUAN</span>
+                <a href="">Kontak kami</a>
             </div>
         </div>
     </div>
