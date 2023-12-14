@@ -31,11 +31,11 @@
     <div class='flex w-3/4'>
          <div class='flex flex-col justify-start gap-6'>
             <div class='flex flex-col bg-white border border-gray-100 border-solid w-80 rounded-2xl'>
-                <div class='flex items-center justify-center h-32'>John Doe</div>
-                <div class='flex items-center justify-center h-16'>Profil Akun</div>
-                <div class='flex items-center justify-center h-16'>Detail Transaksi</div>
+                <div class='flex items-center justify-start h-32 gap-6 p-6'><div class='w-20 h-20 bg-gray-300 rounded-full'></div><span>John Doe</span></div>
+                <div class='flex items-center justify-start h-16 px-6 py-4'>Profil Akun</div>
+                <div class='flex items-center justify-start h-16 px-6 py-4'>Detail Transaksi</div>
             </div>
-            <div class='flex items-center justify-center h-16 bg-white rounded-2xl'>Detail Transaksi</div>
+            <div class='flex items-center justify-start h-16 px-6 py-4 bg-white rounded-2xl'>Keluar</div>
          </div>
     </div>
 </div>
