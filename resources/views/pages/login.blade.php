@@ -27,7 +27,7 @@
                 <div class='flex flex-col gap-8'>
                     <div class='flex justify-between'>
                         <div class='flex items-center'>
-                            <input type="checkbox" id="rememberMe" name="remember" class="h-4 w-4">
+                            <input type="checkbox" id="rememberMe" name="remember">
                             <label for="rememberMe" class='ml-2 block text-base text-black'>Remember me</label>
                         </div>
                         <span class='text-base text-primary'>Lupa Kata Sandi?</span>

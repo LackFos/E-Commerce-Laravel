@@ -37,32 +37,33 @@ Route::get('/order', [OrderController::class, 'store'])->middleware(
     RequireAuth::class
 );
 
-Route::prefix('profile')->group(function () {
-    Route::get('/', function () {
-        return view('pages.profileAccount');
-    })->name('profile.account');
+Route::prefix('profile')
+    ->middleware(RequireAuth::class)
+    ->group(function () {
+        Route::get('/', function () {
+            return view('pages.profile');
+        })->name('profile');
 
-    Route::get('/transaction/{slug}', function () {
-        return view('pages.transaction');
-    })->name('profile.transaction');
-});
+        Route::get('/orders/{slug}', function () {
+            return view('pages.orders');
+        })->name('orders');
+    });
 
 Route::prefix('dashboard')
     ->middleware(AdminOnly::class)
     ->group(function () {
         Route::controller(ProductController::class)->group(function () {
-            Route::get('/products', 'index');
-            Route::get('/product/{product:slug}', 'show');
-            Route::post('/product/{product:slug}', 'store');
-            Route::patch('/product/{product:slug}', 'update');
-            Route::delete('/product/{product:slug}', 'destroy');
+            Route::get('/produk/{product:slug}', 'show');
+            Route::post('/produk/{product:slug}', 'store');
+            Route::patch('/produk/{product:slug}', 'update');
+            Route::delete('/produk/{product:slug}', 'destroy');
         });
 
         Route::controller(CategoryController::class)->group(function () {
-            Route::get('/categories', 'index');
-            Route::get('/category/{category:slug}', 'show');
-            Route::post('/category/{category:slug}', 'store');
-            Route::patch('/category/{category:slug}', 'update');
-            Route::delete('/category/{category:slug}/delete', 'destroy');
+            Route::get('/kategori', 'index');
+            Route::get('/kategori/{category:slug}', 'show');
+            Route::post('/kategori/{category:slug}', 'store');
+            Route::patch('/kategori/{category:slug}', 'update');
+            Route::delete('/kategori/{category:slug}/delete', 'destroy');
         });
     });
