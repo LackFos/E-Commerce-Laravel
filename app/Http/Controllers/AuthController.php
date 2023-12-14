@@ -8,9 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function loginPage(Request $request)
+    public function showLoginForm()
     {
         return view('pages.login');
+    }
+
+    public function showRegisterForm()
+    {
+        return view('pages.register');
     }
 
     /**
@@ -35,15 +40,24 @@ class AuthController extends Controller
             ->onlyInput('email');
     }
 
+    /**
+     * Handle an register attempt.
+     */
     public function register(Request $request)
     {
         $credentials = $request->validate([
-            'username' => 'required',
-            'email' => 'required|email:unique',
-            'password' => 'required|min:8',
-            'confirm_password' => 'required|same:password',
+            'username' => 'bail|required',
+            'email' => 'bail|required|unique:users,email',
+            'password' => 'bail|required|min:8',
+            'confirm_password' => 'bail|required|same:password',
         ]);
 
-        User::create([$credentials]);
+        $user = new User();
+        $user->username = $credentials['username'];
+        $user->email = $credentials['email'];
+        $user->password = $credentials['password'];
+        $user->save();
+
+        return redirect()->route('login.show');
     }
 }

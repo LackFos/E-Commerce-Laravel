@@ -15,6 +15,8 @@ return new class extends Migration {
             $table->string('name');
             $table->string('slug');
             $table->string('image');
+            $table->string('color');
+            $table->integer('stock');
             $table->string('description');
             $table->foreignId('category_id');
             $table->timestamps();

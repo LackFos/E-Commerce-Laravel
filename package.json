@@ -5,7 +5,7 @@
         "serve": "php artisan serve",
         "dev": "vite",
         "build": "vite build",
-        "format": "blade-formatter resources/**/*.blade.php"
+        "migrate": "php artisan migrate:fresh --seed"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.16",

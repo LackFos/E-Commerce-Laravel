@@ -16,6 +16,8 @@ class ProductSeeder extends Seeder
             'name' => 'Product #1',
             'slug' => 'product-1',
             'image' => '/storage/product_image/OIP.jpeg',
+            'color' => 'Merah',
+            'stock' => '5',
             'description' =>
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
             'category_id' => 1,
@@ -25,6 +27,8 @@ class ProductSeeder extends Seeder
             'name' => 'Product #2',
             'slug' => 'product-2',
             'image' => '/storage/product_image/OIP.jpeg',
+            'color' => 'Biru',
+            'stock' => '1',
             'description' =>
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
             'category_id' => 1,
@@ -34,6 +38,8 @@ class ProductSeeder extends Seeder
             'name' => 'Product #3',
             'slug' => 'product-3',
             'image' => '/storage/product_image/OIP.jpeg',
+            'color' => 'Army',
+            'stock' => '10',
             'description' =>
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
             'category_id' => 2,

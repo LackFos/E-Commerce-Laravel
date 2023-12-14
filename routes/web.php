@@ -18,11 +18,14 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
-Route::get('/login', [AuthController::class, 'loginPage']);
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name(
+    'login.show'
+);
 Route::post('/login', [AuthController::class, 'authenticate']);
+
+Route::get('/register', [AuthController::class, 'showRegisterForm']);
+Route::post('/register', [AuthController::class, 'register']);
 
 Route::get('/profile', function () {
     return view('pages.profile');
 });
-
-Route::post('/register', [AuthController::class, 'register']);
