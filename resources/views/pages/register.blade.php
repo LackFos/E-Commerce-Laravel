@@ -54,7 +54,7 @@
                     class='h-14 w-96 rounded-2xl bg-primary text-base font-semibold text-white hover:bg-opacity-75'>Daftar
                     Akun</button>
 
-                <div class='flex justify-center'>
+                <div class='flex justify-center gap-2'>
                     <a class='text-base'>Sudah punya akun? <a href='/login'
                             class='text-base font-semibold text-primary'>Login Sekarang</a></a>
                 </div>
