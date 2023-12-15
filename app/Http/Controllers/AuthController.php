@@ -19,27 +19,6 @@ class AuthController extends Controller
     }
 
     /**
-     * Handle an authentication attempt.
-     */
-    public function authenticate(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'bail|required|email',
-            'password' => 'bail|required|string',
-        ]);
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-        }
-
-        return back()
-            ->withErrors([
-                'email' => 'Email atau password salah.',
-            ])
-            ->onlyInput('email');
-    }
-
-    /**
      * Handle an register attempt.
      */
     public function register(Request $request)
@@ -62,5 +41,35 @@ class AuthController extends Controller
         $user->save();
 
         return redirect()->route('login.show');
+    }
+
+    /**
+     * Handle an authentication attempt.
+     */
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'bail|required|email',
+            'password' => 'bail|required|string',
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+        }
+
+        return back()
+            ->withErrors([
+                'email' => 'Email atau password salah.',
+            ])
+            ->onlyInput('email');
+    }
+
+    /**
+     * Handle logout attempt.
+     */
+    public function Logout()
+    {
+        Auth::logout();
+        return redirect()->route('home');
     }
 }

@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->uuid('id')->primary();
             $table->string('username');
             $table->string('email')->unique();
-            $table->bigInteger('phone_number')->unique();
+            $table->char('phone_number', 13)->unique();
             $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

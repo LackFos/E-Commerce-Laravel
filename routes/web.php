@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
@@ -26,10 +27,15 @@ Route::get('/', function () {
 
 Route::middleware(RedirectIfAuthenticated::class)->group(function () {
     Route::controller(AuthController::class)->group(function () {
-        Route::get('/login', 'showLoginForm')->name('login.show');
-        Route::post('/login', 'authenticate');
         Route::get('/register', 'showRegisterForm');
         Route::post('/register', 'register');
+
+        Route::get('/login', 'showLoginForm')->name('login.show');
+        Route::post('/login', 'authenticate');
+
+        Route::post('/logout', 'logout')
+            ->name('logout')
+            ->withoutMiddleware([RedirectIfAuthenticated::class]);
     });
 });
 
@@ -40,13 +46,13 @@ Route::get('/order', [OrderController::class, 'store'])->middleware(
 Route::prefix('profile')
     ->middleware(RequireAuth::class)
     ->group(function () {
-        Route::get('/', function () {
-            return view('pages.profile');
-        })->name('profile');
-
-        Route::get('/orders/{slug}', function () {
-            return view('pages.orders');
-        })->name('orders');
+        Route::get('/', [ProfileController::class, 'showProfile'])->name(
+            'profile'
+        );
+        Route::get('/orders/{slug}', [
+            ProfileController::class,
+            'showOrders',
+        ])->name('orders');
     });
 
 Route::prefix('dashboard')
