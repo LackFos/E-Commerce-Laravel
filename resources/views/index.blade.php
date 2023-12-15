@@ -20,7 +20,9 @@
             <x-layout.header />
         @endif
 
-        @yield('page')
+        <main class="min-h-[calc(100vh-292px)] pb-10">
+            @yield('page')
+        </main>
 
         @if (!isset($hideFooter))
             <x-layout.footer />

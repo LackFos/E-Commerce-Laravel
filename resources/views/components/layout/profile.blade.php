@@ -1,6 +1,6 @@
 @props(['username', 'image'])
 
-<div class='flex min-h-[calc(100vh-300px)] justify-center py-10'>
+<div class='flex justify-center py-10'>
     <div class='flex w-[1440px] gap-6'>
         <div class='flex w-1/4 flex-col justify-start gap-6'>
             <div class='flex w-full flex-col rounded-2xl border border-solid border-gray-100 bg-white'>

@@ -26,7 +26,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/invoice', function () {
-    return view('pages.detailTransaction');
+    return view('pages.invoice');
 })->name('invoice');
 
 Route::middleware(RedirectIfAuthenticated::class)->group(function () {
