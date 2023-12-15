@@ -39,19 +39,6 @@ class OrderController extends Controller
         );
     }
 
-    public function showInvoice($id)
-    {
-        // Page Props
-        $user = Auth::user();
-
-        // Page Content
-        $order = Order::where('id', $id)
-            ->where('user_id', $user->id)
-            ->firstOrFail();
-
-        return view('pages.invoice', compact('order'));
-    }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -105,9 +92,17 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        //
+        // Page Props
+        $user = Auth::user();
+
+        // Page Content
+        $order = Order::where('id', $id)
+            ->where('user_id', $user->id)
+            ->firstOrFail();
+
+        return view('pages.order-detail', compact('order'));
     }
 
     /**

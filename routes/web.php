@@ -39,10 +39,6 @@ Route::middleware(RedirectIfAuthenticated::class)->group(function () {
     });
 });
 
-Route::get('/invoice/{id}', [OrderController::class, 'showInvoice'])->name(
-    'invoice'
-);
-
 Route::get('/order', [OrderController::class, 'store'])->middleware(
     RequireAuth::class
 );
@@ -54,8 +50,9 @@ Route::prefix('profile')
             'profile'
         );
 
-        Route::get('/orders/{slug}', [OrderController::class, 'index'])->name(
-            'orders'
+        Route::get('/orders/{slug}', [OrderController::class, 'index']);
+        Route::get('/order/{id}', [OrderController::class, 'show'])->name(
+            'order.detail'
         );
     });
 

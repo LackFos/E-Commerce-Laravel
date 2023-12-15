@@ -23,7 +23,7 @@
                         <div class='flex items-center gap-6'>
                             <span class='text-base font-medium'>{{ $order->created_at }}</span>
                         </div>
-                        <a href="/transactionDetail" class='text-base font-semibold text-primary'> Detail Transaksi</a>
+                        <a href="{{ route('order.detail', ['id' => $order->id]) }}" class='text-base font-semibold text-primary'>Lihat Detail</a>
                     </div>
 
                     @foreach ($order->orderItems as $item)
