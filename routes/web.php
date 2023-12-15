@@ -24,6 +24,9 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 Route::get('/', function () {
     return view('pages.home');
 })->name('home');
+Route::get('/product', function () {
+    return view('pages.product-detail');
+})->name('product-detail');
 
 Route::middleware(RedirectIfAuthenticated::class)->group(function () {
     Route::controller(AuthController::class)->group(function () {

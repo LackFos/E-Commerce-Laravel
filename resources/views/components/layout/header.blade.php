@@ -1,5 +1,5 @@
 <header class="flex justify-center bg-white">
-    <nav class="flex h-[72px] w-full max-w-[1440px] items-center">
+    <nav class="flex h-[72px] max-w-[1440px] items-center">
         <div class="container flex items-center justify-between gap-20 mx-auto">
             <!-- Logo atau Nama Aplikasi -->
             <div>
@@ -19,8 +19,10 @@
                 <div class='flex flex-shrink-0 w-px h-10 bg-gray-200'></div>
 
                 <!-- Profile -->
-                <img class="w-10 h-10 bg-gray-200 rounded-full" src={{ asset($user->image) }} alt="">
-                <span class="">{{$user->username}}</span>
+                <a href="/profile" class="flex items-center gap-2">
+                    <img class="w-10 h-10 bg-gray-200 rounded-full" src={{ asset($user->image) }} alt="">
+                    <span class="">{{$user->username}}</span>
+                </a>
                 @else
                     <!-- Cart -->
                     <a href="/cart" class="text-black"><x-icons.cart /></a>
