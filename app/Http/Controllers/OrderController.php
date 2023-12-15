@@ -119,7 +119,7 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $validated = $request->validate([
-            'status' => [new ValidOrderStatus()],
+            'status' => 'exists:order_statuses,name',
         ]);
 
         $order->update(['status' => $validated['status']]);

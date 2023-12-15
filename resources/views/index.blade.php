@@ -17,10 +17,10 @@
 
     <body>
         @if (!isset($hideHeader))
-            <x-layout.header />
+            <x-layout.header :user="$user" />
         @endif
 
-        <main class="min-h-[calc(100vh-292px)] pb-10">
+        <main class="min-h-[calc(100vh-392px)] pb-10">
             @yield('page')
         </main>
 

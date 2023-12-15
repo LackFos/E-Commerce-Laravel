@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('bank_name');
             $table->string('bank_number');
             $table->string('bank_owner');
+            $table->unique(['bank_name', 'bank_number']);
             $table->timestamps();
         });
     }

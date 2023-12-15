@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PaymentAccount;
 use Illuminate\Http\Request;
+use App\Models\PaymentAccount;
+use App\Rules\ValidBankDetails;
 
 class PaymentAccountController extends Controller
 {
@@ -20,7 +21,6 @@ class PaymentAccountController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -28,7 +28,19 @@ class PaymentAccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'bank_name' => 'bail|required',
+            'bank_number' => ['bail', 'required', new ValidBankDetails()],
+            'bank_owner' => 'bail|required',
+        ]);
+
+        $paymentAccount = new PaymentAccount([
+            'bank_name' => $validated['bank_name'],
+            'bank_number' => $validated['bank_number'],
+            'bank_owner' => $validated['bank_owner'],
+        ]);
+
+        $paymentAccount->save();
     }
 
     /**
@@ -36,7 +48,6 @@ class PaymentAccountController extends Controller
      */
     public function show(PaymentAccount $paymentAccount)
     {
-        //
     }
 
     /**
@@ -52,7 +63,17 @@ class PaymentAccountController extends Controller
      */
     public function update(Request $request, PaymentAccount $paymentAccount)
     {
-        //
+        $validated = $request->validate([
+            'bank_name' => 'bail|required',
+            'bank_number' => ['bail', 'required', new ValidBankDetails()],
+            'bank_owner' => 'bail|required',
+        ]);
+
+        $paymentAccount->update([
+            'bank_name' => $validated['bank_name'],
+            'bank_number' => $validated['bank_number'],
+            'bank_owner' => $validated['bank_owner'],
+        ]);
     }
 
     /**
@@ -60,6 +81,6 @@ class PaymentAccountController extends Controller
      */
     public function destroy(PaymentAccount $paymentAccount)
     {
-        //
+        $paymentAccount->delete();
     }
 }
