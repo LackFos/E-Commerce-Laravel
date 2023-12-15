@@ -16,8 +16,15 @@
     </head>
 
     <body>
+        @if (!isset($hideHeader))
+            <x-layout.header />
+        @endif
+
         @yield('page')
-        @include('partial.footer')
+
+        @if (!isset($hideFooter))
+            <x-layout.footer />
+        @endif
     </body>
 
 </html>

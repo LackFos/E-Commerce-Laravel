@@ -1,9 +1,5 @@
 @props(['username', 'image'])
 
-
-
-@include('partial.navbar')
-
 <div class='flex min-h-[calc(100vh-300px)] items-center justify-center py-10'>
     <div class='flex w-[1440px] gap-6'>
         <div class='flex w-1/4 flex-col justify-start gap-6'>

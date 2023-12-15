@@ -10,12 +10,16 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
-        return view('pages.login');
+        return view('pages.login')
+            ->with('hideHeader', true)
+            ->with('hideFooter', true);
     }
 
     public function showRegisterForm()
     {
-        return view('pages.register');
+        return view('pages.register')
+            ->with('hideHeader', true)
+            ->with('hideFooter', true);
     }
 
     /**

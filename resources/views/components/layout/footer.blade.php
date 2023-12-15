@@ -1,4 +1,4 @@
-<div class="mt-10 flex w-full items-center justify-center bg-white">
+<footer class="mt-10 flex w-full items-center justify-center bg-white">
     <div class="flex w-4/5 justify-between py-8">
         <div class="flex flex-col justify-start gap-8">
             <span class="text-4xl font-bold">LOGO</span>
@@ -29,4 +29,4 @@
             </div>
         </div>
     </div>
-</div>
+</footer>
