@@ -20,7 +20,8 @@
                     <span class="text-lg font-bold">Total Harga</span>
                     <span class="text-lg font-bold text-primary">Rp {{ number_format($order->price_amount, 0, ',', '.') }}</span>
                 </div>
-                <div class="flex items-center justify-center p-6 border-t border-gray-100 border-solid">
+                <div class="flex items-center justify-between p-6 border-t border-gray-100 border-solid">
+                    <a href="/profile/orders/pending" class="flex justify-between gap-2 px-6 py-2 bg-white border border-black border-solid rounded-full"><x-icons.arrowleft/>Back</a>
                     <label for="fileInput" class="flex items-center justify-center gap-2 px-6 py-2 text-sm font-medium text-white rounded-full cursor-pointer bg-primary">
                         Upload Bukti
                         <x-icons.archive/>
