@@ -49,6 +49,7 @@ Route::prefix('profile')
         Route::get('/', [ProfileController::class, 'showProfile'])->name(
             'profile'
         );
+
         Route::get('/orders/{slug}', [
             ProfileController::class,
             'showOrders',

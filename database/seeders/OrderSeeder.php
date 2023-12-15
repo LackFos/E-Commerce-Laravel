@@ -15,7 +15,6 @@ class OrderSeeder extends Seeder
     {
         Order::create([
             'user_id' => User::first()->id,
-            'status' => 'Belum Dibayar',
             'price_amount' => 50000,
         ]);
     }

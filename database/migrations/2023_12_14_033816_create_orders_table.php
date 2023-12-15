@@ -19,7 +19,12 @@ return new class extends Migration {
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
-            $table->string('status')->default('Perlu Diproses');
+            $table
+                ->foreignId('order_status_id')
+                ->default(1)
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
             $table->integer('price_amount');
             $table->timestamps();
         });
