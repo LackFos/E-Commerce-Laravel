@@ -6,7 +6,7 @@
 
         <div class='flex w-full flex-col gap-8 rounded-2xl bg-white p-6'>
             <div class='flex w-fit flex-col justify-start gap-4'>
-                <img src={{ asset($user->image) }} class='h-40 w-40 rounded-full bg-gray-300 object-cover'></img>
+                <img src={{ asset($user->image) }} class='h-40 w-40 rounded-full bg-white'></img>
                 <span class='flex justify-center text-base font-semibold text-primary'>Ganti Foto Profil</span>
             </div>
             <form action="">

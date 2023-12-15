@@ -46,12 +46,11 @@
                     </div>
                     <div class='flex justify-between py-4'>
                         <div class='flex flex-col gap-4'>
-                            <span class='text-xl font-bold'>Tampilkan Bukti Pembayaran</span>
-                            <span>Transfer ke:</span>
+                            <h2>Transfer ke:</h2>
 
                             @foreach ($paymentAccount as $payment)
                                 <div>
-                                    <span>{{ $payment->bank_name }}: {{ $payment->bank_number }}({{ $payment->bank_owner }})</span>
+                                    <span>{{ $payment->bank_name }}: {{ $payment->bank_number }} ({{ $payment->bank_owner }})</span>
                                 </div>
                             @endforeach
 

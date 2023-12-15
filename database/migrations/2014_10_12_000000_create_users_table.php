@@ -15,7 +15,10 @@ return new class extends Migration {
             $table->string('username');
             $table->string('email')->unique();
             $table->char('phone_number', 13)->unique();
-            $table->string('image')->nullable();
+            $table
+                ->string('image')
+                ->nullable()
+                ->default('/storage/assets/no-profile.png');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('is_admin')->default(0);
