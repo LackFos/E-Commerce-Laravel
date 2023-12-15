@@ -15,7 +15,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Product #1',
             'slug' => 'product-1',
-            'image' => '/storage/product_image/OIP.jpeg',
+            'image' => '/storage/upload_image/cardigan rajut.jpg',
             'price' => 10000,
             'color' => 'Merah',
             'stock' => '5',
@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Product #2',
             'slug' => 'product-2',
-            'image' => '/storage/product_image/OIP.jpeg',
+            'image' => '/storage/upload_image/cargo pantas slava.jpg',
             'price' => 55000,
             'color' => 'Biru',
             'stock' => '1',
@@ -41,7 +41,7 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Product #3',
             'slug' => 'product-3',
-            'image' => '/storage/product_image/OIP.jpeg',
+            'image' => '/storage/upload_image/double sided hoodie.jpg',
             'price' => 100000,
             'color' => 'Army',
             'stock' => '10',
