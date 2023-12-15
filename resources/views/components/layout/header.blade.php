@@ -12,8 +12,9 @@
 
             <div class="flex items-center gap-6">
                 <!-- Search -->
-
-                @isset($user)
+                @if ($user)
+                    <p>Logged</p>
+                @else
                     <!-- Cart -->
                     <a href="/cart" class="text-black"><x-icons.cart /></a>
                     <div class='flex h-10 w-px justify-center bg-gray-200'></div>
@@ -22,9 +23,8 @@
                     <div class='flex items-center justify-start gap-4'>
                         <a href="/login" class='rounded-full bg-primary px-6 py-2'><span class='text-sm font-medium text-white'>Login</span></a href="/login">
                     </div>
-                @else
-                    @endif
-                </div>
+                @endif
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>

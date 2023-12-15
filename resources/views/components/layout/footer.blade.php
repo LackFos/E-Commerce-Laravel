@@ -1,5 +1,5 @@
-<footer class="flex justify-center w-full bg-white">
-    <div class="flex flex-col w-4/5 gap-12 py-8">
+<footer class="flex w-full justify-center bg-white">
+    <div class="flex w-4/5 flex-col gap-12 py-8">
         <div class="flex">
             <div class="flex flex-col justify-start gap-8">
                 <span class="text-4xl font-bold">LOGO</span>
@@ -10,9 +10,9 @@
                 </div>
             </div>
 
-            <div class="flex items-start justify-center gap-10 ml-44">
+            <div class="ml-44 flex items-start justify-center gap-10">
                 <div class="flex flex-col gap-6">
-                    <h4 class="text-xl font-bold">PEMBELI</h4>
+                    <h4>PEMBELI</h4>
 
                     <ul class='flex flex-col gap-4'>
                         <ol><a href="">Akun Saya</a></ol>
@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="flex flex-col gap-6">
-                    <h4 class="text-xl font-bold">BANTUAN</h4>
+                    <h4>BANTUAN</h4>
 
                     <ul class='flex flex-col gap-4'>
                         <ol><a href="">Kontak Kami</a></ol>
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="flex flex-col gap-6">
-                    <h4 class="text-xl font-bold">MEDIA SOSIAL</h4>
+                    <h4>MEDIA SOSIAL</h4>
 
                     <ul class='flex gap-4'>
                         <ol><a href=""><x-icons.facebook /></a></ol>

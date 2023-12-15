@@ -16,7 +16,7 @@
     }
 
     h4 {
-        @apply font-bold;
+        @apply text-base font-bold;
     }
 }
 

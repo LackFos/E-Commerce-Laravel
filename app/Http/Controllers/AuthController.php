@@ -13,8 +13,7 @@ class AuthController extends Controller
      */
     public function show()
     {
-        $user = Auth::user();
-        return view('pages.profile', compact('user'));
+        return view('pages.profile');
     }
 
     /**
