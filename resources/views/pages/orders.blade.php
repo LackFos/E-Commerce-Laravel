@@ -46,7 +46,7 @@
 
                     <div class='flex justify-between py-4'>
                         <span class='text-lg font-bold'>Total Pesanan</span>
-                        <span class='text-lg font-bold text-primary'>{{ number_format($order->price_amount, 0, ',', '.') }}</span>
+                        <span class='text-lg font-bold text-primary'>Rp {{ number_format($order->price_amount, 0, ',', '.') }}</span>
                     </div>
                     <div class='flex justify-between py-4'>
                         <div class='flex flex-col gap-4'>
@@ -60,8 +60,9 @@
 
                         </div>
                         <div class='flex flex-col justify-end'>
-                            <label for="fileInput" class="flex justify-center px-6 py-2 text-sm font-medium text-white rounded-full cursor-pointer bg-primary">
+                            <label for="fileInput" class="flex items-center justify-center gap-2 px-6 py-2 text-sm font-medium text-white rounded-full cursor-pointer bg-primary">
                                 Upload Bukti
+                                <x-icons.archive/>
                                 <input type="file" id="fileInput" name="FotoProfil" class="absolute top-0 left-0 w-0 h-0 opacity-0" />
                             </label>
                         </div>
