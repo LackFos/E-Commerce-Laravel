@@ -25,6 +25,10 @@ Route::get('/', function () {
     return view('pages.home');
 })->name('home');
 
+Route::get('/invoice', function () {
+    return view('pages.detailTransaction');
+})->name('invoice');
+
 Route::middleware(RedirectIfAuthenticated::class)->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('/register', 'showRegisterForm');
