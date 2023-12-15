@@ -25,10 +25,6 @@ Route::get('/', function () {
     return view('pages.home');
 })->name('home');
 
-Route::get('/invoice', function () {
-    return view('pages.invoice');
-})->name('invoice');
-
 Route::middleware(RedirectIfAuthenticated::class)->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('/register', 'showRegisterForm');
@@ -43,6 +39,10 @@ Route::middleware(RedirectIfAuthenticated::class)->group(function () {
     });
 });
 
+Route::get('/invoice/{id}', [OrderController::class, 'showInvoice'])->name(
+    'invoice'
+);
+
 Route::get('/order', [OrderController::class, 'store'])->middleware(
     RequireAuth::class
 );
@@ -54,10 +54,9 @@ Route::prefix('profile')
             'profile'
         );
 
-        Route::get('/orders/{slug}', [
-            ProfileController::class,
-            'showOrders',
-        ])->name('orders');
+        Route::get('/orders/{slug}', [OrderController::class, 'index'])->name(
+            'orders'
+        );
     });
 
 Route::prefix('dashboard')
