@@ -8,6 +8,18 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    /**
+     * Display the specified resource.
+     */
+    public function show()
+    {
+        $user = Auth::user();
+        return view('pages.profile', compact('user'));
+    }
+
+    /**
+     * Display the form for login.
+     */
     public function showLoginForm()
     {
         return view('pages.login')
@@ -15,6 +27,30 @@ class AuthController extends Controller
             ->with('hideFooter', true);
     }
 
+    /**
+     * Handle an authentication attempt.
+     */
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'bail|required|email',
+            'password' => 'bail|required|string',
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+        }
+
+        return back()
+            ->withErrors([
+                'email' => 'Email atau password salah.',
+            ])
+            ->onlyInput('email');
+    }
+
+    /**
+     * Display the form for register.
+     */
     public function showRegisterForm()
     {
         return view('pages.register')
@@ -45,27 +81,6 @@ class AuthController extends Controller
         $user->save();
 
         return redirect()->route('login.show');
-    }
-
-    /**
-     * Handle an authentication attempt.
-     */
-    public function authenticate(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'bail|required|email',
-            'password' => 'bail|required|string',
-        ]);
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-        }
-
-        return back()
-            ->withErrors([
-                'email' => 'Email atau password salah.',
-            ])
-            ->onlyInput('email');
     }
 
     /**

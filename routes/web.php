@@ -46,10 +46,7 @@ Route::get('/order', [OrderController::class, 'store'])->middleware(
 Route::prefix('profile')
     ->middleware(RequireAuth::class)
     ->group(function () {
-        Route::get('/', [ProfileController::class, 'showProfile'])->name(
-            'profile'
-        );
-
+        Route::get('/', [AuthController::class, 'show'])->name('profile');
         Route::get('/orders/{slug}', [OrderController::class, 'index']);
         Route::get('/order/{id}', [OrderController::class, 'show'])->name(
             'order.detail'
