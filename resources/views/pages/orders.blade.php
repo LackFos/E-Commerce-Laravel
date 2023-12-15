@@ -39,14 +39,14 @@
                                 <span class='text-base font-medium'>{{ $item->product->name }}</span>
                                 <div class='flex items-center justify-center px-6 py-2 bg-gray-200 rounded-full'><span class='text-black opacity-60'>{{ $item->product->size }}</span>
                                 </div>
-                                <span class='text-lg font-bold'>Rp {{ number_format($item->product->price, 2, ',', '.') }}</span>
+                                <span class='text-lg font-bold'>Rp {{ number_format($item->product->price, 0, ',', '.') }}</span>
                             </div>
                         </div>
                     @endforeach
 
                     <div class='flex justify-between py-4'>
                         <span class='text-lg font-bold'>Total Pesanan</span>
-                        <span class='text-lg font-bold text-primary'>{{ number_format($order->price_amount, 2, ',', '.') }}</span>
+                        <span class='text-lg font-bold text-primary'>{{ number_format($order->price_amount, 0, ',', '.') }}</span>
                     </div>
                     <div class='flex justify-between py-4'>
                         <div class='flex flex-col gap-4'>
