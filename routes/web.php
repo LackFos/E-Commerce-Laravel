@@ -27,6 +27,9 @@ Route::get('/', function () {
 Route::get('/product', function () {
     return view('pages.product-detail');
 })->name('product-detail');
+Route::get('/cart', function () {
+    return view('pages.cart');
+})->name('cart');
 
 Route::middleware(RedirectIfAuthenticated::class)->group(function () {
     Route::controller(AuthController::class)->group(function () {

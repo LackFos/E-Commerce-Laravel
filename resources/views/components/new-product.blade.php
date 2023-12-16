@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-4 py-6 rounded-lg">
+<div class="flex  flex-col gap-4 py-6 rounded-lg">
     <div class="flex justify-between">
         <span class="text-2xl font-bold">Produk Terbaru</span>
         <a href="" class="font-semibold text-primary">Lihat Semua</a>
@@ -6,7 +6,7 @@
     <div class="flex flex-col gap-6"></div>
         <div class="flex justify-start w-full gap-4">
             <div class="flex flex-col w-full bg-white rounded-2xl">
-                <div class="w-full bg-gray-300 h-60 rounded-t-2xl"></div>
+                <img class="w-full bg-gray-300 h-60 rounded-t-2xl">
                 <div class="flex flex-col w-full gap-4 p-4 bg-white rounded-b-2xl">
                     <div class="flex flex-col justify-start gap-2">
                         <span class="text-base font-medium">Cardigan</span>
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="flex flex-col w-full bg-white rounded-2xl">
-                <div class="w-full bg-gray-300 h-60 rounded-t-2xl"></div>
+                <img class="w-full bg-gray-300 h-60 rounded-t-2xl">
                 <div class="flex flex-col w-full gap-4 p-4 bg-white rounded-b-2xl">
                     <div class="flex flex-col justify-start gap-2">
                         <span class="text-base font-medium">Cardigan</span>
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="flex flex-col w-full bg-white rounded-2xl">
-                <div class="w-full bg-gray-300 h-60 rounded-t-2xl"></div>
+                <img class="w-full bg-gray-300 h-60 rounded-t-2xl">
                 <div class="flex flex-col w-full gap-4 p-4 bg-white rounded-b-2xl">
                     <div class="flex flex-col justify-start gap-2">
                         <span class="text-base font-medium">Cardigan</span>
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="flex flex-col w-full bg-white rounded-2xl">
-                <div class="w-full bg-gray-300 h-60 rounded-t-2xl"></div>
+                <img class="w-full bg-gray-300 h-60 rounded-t-2xl">
                 <div class="flex flex-col w-full gap-4 p-4 bg-white rounded-b-2xl">
                     <div class="flex flex-col justify-start gap-2">
                         <span class="text-base font-medium">Cardigan</span>
@@ -56,7 +56,7 @@
     </div>
     <div class="flex justify-start w-full gap-4">
         <div class="flex flex-col w-full bg-white rounded-2xl">
-            <div class="w-full bg-gray-300 h-60 rounded-t-2xl"></div>
+            <img class="w-full bg-gray-300 h-60 rounded-t-2xl">
             <div class="flex flex-col w-full gap-4 p-4 bg-white rounded-b-2xl">
                 <div class="flex flex-col justify-start gap-2">
                     <span class="text-base font-medium">Cardigan</span>
@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="flex flex-col w-full bg-white rounded-2xl">
-            <div class="w-full bg-gray-300 h-60 rounded-t-2xl"></div>
+            <img class="w-full bg-gray-300 h-60 rounded-t-2xl">
             <div class="flex flex-col w-full gap-4 p-4 bg-white rounded-b-2xl">
                 <div class="flex flex-col justify-start gap-2">
                     <span class="text-base font-medium">Cardigan</span>
@@ -80,7 +80,7 @@
             </div>
         </div>
         <div class="flex flex-col w-full bg-white rounded-2xl">
-            <div class="w-full bg-gray-300 h-60 rounded-t-2xl"></div>
+            <img class="w-full bg-gray-300 h-60 rounded-t-2xl">
             <div class="flex flex-col w-full gap-4 p-4 bg-white rounded-b-2xl">
                 <div class="flex flex-col justify-start gap-2">
                     <span class="text-base font-medium">Cardigan</span>
@@ -92,7 +92,7 @@
             </div>
         </div>
         <div class="flex flex-col w-full bg-white rounded-2xl">
-            <div class="w-full bg-gray-300 h-60 rounded-t-2xl"></div>
+            <img class="w-full bg-gray-300 h-60 rounded-t-2xl">
             <div class="flex flex-col w-full gap-4 p-4 bg-white rounded-b-2xl">
                 <div class="flex flex-col justify-start gap-2">
                     <span class="text-base font-medium">Cardigan</span>
