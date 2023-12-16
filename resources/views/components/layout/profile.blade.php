@@ -2,8 +2,8 @@
 
 <div class='flex justify-center py-10'>
     <div class='flex w-[1440px] gap-6'>
-        <div class='flex w-1/4 flex-col justify-start gap-6'>
-            <div class='flex w-full flex-col rounded-2xl border border-solid border-gray-100 bg-white'>
+        <div class='flex w-72 flex-col justify-start gap-6'>
+            <div class='flex flex-col rounded-2xl border border-solid border-gray-100 bg-white'>
                 <div class='flex h-32 items-center justify-start gap-6 p-6'>
                     <img src={{ asset($image) }} class='h-20 w-20 rounded-full bg-white object-cover'></img><span>{{ $username }}</span>
                 </div>
@@ -27,7 +27,7 @@
             </form>
         </div>
 
-        <div class='flex w-full flex-col gap-6'>
+        <div class='flex w-[calc(100%-288px)] flex-col gap-6'>
             {{ $slot }}
         </div>
     </div>
