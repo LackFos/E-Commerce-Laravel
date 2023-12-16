@@ -50,12 +50,10 @@ class ProductController extends Controller
         $product->save();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
+    public function show($slug)
     {
-        //
+        $product = Product::where('slug', $slug)->firstOrFail();
+        return view('pages.product-detail', compact('product'));
     }
 
     /**
@@ -66,9 +64,6 @@ class ProductController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Product $product)
     {
         $validated = $request->validate([

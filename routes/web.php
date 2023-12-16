@@ -24,9 +24,11 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 Route::get('/', function () {
     return view('pages.home');
 })->name('home');
-Route::get('/product', function () {
-    return view('pages.product-detail');
-})->name('product-detail');
+
+Route::get('/produk/{products:slug}', [ProductController::class, 'show'])->name(
+    'product.detail'
+);
+
 Route::get('/cart', function () {
     return view('pages.cart');
 })->name('cart');
@@ -45,9 +47,9 @@ Route::middleware(RedirectIfAuthenticated::class)->group(function () {
     });
 });
 
-Route::get('/order', [OrderController::class, 'store'])->middleware(
-    RequireAuth::class
-);
+// Route::get('/order', [OrderController::class, 'store'])->middleware(
+//     RequireAuth::class
+// );
 
 Route::prefix('profile')
     ->middleware(RequireAuth::class)
