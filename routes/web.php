@@ -53,6 +53,10 @@ Route::prefix('profile')
     ->middleware(RequireAuth::class)
     ->group(function () {
         Route::get('/', [AuthController::class, 'show'])->name('profile');
+        Route::post('/', [AuthController::class, 'update'])->name(
+            'profile.update'
+        );
+
         Route::get('/orders/{slug}', [OrderController::class, 'index']);
         Route::get('/order/{id}', [OrderController::class, 'show'])->name(
             'order.detail'
