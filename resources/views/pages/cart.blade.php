@@ -22,7 +22,6 @@
                     </div>
                 </div>
                 <div class="flex justify-between">
-                    <button class="text-sm font-medium text-primary">Tambahkan Wishlist</button>
                     <div class="flex justify-between p-4 bg-gray-300 rounded-full w-36">
                         <button class="text-xl font-bold">-</button>
                         <span>1</span>
@@ -48,7 +47,6 @@
                     </div>
                 </div>
                 <div class="flex justify-between">
-                    <button class="text-sm font-medium text-primary">Tambahkan Wishlist</button>
                     <div class="flex justify-between p-4 bg-gray-300 rounded-full w-36">
                         <button class="text-xl font-bold">-</button>
                         <span>1</span>
@@ -74,7 +72,6 @@
                     </div>
                 </div>
                 <div class="flex justify-between">
-                    <button class="text-sm font-medium text-primary">Tambahkan Wishlist</button>
                     <div class="flex justify-between p-4 bg-gray-300 rounded-full w-36">
                         <button class="text-xl font-bold">-</button>
                         <span>1</span>
