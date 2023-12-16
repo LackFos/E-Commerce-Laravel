@@ -1,3 +1,4 @@
+// Image Preview Upload Profile
 document
     .getElementById('imageInput')
     .addEventListener('change', function (event) {

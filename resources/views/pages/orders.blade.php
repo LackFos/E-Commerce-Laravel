@@ -1,6 +1,5 @@
 @extends('index')
 
-
 @section('page')
     <x-layout.profile :username="$user->username" :image="$user->image">
         <div class='flex w-full flex-col justify-start gap-8 rounded-2xl bg-white p-6'>
@@ -53,8 +52,9 @@
                             <h2>Transfer ke:</h2>
 
                             @foreach ($paymentAccount as $payment)
-                                <div>
-                                    <span>{{ $payment->bank_name }}: {{ $payment->bank_number }} ({{ $payment->bank_owner }})</span>
+                                <div class='flex flex-col gap-4 pt-4'>
+                                    <span>{{ $payment->bank_name }}: {{ $payment->bank_number }}</span>
+                                    <span>A/N {{ $payment->bank_owner }}</span>
                                 </div>
                             @endforeach
 
