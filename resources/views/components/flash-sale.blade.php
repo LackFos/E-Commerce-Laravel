@@ -1,4 +1,4 @@
-<div class="flex flex-col  gap-4 py-6 bg-gray-200 rounded-lg">
+<div class="flex flex-col gap-4 py-6 bg-gray-200 rounded-lg">
     <div class="flex justify-between px-6">
         <span class="text-2xl font-bold">Flash Sale</span>
         <a href="" class="font-semibold text-primary">Lihat Semua</a>
