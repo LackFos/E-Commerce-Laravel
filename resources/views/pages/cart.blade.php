@@ -21,7 +21,7 @@
                         <button>X</button>
                     </div>
                 </div>
-                <div class="flex justify-between">
+                <div class="flex justify-end">
                     <div class="flex justify-between p-4 bg-gray-300 rounded-full w-36">
                         <button class="text-xl font-bold">-</button>
                         <span>1</span>
@@ -46,7 +46,7 @@
                         <button>X</button>
                     </div>
                 </div>
-                <div class="flex justify-between">
+                <div class="flex justify-end">
                     <div class="flex justify-between p-4 bg-gray-300 rounded-full w-36">
                         <button class="text-xl font-bold">-</button>
                         <span>1</span>
@@ -71,7 +71,7 @@
                         <button>X</button>
                     </div>
                 </div>
-                <div class="flex justify-between">
+                <div class="flex justify-end">
                     <div class="flex justify-between p-4 bg-gray-300 rounded-full w-36">
                         <button class="text-xl font-bold">-</button>
                         <span>1</span>
