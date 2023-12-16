@@ -5,9 +5,9 @@
     <div class="flex max-w-[1440px] justify-center w-full gap-6">
         <div class="flex flex-col gap-4">
             <div class="flex flex-col p-6 gap-6 bg-white rounded-2xl max-w-[788px] w-full border border-solid border-gray-200">
-                <div class="flex justify-between">
+                <div class="flex gap-80">
                     <div class="flex gap-6">
-                        <img class="bg-gray-300 w-36 h-36 rounded-2xl" src="" alt="">
+                        <img class="bg-gray-300 min-w-[144px] w-full h-36 rounded-2xl" src="" alt="">
                         <div class="flex flex-col justify-start gap-6">
                             <span class="font-medium">Cardigan</span>
                             <div class="flex gap-2">
@@ -30,9 +30,9 @@
                 </div>
             </div>
             <div class="flex flex-col p-6 gap-6 bg-white rounded-2xl max-w-[788px] w-full border border-solid border-gray-200">
-                <div class="flex justify-between">
+                <div class="flex gap-80">
                     <div class="flex gap-6">
-                        <img class="bg-gray-300 w-36 h-36 rounded-2xl" src="" alt="">
+                        <img class="bg-gray-300 min-w-[144px] w-full h-36 rounded-2xl" src="" alt="">
                         <div class="flex flex-col justify-start gap-6">
                             <span class="font-medium">Cardigan</span>
                             <div class="flex gap-2">
@@ -55,9 +55,9 @@
                 </div>
             </div>
             <div class="flex flex-col p-6 gap-6 bg-white rounded-2xl max-w-[788px] w-full border border-solid border-gray-200">
-                <div class="flex justify-between">
+                <div class="flex gap-80">
                     <div class="flex gap-6">
-                        <img class="bg-gray-300 w-36 h-36 rounded-2xl" src="" alt="">
+                        <img class="bg-gray-300 min-w-[144px] w-full h-36 rounded-2xl" src="" alt="">
                         <div class="flex flex-col justify-start gap-6">
                             <span class="font-medium">Cardigan</span>
                             <div class="flex gap-2">
