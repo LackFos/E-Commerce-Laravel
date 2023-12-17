@@ -64,11 +64,14 @@
                                 <label for="fileInput" class="flex items-center justify-center gap-2 px-6 py-2 text-sm font-medium text-white rounded-full cursor-pointer bg-primary">
                                     Upload Bukti
                                     <x-icons.archive/>
-                                    <input type="submit" type="file" id="fileInput" name="FotoProfil" class="absolute top-0 left-0 w-0 h-0 opacity-0" />
+                                    <input type="file" id="fileInput" name="FotoProfil" class="absolute top-0 left-0 w-0 h-0 opacity-0" />
                                 </label>
                                 <button  onclick="" class="flex items-center justify-center gap-2 px-6 py-2 text-sm font-medium text-white rounded-full cursor-pointer bg-primary">
                                     Lihat Bukti
                                     <x-icons.paper/>
+                                </button>
+                                <button  type="submit" class="flex items-center justify-center gap-2 px-6 py-2 text-sm font-medium text-white rounded-full cursor-pointer bg-primary">
+                                    Submit Bukti
                                 </button>
                             </div>
                         </form>
