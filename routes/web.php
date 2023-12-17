@@ -33,6 +33,14 @@ Route::get('/cart', function () {
     return view('pages.cart');
 })->name('cart');
 
+Route::get('/result', function () {
+    return view('pages.result');
+})->name('result');
+
+Route::get('/category', function () {
+    return view('pages.category');
+})->name('category');
+
 Route::middleware(RedirectIfAuthenticated::class)->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('/register', 'showRegisterForm');
