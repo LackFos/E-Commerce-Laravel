@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
+     * Display the specified resource (filter by search keyword).
+     */
+    public function search(Request $request)
+    {
+        $keyword = $request->input('q');
+        $products = Product::where('name', 'like', '%' . $keyword . '%')->get();
+        return view('pages.search', compact('keyword', 'products'));
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index()
@@ -50,6 +60,9 @@ class ProductController extends Controller
         $product->save();
     }
 
+    /**
+     * Display the specified resource.
+     */
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();

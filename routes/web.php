@@ -1,14 +1,15 @@
 <?php
 
+use App\Models\Product;
+use Illuminate\Http\Request;
 use App\Http\Middleware\AdminOnly;
 use App\Http\Middleware\RequireAuth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
@@ -32,9 +33,7 @@ Route::get('/cart', function () {
     return view('pages.cart');
 });
 
-Route::get('/result', function () {
-    return view('pages.result');
-});
+Route::get('/search', [ProductController::class, 'search']);
 
 Route::get('/kategori/{slug}', [CategoryController::class, 'show']);
 

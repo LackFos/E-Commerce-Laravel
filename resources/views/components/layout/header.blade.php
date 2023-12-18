@@ -6,9 +6,9 @@
                 <a href="/" class="text-lg font-semibold">Logo</a>
             </div>
             <!-- Item Navbar -->
-            <div class="w-80">
-                <input type="text" class="w-full rounded-lg border border-gray-300 px-4 py-2" placeholder="Cari...">
-            </div>
+            <form action='/search' class="w-80">
+                <input type="search" name="q" class="w-full rounded-lg border border-gray-300 px-4 py-2 outline-none" placeholder="Cari...">
+            </form>
 
             <div class="flex items-center justify-between gap-6">
                 <!-- Search -->

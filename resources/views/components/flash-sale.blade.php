@@ -7,25 +7,7 @@
         <div class="flex w-full justify-start gap-4 px-6">
 
             @foreach ($flashsale as $fs)
-                <div class="flex w-64 flex-shrink-0 flex-col overflow-hidden rounded-2xl border border-gray-300 bg-white">
-                    <img src="{{ asset($fs->product->image) }}" class="h-60 w-full bg-gray-300">
-
-                    <div class="flex w-full flex-col gap-4 rounded-b-2xl bg-white p-4">
-                        <div class="flex flex-col justify-start gap-2">
-                            <span class="text-base font-medium">{{ $fs->product->name }}</span>
-                            <div class="flex flex-col gap-1">
-                                <span class="text-xl font-bold text-primary">@money($fs->price_after_discount)</span>
-                                <div class="flex items-center gap-1">
-                                    <span
-                                        class="rounded-full bg-primary-light px-2 py-1 text-xs font-medium text-primary">{{ (($fs->product->price - $fs->price_after_discount) / $fs->product->price) * 100 }}%</span>
-                                    <span class="text-xs text-gray-400 line-through">@money($fs->product->price)</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <span class="text-sm text-gray-400">Outwear</span>
-                    </div>
-                </div>
+                <x-product-card :product="$fs->product" :price_after_discount="$fs->price_after_discount" />
             @endforeach
 
         </div>
