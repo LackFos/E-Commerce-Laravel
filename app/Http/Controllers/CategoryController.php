@@ -44,10 +44,14 @@ class CategoryController extends Controller
      */
     public function show($slug)
     {
-        $category = Category::where('slug', $slug)->firstOrFail();
-        $products = $category->products;
+        $categories = Category::all();
+        $selectedCategory = Category::where('slug', $slug)->firstOrFail();
+        $products = $selectedCategory->products;
 
-        return view('pages.category', compact('category', 'products'));
+        return view(
+            'pages.category',
+            compact('slug', 'categories', 'selectedCategory', 'products')
+        );
     }
 
     /**

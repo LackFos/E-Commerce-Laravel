@@ -5,7 +5,7 @@
         <div class="flex w-full max-w-[1440px] flex-col gap-10">
             <div class="flex w-full justify-start gap-2">
                 <span class="font-semibold"><a href="{{ route('home') }}" class="text-black">Home</a></span>
-                <span>> </span>
+                <span>•</span>
                 <span aria-current="page" class="text-gray-500 active:font-semibold">Product Detail</span>
             </div>
 
