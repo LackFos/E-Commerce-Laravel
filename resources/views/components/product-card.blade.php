@@ -1,6 +1,5 @@
 @props(['product', 'price_after_discount'])
 
-
 <div class="flex flex-col rounded-2xl">
     <a href="/produk/{{ $product->slug }}" class="block">
         <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="h-60 w-full rounded-t-2xl bg-gray-300" />

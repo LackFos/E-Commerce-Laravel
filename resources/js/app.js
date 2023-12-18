@@ -1,11 +1,3 @@
-// Image Preview Upload Profile
-document
-    .getElementById('imageInput')
-    .addEventListener('change', function (event) {
-        var reader = new FileReader();
-        reader.onload = function () {
-            var output = document.getElementById('imagePreview');
-            output.src = reader.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    });
+import jQuery from 'jquery';
+
+window.$ = window.jQuery = jQuery;

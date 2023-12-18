@@ -6,6 +6,7 @@ use App\Http\Middleware\AdminOnly;
 use App\Http\Middleware\RequireAuth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -24,16 +25,20 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 */
 
 Route::get('/', HomeController::class)->name('home');
-
-Route::get('/produk/{products:slug}', [ProductController::class, 'show'])->name(
-    'product.detail'
-);
-
-Route::get('/cart', function () {
-    return view('pages.cart');
-});
-
+Route::get('/produk/{products:slug}', [ProductController::class, 'show']);
 Route::get('/search', [ProductController::class, 'search']);
+
+// Route::get('/cart', function () {
+//     return view('pages.cart');
+// });
+
+Route::prefix('cart')->group(function () {
+    Route::controller(CartController::class)->group(function () {
+        Route::get('/', 'getCartItems');
+        Route::post('/add', 'addToCart');
+        Route::post('/remove', 'addToCart');
+    });
+});
 
 Route::get('/demodashboard', function () {
     return view('pages.dashboard')->with('hideFooter', true);
