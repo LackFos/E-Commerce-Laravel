@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\User;
 use Illuminate\Support\Arr;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use App\Helpers\ImageUploadHelper;
-use App\Http\Requests\UpdateUserDetailRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\AuthenticateUserRequest;
+use App\Http\Requests\UpdateUserDetailRequest;
 
 class AuthController extends Controller
 {
@@ -24,36 +24,29 @@ class AuthController extends Controller
     {
         $user = Auth::user();
 
+        DB::beginTransaction();
+
         try {
-            $newImagePath = null;
+            $userData = Arr::except($request->validated(), ['image']);
+            $user->update($userData);
+
             if ($request->hasFile('image')) {
                 $newImagePath = ImageUploadHelper::uploadProfileImage(
-                    $request->file('image')
+                    $request->file('image'),
+                    $user
                 );
-                if (!$newImagePath) {
-                    throw new Exception('Failed to upload new profile image.');
-                }
+
+                $user->image = $newImagePath;
+                $user->save();
             }
 
-            DB::transaction(function () use ($user, $request, $newImagePath) {
-                $userData = Arr::except($request->validated(), ['image']);
-                $user->update($userData);
-
-                if ($newImagePath) {
-                    ImageUploadHelper::deleteOldProfile($user->image);
-                    $user->image = $newImagePath;
-                    $user->save();
-                }
-            });
-
+            DB::commit();
             return redirect()
                 ->route('profile')
                 ->with('success', 'Profile updated successfully');
         } catch (Exception $e) {
-            Log::error(
-                "Profile update failed for user {$user->id}: " .
-                    $e->getMessage()
-            );
+            DB::rollBack();
+            Log::error($e->getMessage());
             return redirect()
                 ->route('profile')
                 ->with('error', 'Failed to update profile');
@@ -67,22 +60,20 @@ class AuthController extends Controller
             ->with('hideFooter', true);
     }
 
-    public function authenticate(Request $request)
+    public function authenticate(AuthenticateUserRequest $request)
     {
-        $credentials = $request->validate([
-            'email' => 'bail|required|email',
-            'password' => 'bail|required|string',
-        ]);
+        $credentials = $request->validated();
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            return redirect()->intended('dashboard');
         }
 
         return back()
             ->withErrors([
-                'email' => 'Email atau password salah.',
+                'email' => 'Email atau Password Salah',
             ])
-            ->onlyInput('email');
+            ->withInput($request->only('email'));
     }
 
     public function showRegisterForm()
@@ -92,25 +83,16 @@ class AuthController extends Controller
             ->with('hideFooter', true);
     }
 
-    public function register(Request $request)
+    public function register(RegisterUserRequest $request)
     {
-        $credentials = $request->validate([
-            'username' => 'bail|required|string|max:30',
-            'email' => 'bail|required|unique:users,email|email',
-            'phone_number' =>
-                'bail|required|unique:users,phone_number|max_digits:13',
-            'password' => 'bail|required|min:8|string',
-            'confirm_password' => 'bail|required|same:password|string',
-        ]);
+        $credentials = $request->validated();
 
-        $user = new User([
+        $user = User::create([
             'username' => $credentials['username'],
             'email' => $credentials['email'],
             'phone_number' => $credentials['phone_number'],
-            'password' => $credentials['password'],
+            'password' => bcrypt($credentials['password']),
         ]);
-
-        $user->save();
 
         Auth::login($user);
 
