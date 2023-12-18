@@ -42,9 +42,12 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show($slug)
     {
-        //
+        $category = Category::where('slug', $slug)->firstOrFail();
+        $products = $category->products;
+
+        return view('pages.category', compact('category', 'products'));
     }
 
     /**

@@ -1,12 +1,12 @@
 @extends('index')
 
 @section('page')
-    <div class="flex justify-center my-10">
-        <div class="flex max-w-[1440px] w-full flex-col gap-10">
-            <x-layout.banner/>
-            <x-layout.flash-sale/>
-            <x-layout.category/>
-            <x-layout.new-product/>
+    <div class="my-10 flex justify-center">
+        <div class="flex w-full max-w-[1440px] flex-col gap-10">
+            <x-banner />
+            <x-flash-sale />
+            <x-categories :categories="$categories" />
+            <x-new-product :products="$latestProducts" />
         </div>
     </div>
 @endsection

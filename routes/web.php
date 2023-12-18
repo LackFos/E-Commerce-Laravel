@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
@@ -21,9 +22,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-})->name('home');
+Route::get('/', HomeController::class)->name('home');
 
 Route::get('/produk/{products:slug}', [ProductController::class, 'show'])->name(
     'product.detail'
@@ -31,15 +30,13 @@ Route::get('/produk/{products:slug}', [ProductController::class, 'show'])->name(
 
 Route::get('/cart', function () {
     return view('pages.cart');
-})->name('cart');
+});
 
 Route::get('/result', function () {
     return view('pages.result');
-})->name('result');
+});
 
-Route::get('/category', function () {
-    return view('pages.category');
-})->name('category');
+Route::get('/kategori/{slug}', [CategoryController::class, 'show']);
 
 Route::middleware(RedirectIfAuthenticated::class)->group(function () {
     Route::controller(AuthController::class)->group(function () {

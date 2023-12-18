@@ -1,1 +1,0 @@
-<img class="bg-gray-300 rounded-lg h-80" src="" alt="">
