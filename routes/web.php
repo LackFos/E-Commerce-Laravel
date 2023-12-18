@@ -35,6 +35,10 @@ Route::get('/cart', function () {
 
 Route::get('/search', [ProductController::class, 'search']);
 
+Route::get('/demodashboard', function () {
+    return view('pages.dashboard')->with('hideFooter', true);
+});
+
 Route::get('/kategori/{slug}', [CategoryController::class, 'show']);
 
 Route::middleware(RedirectIfAuthenticated::class)->group(function () {

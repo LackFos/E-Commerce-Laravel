@@ -55,7 +55,9 @@
 
                     <div class='flex gap-6 pr-16'>
                         <div class='flex items-center w-60'></div>
-                        <button type="submit" class="px-6 py-2 text-sm font-medium text-white rounded-full bg-primary">Simpan</button>
+                        <div class="w-[500px] flex justify-start">
+                            <button type="submit" class="px-6 py-2 text-sm font-medium text-white rounded-full bg-primary">Simpan</button>
+                        </div>
                     </div>
                 </div>
             </form>
