@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'username' => 'user',
             'email' => 'user@gmail.com',
             'phone_number' => '0812345677',
-            'image' => '/storage/user_image/user.png',
+            'image' => '/storage/assets/user.png',
             'password' => Hash::make('user'),
         ]);
     }
