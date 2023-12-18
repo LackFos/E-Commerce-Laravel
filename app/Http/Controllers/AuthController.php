@@ -60,9 +60,6 @@ class AuthController extends Controller
         }
     }
 
-    /**
-     * Display the form for login.
-     */
     public function showLoginForm()
     {
         return view('pages.login')
@@ -70,9 +67,6 @@ class AuthController extends Controller
             ->with('hideFooter', true);
     }
 
-    /**
-     * Handle an authentication attempt.
-     */
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
@@ -91,9 +85,6 @@ class AuthController extends Controller
             ->onlyInput('email');
     }
 
-    /**
-     * Display the form for register.
-     */
     public function showRegisterForm()
     {
         return view('pages.register')
@@ -101,9 +92,6 @@ class AuthController extends Controller
             ->with('hideFooter', true);
     }
 
-    /**
-     * Handle an register attempt.
-     */
     public function register(Request $request)
     {
         $credentials = $request->validate([
@@ -121,14 +109,14 @@ class AuthController extends Controller
             'phone_number' => $credentials['phone_number'],
             'password' => $credentials['password'],
         ]);
+
         $user->save();
 
-        return redirect()->route('login.show');
+        Auth::login($user);
+
+        return redirect()->route('home');
     }
 
-    /**
-     * Handle logout attempt.
-     */
     public function Logout()
     {
         Auth::logout();

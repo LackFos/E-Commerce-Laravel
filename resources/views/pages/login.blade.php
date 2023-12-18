@@ -3,6 +3,7 @@
 @section('page')
     <main>
         <x-alert />
+
         <div class='absolute left-1/2 top-1/2 flex w-[567px] translate-x-[-50%] translate-y-[-50%] flex-col items-center rounded-[40px] bg-white p-20'>
             <form action="" method="post" class='flex flex-col gap-6'>
                 @csrf
