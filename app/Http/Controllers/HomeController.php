@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Models\Flashsale;
 
 class HomeController extends Controller
 {
     public function __invoke()
     {
+        $flashsale = Flashsale::all();
+        $categories = Category::all();
         $latestProducts = Product::latest()
             ->take(10)
             ->get();
-        $categories = Category::all();
 
-        return view('Pages.home', compact('categories', 'latestProducts'));
+        return view(
+            'Pages.home',
+            compact('flashsale', 'categories', 'latestProducts')
+        );
     }
 }
