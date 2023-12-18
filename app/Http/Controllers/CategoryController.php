@@ -49,7 +49,7 @@ class CategoryController extends Controller
         $products = $selectedCategory->products;
 
         return view(
-            'pages.category',
+            'pages.kategori',
             compact('slug', 'categories', 'selectedCategory', 'products')
         );
     }

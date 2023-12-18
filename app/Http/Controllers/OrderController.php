@@ -102,7 +102,7 @@ class OrderController extends Controller
             ->where('user_id', $user->id)
             ->firstOrFail();
 
-        return view('pages.order-detail', compact('order'));
+        return view('pages.order', compact('order'));
     }
 
     /**
