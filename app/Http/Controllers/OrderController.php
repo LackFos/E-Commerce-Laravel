@@ -24,6 +24,7 @@ class OrderController extends Controller
 
         $userOrders = Order::where('user_id', $user->id)
             ->where('order_status_id', $selectedStatus->id)
+            ->latest()
             ->get();
 
         return view(
