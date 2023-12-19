@@ -1,4 +1,4 @@
-<div class="h-screen border-t border-solid border-gray-100 p-6 bg-white w-full max-w-[280px] flex-">
+<div class="h-screen border-t border-solid border-gray-100 p-6 bg-white w-full max-w-[284px] flex-">
     <!-- Sidebar content goes here -->
     <div class="flex flex-col gap-4">
         <ul>
@@ -8,6 +8,7 @@
                     Toko
                 </span>
                 <a href="/demodashboard" class="w-full py-2 px-14"> Beranda</a>
+                <a href="/demodashboard/banner" class="w-full py-2 px-14">Banner</a>
             </li>
         </ul>
         <ul>
@@ -26,7 +27,8 @@
                     Produk
                 </span>
                 <a href="/demodashboard/product" class="w-full py-2 px-14">Daftar Produk</a>
-                <a href="#" class="w-full py-2 px-14">Tambah Produk</a>
+                <a href="/demodashboard/product/add" class="w-full py-2 px-14">Tambah Produk</a>
+                <a href="/demodashboard/product/category" class="w-full py-2 px-14">Tambah Kategori</a>
             </li>
         </ul>
     </div>

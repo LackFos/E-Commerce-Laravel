@@ -57,12 +57,10 @@
                                 </div>
                             </div>
                             <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
-                                <select id="sort" name="sort" class="max-w-[120px] w-full py-2 pl-3 text-base text-black rounded-md bg-slate-200">
-                                    <option value="harga-terendah">Menu</option>
-                                    <option value="harga-tertinggi">Harga Tertinggi</option>
-                                    <option value="terbaru">Terbaru</option>
-                                    <option value="terpopuler">Terpopuler</option>
-                                </select>
+                                <div class='flex items-center justify-start w-full gap-4 font-light text-gray-500'>
+                                  <a href="/demodashboard/product/edit">Edit</a>
+                                  <button>Hapus</button>
+                              </div>
                             </div>
                           </div>
                 </div>
@@ -86,11 +84,10 @@
                         </div>
                       </div>
                       <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
-                          <select id="sort" name="sort" class="max-w-[120px] w-full py-2 pl-3 text-base text-black rounded-md bg-slate-200">
-                              <option value="harga-terendah">Menu</option>
-                              <option value="harga-tertinggi">Edit</option>
-                              <option value="terbaru">Hapus</option>
-                          </select>
+                        <div class='flex items-center justify-start w-full gap-4 font-light text-gray-500'>
+                          <a href="/demodashboard/product/edit">Edit</a>
+                          <button>Hapus</button>
+                      </div>
                       </div>
                     </div>
           </div>
