@@ -1,101 +1,58 @@
 @extends('index')
 
 @section('page')
-<div class="flex justify-center my-10">
-    <div class="flex max-w-[1440px] justify-center w-full gap-6">
-        <div class="flex flex-col gap-4">
-            <div class="flex p-6 gap-6 bg-white rounded-2xl max-w-[788px] w-full border border-solid border-gray-200">
-                <div class="flex gap-52">
-                    <div class="flex gap-6">
-                        <img class="bg-gray-300 min-w-[144px] w-full h-36 rounded-2xl" src="" alt="">
-                        <div class="flex flex-col justify-start gap-6">
-                            <span class="font-medium">Cardigan</span>
-                            <div class="flex gap-2">
-                                <span class="px-6 py-2 bg-gray-200 rounded-full">Hijau</span>
-                                <span class="px-6 py-2 bg-gray-200 rounded-full">Hijau</span>
+    <div class="my-10 flex justify-center">
+        <div class="flex w-full max-w-[1440px] justify-center gap-6">
+            <div class="flex w-full flex-col gap-4">
+
+                @foreach ($cart['products'] as $cartItem)
+                    <div class="product-card flex w-full gap-6 rounded-2xl border border-solid border-gray-200 bg-white p-6">
+                        <div class="flex w-full justify-between">
+                            <div class="flex gap-6">
+                                <img class="h-36 w-full min-w-[144px] rounded-2xl bg-gray-300" src="{{ asset($cartItem['product']->image) }}" alt="">
+                                <div class="flex flex-col justify-start gap-6">
+                                    <div class="flex gap-2">
+                                        <span class="font-medium">{{ $cartItem['product']->name }}</span>
+                                        <div class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs text-white">{{ $cartItem['product_quantity'] }}</div>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <span class="rounded-full bg-gray-200 px-6 py-2">{{ $cartItem['product']->size }}</span>
+                                        <span class="rounded-full bg-gray-200 px-6 py-2">{{ $cartItem['product']->color }}</span>
+                                    </div>
+                                    <span class="text-lg font-bold">@money($cartItem['product']->price)<span class="text-xs leading-8">/ item</span></span>
+                                </div>
                             </div>
-                            <span class="text-lg font-bold">Rp 100.000 <span class="text-xs leading-8">/ item</span></span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col justify-between">
-                        <button class="flex justify-end">X</button>
-                        <div class="flex justify-between p-4 bg-gray-300 rounded-full w-36">
-                            <button class="text-xl font-bold">-</button>
-                            <span>1</span>
-                            <button class="text-xl font-bold">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex p-6 gap-6 bg-white rounded-2xl max-w-[788px] w-full border border-solid border-gray-200">
-                <div class="flex gap-52">
-                    <div class="flex gap-6">
-                        <img class="bg-gray-300 min-w-[144px] w-full h-36 rounded-2xl" src="" alt="">
-                        <div class="flex flex-col justify-start gap-6">
-                            <span class="font-medium">Cardigan</span>
-                            <div class="flex gap-2">
-                                <span class="px-6 py-2 bg-gray-200 rounded-full">Hijau</span>
-                                <span class="px-6 py-2 bg-gray-200 rounded-full">Hijau</span>
+                            <div class="flex flex-col justify-between">
+                                <button data-product-id={{ $cartItem['product']->id }} class="remove-from-cart flex justify-end">X</button>
                             </div>
-                            <span class="text-lg font-bold">Rp 100.000 <span class="text-xs leading-8">/ item</span></span>
                         </div>
                     </div>
-                    <div class="flex flex-col justify-between">
-                        <button class="flex justify-end">X</button>
-                        <div class="flex justify-between p-4 bg-gray-300 rounded-full w-36">
-                            <button class="text-xl font-bold">-</button>
-                            <span>1</span>
-                            <button class="text-xl font-bold">+</button>
-                        </div>
+                @endforeach
+
+            </div>
+
+            <div class="order-summary flex h-fit w-full max-w-[420px] flex-col rounded-2xl border border-solid border-gray-200 bg-white">
+                <div class="flex justify-start border-b border-solid border-gray-200 p-6"><span class="text-xl font-bold">Ringkasan Belanja</span></div>
+
+                @foreach ($cart['products'] as $cartItem)
+                    <div data-product-id={{ $cartItem['product']->id }} class="flex items-end justify-between border-b border-solid border-gray-200 px-6 py-4">
+                        <span class='flex gap-2'>{{ $cartItem['product']->name }} <sub>x{{ $cartItem['product_quantity'] }}</sub></span>
+                        <span> @money($cartItem['product']->price * $cartItem['product_quantity'])</span>
                     </div>
+                @endforeach
+
+                <div class="flex items-end justify-between border-b border-solid border-gray-200 p-6">
+                    <span class="text-lg font-bold">Total Harga</span>
+                    <span id="total-price"class="text-lg font-bold text-primary">@money($cart['total_price'])</span>
                 </div>
-            </div>
-            <div class="flex p-6 gap-6 bg-white rounded-2xl max-w-[788px] w-full border border-solid border-gray-200">
-                <div class="flex gap-52">
-                    <div class="flex gap-6">
-                        <img class="bg-gray-300 min-w-[144px] w-full h-36 rounded-2xl" src="" alt="">
-                        <div class="flex flex-col justify-start gap-6">
-                            <span class="font-medium">Cardigan</span>
-                            <div class="flex gap-2">
-                                <span class="px-6 py-2 bg-gray-200 rounded-full">Hijau</span>
-                                <span class="px-6 py-2 bg-gray-200 rounded-full">Hijau</span>
-                            </div>
-                            <span class="text-lg font-bold">Rp 100.000 <span class="text-xs leading-8">/ item</span></span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col justify-between">
-                        <button class="flex justify-end">X</button>
-                        <div class="flex justify-between p-4 bg-gray-300 rounded-full w-36">
-                            <button class="text-xl font-bold">-</button>
-                            <span>1</span>
-                            <button class="text-xl font-bold">+</button>
-                        </div>
-                    </div>
+                <div class="flex items-end justify-between border-b border-solid border-gray-200 p-6">
+                    <button class="flex w-full justify-center rounded-full bg-primary py-4 font-semibold text-white">Buat Pesanan</button>
                 </div>
-            </div>
-        </div>
-        <div class="flex flex-col h-fit max-w-[420px] w-full bg-white rounded-2xl border border-solid border-gray-200">
-            <div class="flex justify-start p-6 border-b border-gray-200 border-solid"><span class="text-xl font-bold">Ringkasan Belanja</span></div>
-            <div class="flex items-end justify-between px-6 py-4 border-b border-gray-200 border-solid">
-                <span>Cardigan x3</span>
-                <span>Rp 300.000</span>
-            </div>
-            <div class="flex items-end justify-between px-6 py-4 border-b border-gray-200 border-solid">
-                <span>Cardigan x3</span>
-                <span>Rp 300.000</span>
-            </div>
-            <div class="flex items-end justify-between px-6 py-4 border-b border-gray-200 border-solid">
-                <span>Cardigan x3</span>
-                <span>Rp 300.000</span>
-            </div>
-            <div class="flex items-end justify-between p-6 border-b border-gray-200 border-solid">
-                <span class="text-lg font-bold ">Total Harga</span>
-                <span class="text-lg font-bold text-primary">Rp 900.000</span>
-            </div>
-            <div class="flex items-end justify-between p-6 border-b border-gray-200 border-solid">
-                <button class="flex justify-center w-full py-4 font-semibold text-white rounded-full bg-primary">Lanjut ke Pembayaran</button>
             </div>
         </div>
     </div>
-</div>
 @endsection
+
+@push('scripts')
+    @vite('resources/js/cart.js')
+@endpush

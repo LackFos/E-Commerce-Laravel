@@ -44,20 +44,22 @@
                     <div class="flex flex-col gap-8">
                         <div class="flex items-center gap-4">
                             <div class="flex w-36 items-center justify-between rounded-full bg-gray-300 p-4">
-                                <button class="w-9 text-3xl font-bold">-</button>
-                                <input type="text" placeholder="1" class="w-6 bg-transparent text-center text-black outline-none placeholder:text-base placeholder:text-black"
-                                    disabled>
-                                <button class="w-9 text-3xl font-bold">+</button>
+                                <div id='reduce-item' class="w-9 text-center text-3xl font-bold">-</div>
+                                <input type="hidden" id="product-id" value="{{ $product->id }}">
+                                <input type="hidden" id="product-price" value="{{ $product->price }}">
+                                <input id='item-quantity' type="number" min="1" max="{{ $product->stock }}" value="1" placeholder="1"
+                                    class="w-10 bg-transparent text-center text-black outline-none placeholder:text-base placeholder:text-black" disabled>
+                                <div id='add-item' class="w-9 text-center text-3xl font-bold">+</div>
                             </div>
                             <span>Stok: <span class="font-bold">Sisa {{ $product->stock }}</span></span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-300">Sub Total</span>
-                            <span class="text-xl font-bold text-primary">Rp 100.00</span>
+                            <span id='total-price' class="text-xl font-bold text-primary">@money($product->price)</span>
                         </div>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <button class="rounded-full bg-primary px-16 py-4 font-medium text-white">+ Keranjang</button>
+                        <button id='add-to-cart' class="rounded-full bg-primary px-16 py-4 font-medium text-white">+ Keranjang</button>
                         <button class="rounded-full border border-solid border-primary bg-white px-16 py-4 font-medium text-primary">Beli Sekarang</button>
                     </div>
                 </div>
@@ -71,5 +73,5 @@
 @endsection
 
 @push('scripts')
-    @vite('resources/js/cart.js')
+    @vite('resources/js/product-detail.js')
 @endpush

@@ -32,12 +32,10 @@ Route::get('/search', [ProductController::class, 'search']);
 //     return view('pages.cart');
 // });
 
-Route::prefix('cart')->group(function () {
-    Route::controller(CartController::class)->group(function () {
-        Route::get('/', 'getCartItems');
-        Route::post('/add', 'addToCart');
-        Route::post('/remove', 'addToCart');
-    });
+Route::controller(CartController::class)->group(function () {
+    Route::get('/cart', 'getCartItems');
+    Route::post('/cart', 'addToCart');
+    Route::delete('/cart/{product_id}', 'removeFromCart');
 });
 
 Route::get('/demodashboard/{section?}/{action?}', function ($section = null, $action = null) {
