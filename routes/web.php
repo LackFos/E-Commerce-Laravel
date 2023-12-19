@@ -75,6 +75,10 @@ Route::prefix('/demodashboard')->group(function () {
         
             return view('pages.dashboard-product-add', compact('product', 'flashsale'));
         })->name('dashboard.product.add');
+
+        Route::get('/category', function () {
+            return view('pages.dashboard-product-category');
+        })->name('dashboard.product.category');
     });
     Route::prefix('/banner')->group(function () {
         Route::get('/', function () {
