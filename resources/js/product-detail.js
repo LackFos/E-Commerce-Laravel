@@ -17,6 +17,10 @@ $(function () {
             let subtotal = productQuantity * productPrice;
             $('#item-quantity').val(newValue);
             $('#total-price').text(formatToRupiah(subtotal));
+        } else if (newValue > maxQuantity) {
+            alert('Stok tidak cukup');
+        } else if (newValue < minQuantity) {
+            alert('Minimal pembelian 1 item');
         }
     }
 

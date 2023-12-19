@@ -5,15 +5,14 @@
         <div class='absolute left-1/2 top-1/2 flex translate-x-[-50%] translate-y-[-50%] flex-col items-center rounded-[40px] bg-white p-20'>
             <form action="" method="post" class='flex flex-col gap-6'>
                 @csrf
-                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
                 <div class='flex justify-center'>
                     <h1>LOGO</h1>
                 </div>
 
                 <div class='flex flex-col gap-4'>
-                    <input class='h-14 w-96 rounded-2xl border border-solid border-gray-300 bg-white px-6 py-3 focus:border-primary focus:shadow-input focus:outline-none'
-                        name="username" type="text" placeholder='Nama' value="{{ old('username') }}" required>
+                    <input class='h-14 w-96 rounded-2xl border border-solid border-gray-300 bg-white px-6 py-3 focus:border-primary focus:shadow-input focus:outline-none' name="username"
+                        type="text" placeholder='Nama' value="{{ old('username') }}" required>
                     @error('username')
                         <p class="text-red-600">{{ $message }}</p>
                     @enderror

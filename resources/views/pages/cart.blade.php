@@ -2,11 +2,15 @@
 
 @section('page')
     <div class="my-10 flex justify-center">
-        <div class="flex w-full max-w-[1440px] justify-center gap-6">
+        <form action='/order' method='POST' class="flex w-full max-w-[1440px] justify-center gap-6">
+            @csrf
+
             <div class="flex w-full flex-col gap-4">
 
-                @foreach ($cart['products'] as $cartItem)
+                @foreach ($cart['products'] as $index => $cartItem)
                     <div class="product-card flex w-full gap-6 rounded-2xl border border-solid border-gray-200 bg-white p-6">
+                        <input type="hidden" name="products[{{ $index }}][product_id]" value={{ $cartItem['product']->id }}>
+                        <input type="hidden" name="products[{{ $index }}][product_quantity]" value={{ $cartItem['product_quantity'] }}>
                         <div class="flex w-full justify-between">
                             <div class="flex gap-6">
                                 <img class="h-36 w-full min-w-[144px] rounded-2xl bg-gray-300" src="{{ asset($cartItem['product']->image) }}" alt="">
@@ -23,7 +27,7 @@
                                 </div>
                             </div>
                             <div class="flex flex-col justify-between">
-                                <button data-product-id={{ $cartItem['product']->id }} class="remove-from-cart flex justify-end">X</button>
+                                <div data-product-id={{ $cartItem['product']->id }} class="remove-from-cart flex justify-end">X</div>
                             </div>
                         </div>
                     </div>
@@ -45,11 +49,11 @@
                     <span class="text-lg font-bold">Total Harga</span>
                     <span id="total-price"class="text-lg font-bold text-primary">@money($cart['total_price'])</span>
                 </div>
-                <div class="flex items-end justify-between border-b border-solid border-gray-200 p-6">
-                    <button class="flex w-full justify-center rounded-full bg-primary py-4 font-semibold text-white">Buat Pesanan</button>
+                <div class="flex items-end justify-between p-6">
+                    <button type='submit' class="flex w-full justify-center rounded-full bg-primary py-4 font-semibold text-white">Buat Pesanan</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 @endsection
 

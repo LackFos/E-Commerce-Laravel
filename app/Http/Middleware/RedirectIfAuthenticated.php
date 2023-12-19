@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +26,7 @@ class RedirectIfAuthenticated
                 $isAdmin = Auth::user()->is_admin;
 
                 return redirect()->intended(
-                    $isAdmin ? 'dashboard' : route('home')
+                    $isAdmin == 1 ? 'dashboard' : route('home')
                 );
             }
         }

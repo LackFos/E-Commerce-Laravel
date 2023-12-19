@@ -15,10 +15,10 @@
                     <div class="flex flex-col gap-4">
                         <span class="text-4xl font-bold text-black">{{ $product->name }}</span>
                         <span class="text-2xl font-bold text-primary">@money($product->price)</span>
-                            <div class="flex items-center gap-2">
-                                <span class="px-3 py-2 text-sm font-medium rounded-full bg-primary-light text-primary">30%</span>
-                                <span class="text-sm text-gray-400 line-through">@money($product->price)</span>
-                            </div>
+                        <div class="flex items-center gap-2">
+                            <span class="rounded-full bg-primary-light px-3 py-2 text-sm font-medium text-primary">30%</span>
+                            <span class="text-sm text-gray-400 line-through">@money($product->price)</span>
+                        </div>
                     </div>
                     <div class="flex flex-col">
                         <div class="flex justify-between border-b border-dashed py-2">
@@ -39,16 +39,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex h-fit min-w-[306px] flex-col gap-6 rounded-2xl border border-solid border-gray-300 bg-white p-6">
+                <form method='POST' action='/order' class="flex h-fit min-w-[306px] flex-col gap-6 rounded-2xl border border-solid border-gray-300 bg-white p-6">
+                    @csrf
+                    <input type="hidden" id="product-id" name='products[0][product_id]' value="{{ $product->id }}">
+                    <input type="hidden" id="product-price" value="{{ $product->price }}">
+
                     <span class="flex justify-start text-xl font-bold">Subtotal</span>
                     <div class="flex flex-col gap-8">
                         <div class="flex items-center gap-4">
                             <div class="flex w-36 items-center justify-between rounded-full bg-gray-300 p-4">
                                 <div id='reduce-item' class="w-9 text-center text-3xl font-bold">-</div>
-                                <input type="hidden" id="product-id" value="{{ $product->id }}">
-                                <input type="hidden" id="product-price" value="{{ $product->price }}">
-                                <input id='item-quantity' type="number" min="1" max="{{ $product->stock }}" value="1" placeholder="1"
-                                    class="w-10 bg-transparent text-center text-black outline-none placeholder:text-base placeholder:text-black" disabled>
+
+                                <input id='item-quantity' type="number" min="1" max="{{ $product->stock }}" value="1" name='products[0][product_quantity]' placeholder="1"
+                                    class="w-10 bg-transparent text-center text-black outline-none placeholder:text-base placeholder:text-black" readonly />
                                 <div id='add-item' class="w-9 text-center text-3xl font-bold">+</div>
                             </div>
                             <span>Stok: <span class="font-bold">Sisa {{ $product->stock }}</span></span>
@@ -59,10 +62,10 @@
                         </div>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <button id='add-to-cart' class="rounded-full bg-primary px-16 py-4 font-medium text-white">+ Keranjang</button>
-                        <button class="rounded-full border border-solid border-primary bg-white px-16 py-4 font-medium text-primary">Beli Sekarang</button>
+                        <div id='add-to-cart' class="rounded-full bg-primary px-16 py-4 text-center font-medium text-white">+ Keranjang</div>
+                        <button type='submit' class="rounded-full border border-solid border-primary bg-white px-16 py-4 text-center font-medium text-primary">Beli Sekarang</button>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="flex w-full flex-col justify-start gap-4 rounded-2xl border border-solid border-gray-200 bg-white p-6">
                 <h2>Deskripsi Produk</h2>

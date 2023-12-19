@@ -28,23 +28,26 @@ Route::get('/', HomeController::class)->name('home');
 Route::get('/produk/{products:slug}', [ProductController::class, 'show']);
 Route::get('/search', [ProductController::class, 'search']);
 
-// Route::get('/cart', function () {
-//     return view('pages.cart');
-// });
-
-Route::controller(CartController::class)->group(function () {
-    Route::get('/cart', 'getCartItems');
-    Route::post('/cart', 'addToCart');
-    Route::delete('/cart/{product_id}', 'removeFromCart');
+Route::middleware(RequireAuth::class)->group(function () {
+    Route::controller(CartController::class)->group(function () {
+        Route::get('/cart', 'getCartItems');
+        Route::post('/cart', 'addToCart');
+        Route::delete('/cart/{product_id}', 'removeFromCart');
+    });
 });
 
-Route::get('/demodashboard/{section?}/{action?}', function ($section = null, $action = null) {
+Route::get('/demodashboard/{section?}/{action?}', function (
+    $section = null,
+    $action = null
+) {
     $view = $section ? 'pages.dashboard-' . $section : 'pages.dashboard';
     if ($action) {
         $view .= '-' . $action;
     }
     return view($view)->with('hideFooter', true);
-})->where('section', 'product')->where('action', 'edit');
+})
+    ->where('section', 'product')
+    ->where('action', 'edit');
 
 Route::get('/kategori/{slug}', [CategoryController::class, 'show']);
 
@@ -62,9 +65,9 @@ Route::middleware(RedirectIfAuthenticated::class)->group(function () {
     });
 });
 
-// Route::get('/order', [OrderController::class, 'store'])->middleware(
-//     RequireAuth::class
-// );
+Route::post('/order', [OrderController::class, 'store'])->middleware(
+    RequireAuth::class
+);
 
 Route::prefix('profile')
     ->middleware(RequireAuth::class)

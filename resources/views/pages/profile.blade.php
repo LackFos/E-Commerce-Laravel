@@ -27,8 +27,6 @@
             <form class='flex flex-col gap-8' action="{{ route('profile.update') }}" method='POST' enctype="multipart/form-data">
                 @csrf
 
-                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-
                 <div class='flex w-fit flex-col gap-4'>
                     <img id='imagePreview' src={{ asset($user->image) }} class='h-40 w-40 rounded-full bg-white object-cover'></img>
 

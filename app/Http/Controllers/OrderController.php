@@ -11,18 +11,17 @@ use App\Models\PaymentAccount;
 use App\Rules\ValidOrderStatus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class OrderController extends Controller
 {
     public function index($slug)
     {
-        // Page Props
         $user = Auth::user();
         $selectedStatus = OrderStatus::where('slug', $slug)->firstOrFail();
         $orderStatuses = OrderStatus::all();
         $paymentAccount = PaymentAccount::all();
 
-        // Page Content
         $userOrders = Order::where('user_id', $user->id)
             ->where('order_status_id', $selectedStatus->id)
             ->get();
@@ -54,39 +53,32 @@ class OrderController extends Controller
     {
         $userId = Auth::id();
         $priceAmount = 0;
-        $orderStatus = 'Belum Dibayar';
 
-        $cartItems = [
-            ['id' => 1, 'quantity' => 1],
-            ['id' => 2, 'quantity' => 1],
-        ];
+        $cartItems = $request->products;
 
         foreach ($cartItems as $item) {
-            $products = Product::find($item['id']);
-            $priceAmount += $products->price * $item['quantity'];
+            $product = Product::find($item['product_id']);
+            $priceAmount += $product->price * $item['product_quantity'];
         }
 
-        DB::transaction(function () use (
-            $userId,
-            $orderStatus,
-            $priceAmount,
-            $cartItems
-        ) {
+        DB::transaction(function () use ($userId, $priceAmount, $cartItems) {
             $order = new Order();
             $order->user_id = $userId;
-            $order->status = $orderStatus;
             $order->price_amount = $priceAmount;
             $order->save();
 
             $orderItems = array_map(function ($item) {
                 return new OrderItem([
-                    'product_id' => $item['id'],
-                    'quantity' => $item['quantity'],
+                    'product_id' => $item['product_id'],
+                    'quantity' => $item['product_quantity'],
                 ]);
             }, $cartItems);
 
             $order->orderItems()->saveMany($orderItems);
         });
+
+        $cookie = Cookie::forget('cart');
+        return redirect('/profile/orders/pending')->withCookie($cookie);
     }
 
     /**

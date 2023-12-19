@@ -32,7 +32,10 @@
                             <img src="{{ asset($item->product->image) }}" alt="{{ $item->product->name }}" class='h-36 w-36 rounded-2xl bg-gray-200'>
 
                             <div class='flex flex-col justify-between'>
-                                <span class='text-base font-medium'>{{ $item->product->name }}</span>
+                                <div class='flex gap-2'>
+                                    {{ $item->product->name }}
+                                    <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs text-white">x{{ $item->quantity }}</span>
+                                </div>
                                 <div class='flex items-center justify-center rounded-full bg-gray-200 px-6 py-2'><span class='text-black opacity-60'>{{ $item->product->size }}</span>
                                 </div>
                                 <span class='text-lg font-bold'>@money($item->product->price)</span>

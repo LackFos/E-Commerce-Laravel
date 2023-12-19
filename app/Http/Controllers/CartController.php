@@ -28,9 +28,9 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
-        $productId = $request->product_id;
+        $product = Product::findOrFail($request->product_id);
+        $pricePerItem = $product->price;
         $productQuantity = $request->product_quantity;
-        $pricePerItem = $request->price_per_item;
 
         $cart = json_decode($request->cookie('cart'), true) ?? [
             'products' => [],
@@ -40,7 +40,7 @@ class CartController extends Controller
         // Find if item is in the cart, if found update items detail
         $productFound = false;
         foreach ($cart['products'] as &$cartProduct) {
-            if ($cartProduct['product_id'] == $productId) {
+            if ($cartProduct['product_id'] == $product->id) {
                 $cartProduct['product_quantity'] += $productQuantity;
                 $productFound = true;
                 break;
@@ -50,7 +50,7 @@ class CartController extends Controller
         // Add item if not found
         if (!$productFound) {
             $cart['products'][] = [
-                'product_id' => $productId,
+                'product_id' => $product->id,
                 'product_quantity' => $productQuantity,
                 'price_per_item' => $pricePerItem,
             ];
