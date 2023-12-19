@@ -15,6 +15,10 @@
                     <div class="flex flex-col gap-4">
                         <span class="text-4xl font-bold text-black">{{ $product->name }}</span>
                         <span class="text-2xl font-bold text-primary">@money($product->price)</span>
+                            <div class="flex items-center gap-2">
+                                <span class="px-3 py-2 text-sm font-medium rounded-full bg-primary-light text-primary">30%</span>
+                                <span class="text-sm text-gray-400 line-through">@money($product->price)</span>
+                            </div>
                     </div>
                     <div class="flex flex-col">
                         <div class="flex justify-between border-b border-dashed py-2">

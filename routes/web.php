@@ -40,9 +40,25 @@ Route::prefix('cart')->group(function () {
     });
 });
 
-Route::get('/demodashboard', function () {
-    return view('pages.dashboard')->with('hideFooter', true);
+// Route::get('/cart', function () {
+//     return view('pages.cart');
+// });
+
+Route::prefix('cart')->group(function () {
+    Route::controller(CartController::class)->group(function () {
+        Route::get('/', 'getCartItems');
+        Route::post('/add', 'addToCart');
+        Route::post('/remove', 'addToCart');
+    });
 });
+
+Route::get('/demodashboard/{section?}/{action?}', function ($section = null, $action = null) {
+    $view = $section ? 'pages.dashboard-' . $section : 'pages.dashboard';
+    if ($action) {
+        $view .= '-' . $action;
+    }
+    return view($view)->with('hideFooter', true);
+})->where('section', 'product')->where('action', 'edit');
 
 Route::get('/kategori/{slug}', [CategoryController::class, 'show']);
 

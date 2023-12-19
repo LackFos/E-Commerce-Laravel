@@ -7,7 +7,7 @@
                     <x-icons.document/>
                     Toko
                 </span>
-                <a href="#" class="w-full py-2 px-14"> Beranda</a>
+                <a href="/demodashboard" class="w-full py-2 px-14"> Beranda</a>
             </li>
         </ul>
         <ul>
@@ -25,7 +25,7 @@
                     <x-icons.document/>
                     Produk
                 </span>
-                <a href="#" class="w-full py-2 px-14">Daftar Produk</a>
+                <a href="/demodashboard/product" class="w-full py-2 px-14">Daftar Produk</a>
                 <a href="#" class="w-full py-2 px-14">Tambah Produk</a>
             </li>
         </ul>
