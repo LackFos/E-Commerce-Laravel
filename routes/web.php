@@ -42,12 +42,13 @@ Route::prefix('cart')->group(function () {
 
 Route::prefix('/demodashboard')->group(function () {
     Route::get('/', function () {
-        return view('pages.dashboard');
+        return view('pages.dashboard')
+        ->with('hideFooter', true);
     });
 
     Route::prefix('/product')->group(function () {
         Route::get('/', function () {
-            return view('pages.dashboard-product');
+            return view('pages.dashboard-product')->with('hideFooter', true);
         });
 
         Route::get('/edit', function () {
@@ -60,7 +61,7 @@ Route::prefix('/demodashboard')->group(function () {
         
             $flashsale = $product['flashsale'];
         
-            return view('pages.dashboard-product-edit', compact('product', 'flashsale'));
+            return view('pages.dashboard-product-edit', compact('product', 'flashsale'))->with('hideFooter', true);
         })->name('dashboard.product.edit');        
 
         Route::get('/add', function () {
@@ -73,25 +74,34 @@ Route::prefix('/demodashboard')->group(function () {
         
             $flashsale = $product['flashsale'];
         
-            return view('pages.dashboard-product-add', compact('product', 'flashsale'));
+            return view('pages.dashboard-product-add', compact('product', 'flashsale'))->with('hideFooter', true);
         })->name('dashboard.product.add');
 
         Route::get('/category', function () {
-            return view('pages.dashboard-product-category');
+            return view('pages.dashboard-product-category')->with('hideFooter', true);
         })->name('dashboard.product.category');
     });
     Route::prefix('/banner')->group(function () {
         Route::get('/', function () {
-            return view('pages.dashboard-banner');
+            return view('pages.dashboard-banner')->with('hideFooter', true);
         });
 
         Route::get('/edit', function () {
-            return view('pages.dashboard-banner-edit');
+            return view('pages.dashboard-banner-edit')->with('hideFooter', true);
         })->name('dashboard.banner.edit');
 
         Route::get('/add', function () {
-            return view('pages.dashboard-banner-add');
+            return view('pages.dashboard-banner-add')->with('hideFooter', true);
         })->name('dashboard.banner.add');
+    });
+    Route::prefix('/pesanan')->group(function () {
+        Route::get('/', function () {
+            return view('pages.dashboard-pesanan')->with('hideFooter', true);
+        });
+
+        Route::get('/detail', function () {
+            return view('pages.dashboard-pesanan-detail')->with('hideFooter', true);
+        })->name('dashboard.pesanan.detail');
     });
 });
 

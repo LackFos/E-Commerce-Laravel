@@ -11,7 +11,7 @@
                         <span aria-current="page" class="text-gray-500 active:font-semibold">Edit Produk</span>
                     </div>
                     <div class="flex flex-col w-full bg-white border border-gray-200 border-solid rounded-lg">
-                        <span class="flex justify-start p-6 text-lg font-bold bg-white border-b border-gray-200 border-solid rounded-t-lg">Edit Produk</span>
+                        <span class="flex justify-start p-6 text-lg font-bold bg-white border-b border-gray-200 border-solid rounded-t-lg">Detail Barang</span>
                         <div class="flex gap-6 px-6 py-4">
                             <span class="flex items-center justify-start w-1/2 font-medium">Nama Barang</span>
                             <input class="w-1/2 px-4 py-1 border border-gray-200 border-solid rounded-lg" type="text" name="" id="">
@@ -67,68 +67,14 @@
                                 <input class="w-full px-4 py-1 border border-gray-200 border-solid rounded-lg" type="checkbox" name="" id="">
                             </div>
                         </div>
-                        <div class='flex items-center border-t border-solid border-gray-200 px-6 gap-6 min-h-[64px]'>
-                            <a href="/demodashboard/product/category" class="font-medium text-primary">+ Tambah Kategori</a>
-                        </div>
-                    </div>
-                    <div class="flex flex-col w-full bg-white border border-gray-200 border-solid rounded-lg">
-                        <span class="flex justify-start p-6 text-lg font-bold bg-white border-b border-gray-200 border-solid rounded-t-lg">Flash Sale</span>
-                        <div class="flex justify-between px-6 py-4">
-                            <span class="flex items-center justify-start font-medium w-fit">Flash Sale</span>
-                            <div class="flex gap-4">
-                                <label class="flex items-center">
-                                    <input
-                                        type="radio"
-                                        name="flashsale"
-                                        value="Ya"
-                                        {{ $flashsale === 'Ya' ? 'checked' : '' }}
-                                        class="absolute top-0 left-0 w-0 h-0 opacity-0"
-                                    />
-                                    <span
-                                        class="relative inline-block w-6 h-6 mr-2 border rounded-full
-                                        {{ $flashsale === 'Ya' ? 'border border-primary focus:bg-primary shadow-input' : 'border-gray-500' }}"
-                                    >
-                                        @if($flashsale === 'Ya')
-                                            <span class="absolute w-4 h-4 transform -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary top-1/2 left-1/2"></span>
-                                        @endif
-                                    </span>
-                                    <span class="ml-2">Ya</span>
-                                </label>
-                                <label class="flex items-center">
-                                    <input
-                                        type="radio"
-                                        name="flashsale"
-                                        value="Tidak"
-                                        {{ $flashsale === 'Tidak' ? 'checked' : '' }}
-                                        class="absolute top-0 left-0 w-0 h-0 opacity-0"
-                                    />
-                                    <span
-                                        class="relative inline-block w-6 h-6 mr-2 border rounded-full
-                                        {{ $flashsale === 'Tidak' ? 'border border-primary focus:bg-primary shadow-input' : 'border-gray-500' }}"
-                                    >
-                                        @if($flashsale === 'Tidak')
-                                            <span class="absolute w-4 h-4 transform -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary top-1/2 left-1/2"></span>
-                                        @endif
-                                    </span>
-                                    <span class="ml-2">Tidak</span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="flex justify-between px-6 py-4">
-                            <span class="flex items-center justify-start w-1/2 font-medium">Diskon Barang</span>
-                            <div class="relative w-20">
-                                <span class="absolute inset-y-0 right-0 flex items-center pr-2 text-gray-600">%</span>
-                                <input type="text" class="w-full px-4 py-1 pr-8 border border-gray-200 border-solid rounded-lg" name="rupiahInput" id="rupiahInput">
-                              </div>                         
-                        </div>
                     </div>
                     <div class="flex flex-col w-full bg-white border border-gray-200 border-solid rounded-lg">
                         <span class="flex justify-start p-6 text-lg font-bold bg-white border-b border-gray-200 border-solid rounded-t-lg">Deskripsi Barang</span>
                         <div class="flex w-full gap-6 px-6 py-6">
-                            <textarea class="w-full h-full px-4 py-2 text-left border border-gray-200 border-solid rounded-lg max-h-60"></textarea>                        
+                            <input type="text" class="w-full h-full px-4 py-2 border border-gray-200 border-solid rounded-lg">
                         </div>
                     </div>
-                    <button type="submit" class="flex flex-col w-full px-6 py-2 font-semibold leading-8 text-white rounded-lg bg-primary">Simpan</button>
+                    <button class="flex flex-col w-full px-6 py-2 font-semibold leading-8 text-white rounded-lg bg-primary">Simpan</button>
                 </form>
         </div>
 </div>

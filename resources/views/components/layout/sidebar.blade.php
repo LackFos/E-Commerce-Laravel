@@ -17,7 +17,7 @@
                     <x-icons.document/>
                     Pesanan
                 </span>
-                <a href="#" class="w-full py-2 px-14">Riwayat Pesanan</a>
+                <a href="/demodashboard/pesanan" class="w-full py-2 px-14">Riwayat Pesanan</a>
             </li>
         </ul>
         <ul>
