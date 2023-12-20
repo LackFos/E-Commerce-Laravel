@@ -17,7 +17,7 @@
         </div>
 
         @if ($userOrders->count() > 0)
-            @foreach ($userOrders as $order)
+            @foreach ($userOrders as $index => $order)
                 <div class='flex w-full flex-col gap-6 rounded-2xl border border-solid border-gray-100 bg-white p-6'>
                     <div class='flex justify-between'>
                         <div class='flex items-center gap-6'>
@@ -47,6 +47,16 @@
                         <span class='text-lg font-bold'>Total Pesanan</span>
                         <span class='text-lg font-bold text-primary'>@money($order->price_amount)</span>
                     </div>
+
+                    <div class='flex flex-col justify-between gap-4 py-4'>
+                        <span class='text-lg font-bold'>Bukti Pembayaran</span>
+                        @if (isset($order->payment_proof))
+                            <img class="w-1/4" src="{{ asset($order->payment_proof) }}" alt="{{ $order->id }}">
+                        @else
+                            <span class='text-red-600'>Belum ada bukti pembayaran</span>
+                        @endif
+                    </div>
+
                     <div class='flex justify-between py-4'>
                         <div class='flex flex-col gap-4'>
                             <h2>Transfer ke:</h2>
@@ -59,17 +69,20 @@
                             @endforeach
 
                         </div>
-                        <form action="" class="flex flex-col justify-end">
+
+                        <form method="PATCH" action="/order/payment" class="order flex flex-col justify-end">
                             <div class="flex gap-2">
-                                <label for="fileInput" class="flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-white">
+                                <label for="payment-image-{{ $index }}"
+                                    class="relative flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-white">
                                     Upload Bukti
                                     <x-icons.archive />
-                                    <input type="submit" type="file" id="fileInput" name="FotoProfil" class="absolute left-0 top-0 h-0 w-0 opacity-0" />
+                                    <input type="file" type="file" accept="image/*" id="payment-image-{{ $index }}" name="FotoProfil"
+                                        class="payment-proof absolute left-0 top-0 h-0 w-0 opacity-0" />
                                 </label>
-                                <button onclick="" class="flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-white">
+                                <div class="view-payment flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-white">
                                     Lihat Bukti
                                     <x-icons.paper />
-                                </button>
+                                </div>
                                 <button type="submit" class="flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-white">
                                     Submit Bukti
                                 </button>
@@ -86,5 +99,14 @@
                 </div>
             </div>
         @endif
+
+
+        <div id='payment-overlay' class="fixed inset-0 hidden items-center justify-center bg-black/75">
+            <img id='payment-image' src="" alt="">
+        </div>
     </x-layout.profile>
 @endsection
+
+@push('scripts')
+    @vite('resources/js/orders.js')
+@endpush

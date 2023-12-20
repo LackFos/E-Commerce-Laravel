@@ -28,82 +28,26 @@ Route::get('/', HomeController::class)->name('home');
 Route::get('/produk/{products:slug}', [ProductController::class, 'show']);
 Route::get('/search', [ProductController::class, 'search']);
 
-// Route::get('/cart', function () {
-//     return view('pages.cart');
-// });
-
-Route::prefix('cart')->group(function () {
+Route::middleware(RequireAuth::class)->group(function () {
     Route::controller(CartController::class)->group(function () {
-        Route::get('/', 'getCartItems');
-        Route::post('/add', 'addToCart');
-        Route::post('/remove', 'addToCart');
+        Route::get('/cart', 'getCartItems');
+        Route::post('/cart', 'addToCart');
+        Route::delete('/cart/{product_id}', 'removeFromCart');
     });
 });
 
-Route::prefix('/demodashboard')->group(function () {
-    Route::get('/', function () {
-        return view('pages.dashboard')
-        ->with('hideFooter', true);
-    });
-
-    Route::prefix('/product')->group(function () {
-        Route::get('/', function () {
-            return view('pages.dashboard-product')->with('hideFooter', true);
-        });
-
-        Route::get('/edit', function () {
-            // Dummy data for 'product' and 'flashsale'
-            $product = [
-                'id' => 1,
-                'name' => 'Sample Product',
-                'flashsale' => 'Ya', // 'Ya' or 'Tidak'
-            ];
-        
-            $flashsale = $product['flashsale'];
-        
-            return view('pages.dashboard-product-edit', compact('product', 'flashsale'))->with('hideFooter', true);
-        })->name('dashboard.product.edit');        
-
-        Route::get('/add', function () {
-            // Dummy data for 'product' and 'flashsale'
-            $product = [
-                'id' => 1,
-                'name' => 'Sample Product',
-                'flashsale' => 'Tidak', // 'Ya' or 'Tidak'
-            ];
-        
-            $flashsale = $product['flashsale'];
-        
-            return view('pages.dashboard-product-add', compact('product', 'flashsale'))->with('hideFooter', true);
-        })->name('dashboard.product.add');
-
-        Route::get('/category', function () {
-            return view('pages.dashboard-product-category')->with('hideFooter', true);
-        })->name('dashboard.product.category');
-    });
-    Route::prefix('/banner')->group(function () {
-        Route::get('/', function () {
-            return view('pages.dashboard-banner')->with('hideFooter', true);
-        });
-
-        Route::get('/edit', function () {
-            return view('pages.dashboard-banner-edit')->with('hideFooter', true);
-        })->name('dashboard.banner.edit');
-
-        Route::get('/add', function () {
-            return view('pages.dashboard-banner-add')->with('hideFooter', true);
-        })->name('dashboard.banner.add');
-    });
-    Route::prefix('/pesanan')->group(function () {
-        Route::get('/', function () {
-            return view('pages.dashboard-pesanan')->with('hideFooter', true);
-        });
-
-        Route::get('/detail', function () {
-            return view('pages.dashboard-pesanan-detail')->with('hideFooter', true);
-        })->name('dashboard.pesanan.detail');
-    });
-});
+Route::get('/demodashboard/{section?}/{action?}', function (
+    $section = null,
+    $action = null
+) {
+    $view = $section ? 'pages.dashboard-' . $section : 'pages.dashboard';
+    if ($action) {
+        $view .= '-' . $action;
+    }
+    return view($view)->with('hideFooter', true);
+})
+    ->where('section', 'product')
+    ->where('action', 'edit');
 
 Route::get('/kategori/{slug}', [CategoryController::class, 'show']);
 
@@ -121,9 +65,13 @@ Route::middleware(RedirectIfAuthenticated::class)->group(function () {
     });
 });
 
-// Route::get('/order', [OrderController::class, 'store'])->middleware(
-//     RequireAuth::class
-// );
+Route::middleware(RequireAuth::class)->group(function () {
+    Route::controller(OrderController::class)->group(function () {
+        Route::post('/order', 'store');
+        Route::patch('/order/status', 'updateOrderStatus');
+        Route::patch('/order/payment', 'updatePaymentProof');
+    });
+});
 
 Route::prefix('profile')
     ->middleware(RequireAuth::class)

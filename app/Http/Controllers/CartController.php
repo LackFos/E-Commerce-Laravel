@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-
-namespace App\Http\Controllers;
-
-use App\Models\Product;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class CartController extends Controller
 {
@@ -28,9 +24,13 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
-        $product = Product::findOrFail($request->product_id);
+        $product = Product::findOrFail($request->products[0]['product_id']);
         $pricePerItem = $product->price;
-        $productQuantity = $request->product_quantity;
+        $productQuantity = $request->products[0]['product_quantity'];
+
+        if ($productQuantity > $product->stock) {
+            abort(403, 'Stok hanya tersisa ' . $product->stock);
+        }
 
         $cart = json_decode($request->cookie('cart'), true) ?? [
             'products' => [],
@@ -41,7 +41,7 @@ class CartController extends Controller
         $productFound = false;
         foreach ($cart['products'] as &$cartProduct) {
             if ($cartProduct['product_id'] == $product->id) {
-                $cartProduct['product_quantity'] += $productQuantity;
+                $cartProduct['product_quantity'] = $productQuantity;
                 $productFound = true;
                 break;
             }
@@ -66,7 +66,9 @@ class CartController extends Controller
             0
         );
 
-        return response('')->cookie('cart', json_encode($cart), 60 * 24 * 180);
+        return back()->withCookie(
+            Cookie::make('cart', json_encode($cart), 60 * 24 * 180)
+        );
     }
 
     public function removeFromCart(Request $request)

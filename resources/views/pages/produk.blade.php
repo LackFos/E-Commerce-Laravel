@@ -39,7 +39,8 @@
                         </div>
                     </div>
                 </div>
-                <form method='POST' action='/order' class="flex h-fit min-w-[306px] flex-col gap-6 rounded-2xl border border-solid border-gray-300 bg-white p-6">
+
+                <form method='POST' action='' class="product flex h-fit min-w-[306px] flex-col gap-6 rounded-2xl border border-solid border-gray-300 bg-white p-6">
                     @csrf
                     <input type="hidden" id="product-id" name='products[0][product_id]' value="{{ $product->id }}">
                     <input type="hidden" id="product-price" value="{{ $product->price }}">
@@ -48,22 +49,23 @@
                     <div class="flex flex-col gap-8">
                         <div class="flex items-center gap-4">
                             <div class="flex w-36 items-center justify-between rounded-full bg-gray-300 p-4">
-                                <div id='reduce-item' class="w-9 text-center text-3xl font-bold">-</div>
+                                <div class="reduce-item w-9 text-center text-3xl font-bold">-</div>
 
-                                <input id='item-quantity' type="number" min="1" max="{{ $product->stock }}" value="1" name='products[0][product_quantity]' placeholder="1"
-                                    class="w-10 bg-transparent text-center text-black outline-none placeholder:text-base placeholder:text-black" readonly />
-                                <div id='add-item' class="w-9 text-center text-3xl font-bold">+</div>
+                                <input type="number" min="1" max="{{ $product->stock }}" value="1" name='products[0][product_quantity]' placeholder="1"
+                                    class="item-quantity w-10 bg-transparent text-center text-black outline-none placeholder:text-base placeholder:text-black" readonly />
+                                <div class="add-item w-9 text-center text-3xl font-bold">+</div>
                             </div>
                             <span>Stok: <span class="font-bold">Sisa {{ $product->stock }}</span></span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-300">Sub Total</span>
-                            <span id='total-price' class="text-xl font-bold text-primary">@money($product->price)</span>
+                            <span class="total-price text-xl font-bold text-primary">@money($product->price)</span>
                         </div>
                     </div>
                     <div class="flex flex-col gap-2">
-                        <div id='add-to-cart' class="rounded-full bg-primary px-16 py-4 text-center font-medium text-white">+ Keranjang</div>
-                        <button type='submit' class="rounded-full border border-solid border-primary bg-white px-16 py-4 text-center font-medium text-primary">Beli Sekarang</button>
+                        <button formaction='/cart' type='submit' class="rounded-full bg-primary px-16 py-4 text-center font-medium text-white">+ Keranjang</button>
+                        <button formaction='/order' type='submit' class="rounded-full border border-solid border-primary bg-white px-16 py-4 text-center font-medium text-primary">Beli
+                            Sekarang</button>
                     </div>
                 </form>
             </div>

@@ -56,7 +56,7 @@ class OrderController extends Controller
         $priceAmount = 0;
 
         $cartItems = $request->products;
-
+        abort_if(!$cartItems, 403, 'Tidak ada barang dikeranjang');
         foreach ($cartItems as $item) {
             $product = Product::find($item['product_id']);
             $priceAmount += $product->price * $item['product_quantity'];
@@ -107,15 +107,27 @@ class OrderController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the  status of specified resource in storage.
      */
-    public function update(Request $request, Order $order)
+    public function updateOrderStatus(Request $request, Order $order)
     {
         $validated = $request->validate([
             'status' => 'exists:order_statuses,name',
         ]);
 
         $order->update(['status' => $validated['status']]);
+    }
+
+    /**
+     * Update the payment proof of specified resource in storage.
+     */
+    public function updatePaymentProof(Request $request, Order $order)
+    {
+        $validated = $request->validate([
+            'payment_proof' => 'bail|require|image',
+        ]);
+
+        $order->update(['payment_proof' => $validated['payment_proof']]);
     }
 
     /**
