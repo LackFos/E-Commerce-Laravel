@@ -33,3 +33,18 @@ body {
     line-height: 1.5em;
     color: #0f172a;
 }
+
+input[type="checkbox"]:checked + label .w-6.h-6 {
+    background-color: #ff696e; /* Warna latar belakang saat dicentang */
+    border-color: #ff696e; /* Warna border saat dicentang */
+}
+
+input[type="checkbox"]:checked + label #checkIcon {
+    opacity: 1;
+    color: #fff; /* Warna ikon centang saat dicentang */
+}
+
+input[type="checkbox"] + label .w-6.h-6 {
+    background-color: #fff; /* Warna latar belakang saat tidak dicentang */
+    border-color: #ccc; /* Warna border saat tidak dicentang */
+}

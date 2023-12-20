@@ -20,7 +20,6 @@
                         <div class='flex items-center justify-between'>
                             <div class='flex items-center gap-6'>
                                 <span class='text-base font-medium'>25 Juli 2023, 17:24 WIB</span>
-                                <span class="px-4 py-1 leading-8 text-orange-500 bg-orange-100 rounded-full">Butuh Diproses</span>
                             </div>
                             <a href="/demodashboard/pesanan/detail" class='text-base font-semibold text-primary'>Detail Transaksi</a>
                         </div>
@@ -59,7 +58,6 @@
                         <div class='flex items-center justify-between'>
                             <div class='flex items-center gap-6'>
                                 <span class='text-base font-medium'>25 Juli 2023, 17:24 WIB</span>
-                                <span class="px-4 py-1 leading-8 text-orange-500 bg-orange-100 rounded-full">Butuh Diproses</span>
                             </div>
                             <a href="/demodashboard/pesanan/detail" class='text-base font-semibold text-primary'>Detail Transaksi</a>
                         </div>

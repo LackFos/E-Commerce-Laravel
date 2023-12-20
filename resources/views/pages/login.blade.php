@@ -22,10 +22,15 @@
 
                 <div class='flex flex-col gap-8'>
                     <div class='flex justify-between'>
-                        <div class='flex items-center'>
-                            <input type="checkbox" id="rememberMe" name="remember">
-                            <label for="rememberMe" class='block ml-2 text-base text-black'>Remember me</label>
-                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="rememberMe" name="remember" class="hidden">
+                            <label for="rememberMe" class="relative flex gap-2 ml-2 text-base cursor-pointer">
+                                <div class="flex items-center justify-center w-6 h-6 bg-white border border-gray-300 rounded-md">
+                                    <span class="absolute text-white transition-opacity" id="checkIcon">✓</span>
+                                </div>
+                                Remember me
+                            </label>
+                        </div>                 
                         <span class='text-base text-primary'>Lupa Kata Sandi?</span>
                     </div>
 

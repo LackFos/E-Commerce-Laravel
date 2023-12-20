@@ -14,8 +14,13 @@
                         <option value="terbaru">Terbaru</option>
                     </select>
                     <div class="flex items-center justify-between w-[25%] gap-4">
-                        <span class="font-bold leading-8">Tampilkan Produk Habis</span>
-                        <input type="checkbox" name="habis" id="habis">
+                        <input type="checkbox" id="outOfStock" name="product" class="hidden">
+                        <label for="outOfStock" class="relative flex justify-between w-full ml-2 text-base font-bold cursor-pointer">
+                          Tampilkan Produk Habis
+                          <div class="flex items-center justify-center w-6 h-6 bg-white border border-gray-300 rounded-md">
+                            <span class="absolute text-white transition-opacity" id="checkIcon">✓</span>
+                          </div>
+                        </label> 
                     </div>
                 </div>
                 <div class="flex flex-col w-full bg-white border border-gray-200 border-solid rounded-lg">

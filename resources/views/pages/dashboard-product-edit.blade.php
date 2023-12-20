@@ -39,32 +39,74 @@
                         <span class="flex justify-start p-6 text-lg font-bold bg-white border-b border-gray-200 border-solid rounded-t-lg">Kategori</span>
                         <div class="flex w-full gap-6 px-6 py-4">
                             <div class="flex justify-between w-1/2 ">
-                                <span class="flex items-center justify-start w-full font-medium">Nama Barang</span>
-                                <input class="w-full px-4 py-1 border border-gray-200 border-solid rounded-lg" type="checkbox" name="" id="">
+                                <input type="checkbox" id="outOfStock" name="product" class="hidden">
+                                <label for="outOfStock" class="relative flex items-center justify-between w-full font-medium cursor-pointer">
+                                     Tampilkan Produk Habis
+                                     <div class="flex justify-center w-1/2">
+                                        <div class="flex items-center justify-center w-6 h-6 bg-white border border-gray-300 rounded-md">
+                                           <span class="absolute text-white transition-opacity" id="checkIcon">✓</span>
+                                        </div>
+                                     </div>
+                                </label> 
                             </div>
                             <div class="flex justify-between w-1/2 ">
-                                <span class="flex items-center justify-start w-full font-medium">Nama Barang</span>
-                                <input class="w-full px-4 py-1 border border-gray-200 border-solid rounded-lg" type="checkbox" name="" id="">
+                                <input type="checkbox" id="outOfStock" name="product" class="hidden">
+                                <label for="outOfStock" class="relative flex items-center justify-between w-full font-medium cursor-pointer">
+                                     Tampilkan Produk Habis
+                                     <div class="flex justify-center w-1/2">
+                                        <div class="flex items-center justify-center w-6 h-6 bg-white border border-gray-300 rounded-md">
+                                           <span class="absolute text-white transition-opacity" id="checkIcon">✓</span>
+                                        </div>
+                                     </div>
+                                </label> 
                             </div>
                         </div>
                         <div class="flex w-full gap-6 px-6 py-4">
                             <div class="flex justify-between w-1/2 ">
-                                <span class="flex items-center justify-start w-full font-medium">Nama Barang</span>
-                                <input class="w-full px-4 py-1 border border-gray-200 border-solid rounded-lg" type="checkbox" name="" id="">
+                                <input type="checkbox" id="outOfStock" name="product" class="hidden">
+                                <label for="outOfStock" class="relative flex items-center justify-between w-full font-medium cursor-pointer">
+                                     Tampilkan Produk Habis
+                                     <div class="flex justify-center w-1/2">
+                                        <div class="flex items-center justify-center w-6 h-6 bg-white border border-gray-300 rounded-md">
+                                           <span class="absolute text-white transition-opacity" id="checkIcon">✓</span>
+                                        </div>
+                                     </div>
+                                </label> 
                             </div>
                             <div class="flex justify-between w-1/2 ">
-                                <span class="flex items-center justify-start w-full font-medium">Nama Barang</span>
-                                <input class="w-full px-4 py-1 border border-gray-200 border-solid rounded-lg" type="checkbox" name="" id="">
+                                <input type="checkbox" id="outOfStock" name="product" class="hidden">
+                                <label for="outOfStock" class="relative flex items-center justify-between w-full font-medium cursor-pointer">
+                                     Tampilkan Produk Habis
+                                     <div class="flex justify-center w-1/2">
+                                        <div class="flex items-center justify-center w-6 h-6 bg-white border border-gray-300 rounded-md">
+                                           <span class="absolute text-white transition-opacity" id="checkIcon">✓</span>
+                                        </div>
+                                     </div>
+                                </label> 
                             </div>
                         </div>
                         <div class="flex w-full gap-6 px-6 py-4">
                             <div class="flex justify-between w-1/2 ">
-                                <span class="flex items-center justify-start w-full font-medium">Nama Barang</span>
-                                <input class="w-full px-4 py-1 border border-gray-200 border-solid rounded-lg" type="checkbox" name="" id="">
+                                <input type="checkbox" id="outOfStock" name="product" class="hidden">
+                                <label for="outOfStock" class="relative flex items-center justify-between w-full font-medium cursor-pointer">
+                                     Tampilkan Produk Habis
+                                     <div class="flex justify-center w-1/2">
+                                        <div class="flex items-center justify-center w-6 h-6 bg-white border border-gray-300 rounded-md">
+                                           <span class="absolute text-white transition-opacity" id="checkIcon">✓</span>
+                                        </div>
+                                     </div>
+                                </label> 
                             </div>
                             <div class="flex justify-between w-1/2 ">
-                                <span class="flex items-center justify-start w-full font-medium">Nama Barang</span>
-                                <input class="w-full px-4 py-1 border border-gray-200 border-solid rounded-lg" type="checkbox" name="" id="">
+                                <input type="checkbox" id="outOfStock" name="product" class="hidden">
+                                <label for="outOfStock" class="relative flex items-center justify-between w-full font-medium cursor-pointer">
+                                     Tampilkan Produk Habis
+                                     <div class="flex justify-center w-1/2">
+                                        <div class="flex items-center justify-center w-6 h-6 bg-white border border-gray-300 rounded-md">
+                                           <span class="absolute text-white transition-opacity" id="checkIcon">✓</span>
+                                        </div>
+                                     </div>
+                                </label> 
                             </div>
                         </div>
                     </div>
