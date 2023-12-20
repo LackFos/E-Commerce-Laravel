@@ -12,15 +12,13 @@
                 <div class="flex items-center justify-between">
                     <span class="text-4xl font-bold">Produk "{{ $keyword }}"</span>
                     <div class="flex items-center gap-2">
-                        <span>Urutkan:</span>
-                        <div class="">
-                            <select id="sort" name="sort" class="w-full rounded-md bg-transparent py-2 pl-3 text-base text-primary">
-                                <option value="harga-terendah">Harga Terendah</option>
-                                <option value="harga-tertinggi">Harga Tertinggi</option>
-                                <option value="terbaru">Terbaru</option>
-                                <option value="terpopuler">Terpopuler</option>
-                            </select>
-                        </div>
+                        <span class='whitespace-nowrap'>Urutkan Berdasarkan :</span>
+
+                        <select id="sort" name="sort" class="w-full rounded-md bg-transparent py-2 pl-3 text-base text-primary">
+                            <option value="" disabled selected>Pilih Opsi</option>
+                            <option value="lowest">Harga Terendah</option>
+                            <option value="highest">Harga Tertinggi</option>
+                        </select>
                     </div>
                 </div>
 
@@ -33,4 +31,9 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
+
+@push('scripts')
+    @vite('resources/js/search.js')
+@endpush

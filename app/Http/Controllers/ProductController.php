@@ -12,8 +12,19 @@ class ProductController extends Controller
      */
     public function search(Request $request)
     {
-        $keyword = $request->input('q');
-        $products = Product::where('name', 'like', '%' . $keyword . '%')->get();
+        $keyword = $request->input('q', '');
+        $sortParam = $request->query('sort', null);
+
+        $query = Product::where('name', 'like', '%' . $keyword . '%');
+
+        if ($sortParam === 'highest') {
+            $query->orderBy('price', 'desc');
+        } elseif ($sortParam === 'lowest') {
+            $query->orderBy('price', 'asc');
+        }
+
+        $products = $query->get();
+
         return view('pages.search', compact('keyword', 'products'));
     }
 
