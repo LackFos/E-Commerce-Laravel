@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrderItem;
 use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 use App\Models\PaymentAccount;
-use App\Rules\ValidOrderStatus;
+use App\Helpers\ImageUploadHelper;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use App\Http\Requests\UploadPaymentReceiptRequest;
 
 class OrderController extends Controller
 {
@@ -87,10 +90,8 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        // Page Props
         $user = Auth::user();
 
-        // Page Content
         $order = Order::where('id', $id)
             ->where('user_id', $user->id)
             ->firstOrFail();
@@ -121,13 +122,38 @@ class OrderController extends Controller
     /**
      * Update the payment proof of specified resource in storage.
      */
-    public function updatePaymentProof(Request $request, Order $order)
+    public function updateOrderPayment(UploadPaymentReceiptRequest $request)
     {
-        $validated = $request->validate([
-            'payment_proof' => 'bail|require|image',
-        ]);
+        DB::beginTransaction();
 
-        $order->update(['payment_proof' => $validated['payment_proof']]);
+        try {
+            if ($request->hasFile('payment_receipt')) {
+                $newImagePath = ImageUploadHelper::uploadPaymentReceipt(
+                    $request->file('payment_receipt')
+                );
+
+                // Delete the old receipt if it exists
+                if ($request->order->payment_receipt) {
+                    ImageUploadHelper::deleteOldReceipt(
+                        $request->order->payment_receipt
+                    );
+                }
+
+                // Update the order with the new receipt image path
+                $request->order->payment_receipt = $newImagePath;
+                $request->order->save();
+            }
+
+            DB::commit();
+            return back()->with(
+                'success',
+                'Bukti Pembayaran berhasil diperbarui'
+            );
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            return back()->with('error', 'Gagal memperbarui Bukti Pembayaran');
+        }
     }
 
     /**

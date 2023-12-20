@@ -32,9 +32,9 @@ class AuthController extends Controller
 
             if ($request->hasFile('image')) {
                 $newImagePath = ImageUploadHelper::uploadProfileImage(
-                    $request->file('image'),
-                    $user
+                    $request->file('image')
                 );
+                ImageUploadHelper::deleteOldProfile($user->image);
 
                 $user->image = $newImagePath;
                 $user->save();

@@ -19,7 +19,7 @@ return new class extends Migration {
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
-            $table->string('payment_proof')->nullable();
+            $table->string('payment_receipt')->nullable();
             $table
                 ->foreignId('order_status_id')
                 ->default(1)

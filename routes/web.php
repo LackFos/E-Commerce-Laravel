@@ -69,7 +69,7 @@ Route::middleware(RequireAuth::class)->group(function () {
     Route::controller(OrderController::class)->group(function () {
         Route::post('/order', 'store');
         Route::patch('/order/status', 'updateOrderStatus');
-        Route::patch('/order/payment', 'updatePaymentProof');
+        Route::patch('/order/payment', 'updateOrderPayment');
     });
 });
 

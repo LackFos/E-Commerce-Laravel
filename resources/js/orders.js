@@ -1,7 +1,7 @@
 $(function () {
     $('.view-payment').on('click', function (event) {
         event.stopPropagation();
-        const fileInput = $(this).closest('.order').find('.payment-proof')[0];
+        const fileInput = $(this).closest('.order').find('.payment-receipt')[0];
 
         if (fileInput && fileInput.files && fileInput.files[0]) {
             const reader = new FileReader();
