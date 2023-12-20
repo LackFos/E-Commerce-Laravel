@@ -1,18 +1,16 @@
-@props(['type' => 'success', 'message'])
+@props(['type', 'message'])
 
-<div class="relative flex justify-center w-full">
-    <div class="absolute top-4 z-10 flex w-full max-w-lg justify-between rounded-xl border p-4
-                @if($type === 'success') border-primary bg-primary-light text-primary @endif
-                @if($type === 'danger') border-red-500 bg-red-100 text-red-500 @endif
-            ">
+@php
+    $borderColor = $type === 'success' ? 'border-green-600' : 'border-red-600';
+    $bgColor = $type === 'success' ? 'bg-green-100' : 'bg-red-100';
+    $textColor = $type === 'success' ? 'text-green-600' : 'text-red-600';
+@endphp
+
+<div class="toast fixed top-2 flex w-full justify-center">
+    <div class="{{ $borderColor }} {{ $bgColor }} {{ $textColor }} text-md absolute top-4 z-10 flex gap-4 rounded-xl border p-4 text-sm">
         <div class="flex items-center gap-2">
-            @if($type === 'success')
-                <x-icons.check />
-            @elseif($type === 'danger')
-                <x-icons.check />
-            @endif
-            <span class="text-xl font-medium">{{ $message }}</span>
+            <span class="font-medium">{{ $message }}</span>
         </div>
-        <button class="text-xl font-bold">X</button>
+        <div onclick="this.parentElement.remove()" class="font-bold">X</div>
     </div>
 </div>

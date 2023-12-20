@@ -14,8 +14,8 @@ class UploadPaymentReceiptRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $this->order = Order::where('id', $this->order_id)->first();
         $this->user = Auth::user();
+        $this->order = Order::where('id', $this->order_id)->first();
 
         // Explicit check for null
         if ($this->order === null) {
@@ -33,7 +33,7 @@ class UploadPaymentReceiptRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'payment_receipt' => 'bail|required',
+            'payment_receipt' => 'bail|required|image|max:5120',
         ];
     }
 }

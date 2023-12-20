@@ -1,6 +1,15 @@
 @extends('index')
 
 @section('page')
+
+    @if (session('success'))
+        <x-alert :message="session('success')" type="success" />
+    @endif
+
+    @if (session('error'))
+        <x-alert :message="session('error')" type="alert" />
+    @endif
+
     <div class="my-10 flex justify-center">
         <form action='/order' method='POST' class="flex w-full max-w-[1440px] justify-center gap-6">
             @csrf

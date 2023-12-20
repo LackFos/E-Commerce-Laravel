@@ -11,11 +11,11 @@
 
 @section('page')
     @if (session('success'))
-        <x-alert :message="session('success')" />
+        <x-alert :message="session('success')" type="success" />
     @endif
 
     @if (session('error'))
-        <x-alert :message="session('error')" />
+        <x-alert :message="session('error')" type="alert" />
     @endif
 
 

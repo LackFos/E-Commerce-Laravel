@@ -1,6 +1,14 @@
 @extends('index')
 
 @section('page')
+    @if (session('success'))
+        <x-alert :message="session('success')" type="success" />
+    @endif
+
+    @if (session('error'))
+        <x-alert :message="session('error')" type="alert" />
+    @endif
+
     <div class="my-10 flex justify-center">
         <div class="flex w-full max-w-[1440px] flex-col gap-10">
             <div class="flex w-full justify-start gap-2">

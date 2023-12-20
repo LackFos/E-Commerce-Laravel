@@ -29,7 +29,9 @@ class CartController extends Controller
         $productQuantity = $request->products[0]['product_quantity'];
 
         if ($productQuantity > $product->stock) {
-            abort(403, 'Stok hanya tersisa ' . $product->stock);
+            return redirect()
+                ->back()
+                ->with('error', 'Stok hanya tersisa ' . $product->stock);
         }
 
         $cart = json_decode($request->cookie('cart'), true) ?? [
@@ -66,9 +68,11 @@ class CartController extends Controller
             0
         );
 
-        return back()->withCookie(
-            Cookie::make('cart', json_encode($cart), 60 * 24 * 180)
-        );
+        return back()
+            ->withCookie(
+                Cookie::make('cart', json_encode($cart), 60 * 24 * 180)
+            )
+            ->with('success', 'Barang berhasil dimasukkan ke keranjang');
     }
 
     public function removeFromCart(Request $request)
