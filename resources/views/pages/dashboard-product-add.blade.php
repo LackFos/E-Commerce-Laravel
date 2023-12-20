@@ -162,10 +162,10 @@
                             </div>
                         </div>
                         <div class="flex justify-between px-6 py-4">
-                            <span class="flex items-center justify-start w-1/2 font-medium">Diskon Barang</span>
-                            <div class="relative w-20">
-                                <span class="absolute inset-y-0 right-0 flex items-center pr-2 text-gray-600">%</span>
-                                <input type="text" class="w-full px-4 py-1 pr-8 border border-gray-200 border-solid rounded-lg" name="rupiahInput" id="rupiahInput">
+                            <span class="flex items-center justify-start w-1/2 font-medium">Harga Flashsale</span>
+                            <div class="relative w-40">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-gray-600">Rp.</span>
+                                <input type="text" class="w-full px-4 py-1 pl-8 border border-gray-200 border-solid rounded-lg" name="rupiahInput" id="rupiahInput">
                               </div>                         
                         </div>
                     </div>

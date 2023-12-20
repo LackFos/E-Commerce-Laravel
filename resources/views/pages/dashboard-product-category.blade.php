@@ -18,9 +18,12 @@
                             </div>
                             <input class="w-1/2 px-4 py-1 border border-gray-200 border-solid rounded-lg" type="text" name="" id="">
                         </div>
+                        <div class="px-6 py-4">
+                            <button type="submit" class="flex flex-col w-full px-6 py-2 font-semibold leading-8 text-white rounded-lg bg-primary">Simpan</button>
+                        </div>
                     </div>
                     <div class="flex flex-col w-full bg-white border border-gray-200 border-solid rounded-lg">
-                        <span class="flex justify-start p-6 text-lg font-bold bg-white border-b border-gray-200 border-solid rounded-t-lg">Kategori</span>
+                        <span class="flex justify-start p-6 text-lg font-bold bg-white border-b border-gray-200 border-solid rounded-t-lg"> Hapus Kategori</span>
                         <div class="flex w-full gap-6 px-6 py-4">
                             <div class="flex justify-between w-1/2 ">
                                 <input type="checkbox" id="outOfStock" name="product" class="hidden">
@@ -92,9 +95,11 @@
                                      </div>
                                 </label> 
                             </div>
+                        </div>
+                        <div class="px-6 py-4">
+                            <button type="submit" class="flex flex-col w-full px-6 py-2 font-semibold leading-8 text-white rounded-lg bg-primary">Hapus</button>
                         </div>
                     </div>
-                    <button type="submit" class="flex flex-col w-full px-6 py-2 font-semibold leading-8 text-white rounded-lg bg-primary">Simpan</button>
                 </form>
         </div>
 </div>
