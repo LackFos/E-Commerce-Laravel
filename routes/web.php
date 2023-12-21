@@ -7,6 +7,7 @@ use App\Http\Middleware\AdminOnly;
 use App\Http\Middleware\RequireAuth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
@@ -160,11 +161,24 @@ Route::prefix('dashboard')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index']);
 
+        Route::controller(BannerController::class)->group(function () {
+            Route::get('/banner', 'index');
+            Route::get('/banner/tambah', 'create');
+            Route::get('/banner/{slug}', 'edit');
+        });
+
         Route::controller(ProductController::class)->group(function () {
-            Route::get('/produk/{product:slug}', 'show');
+            Route::get('/produk', 'index');
+            Route::get('/produk/tambah', 'create');
+            Route::get('/produk/{slug}', 'edit');
             Route::post('/produk/{product:slug}', 'store');
             Route::patch('/produk/{product:slug}', 'update');
             Route::delete('/produk/{product:slug}', 'destroy');
+        });
+
+        Route::controller(OrderController::class)->group(function () {
+            Route::get('/pesanan', 'index_admin');
+            Route::get('/pesanan/{order_id}', 'show_admin');
         });
 
         Route::controller(CategoryController::class)->group(function () {

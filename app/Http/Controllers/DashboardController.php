@@ -7,6 +7,9 @@ use App\Models\Product;
 
 class DashboardController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $orderStatuses = OrderStatus::select('slug', 'name')
@@ -29,10 +32,9 @@ class DashboardController extends Controller
 
         $emptyStockProduct = Product::where('stock', 0)->get();
 
-        $almostEmptyStockProduct = Product::whereBetween('stock', [
-            1,
-            20 - 1,
-        ])->get();
+        $almostEmptyStockProduct = Product::whereBetween('stock', [1, 20 - 1])
+            ->orderBy('stock')
+            ->get();
 
         return view(
             'Pages.dashboard.beranda',

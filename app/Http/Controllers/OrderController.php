@@ -18,6 +18,9 @@ use App\Http\Requests\UploadPaymentReceiptRequest;
 
 class OrderController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index($slug)
     {
         $user = Auth::user();
@@ -43,11 +46,28 @@ class OrderController extends Controller
     }
 
     /**
+     * Display a listing of the resource (Admin Only).
+     */
+    public function index_admin(Request $request)
+    {
+        $status = $request->input('status', '');
+        $selectedStatus = OrderStatus::where('slug', $status)->firstOrFail();
+        $orderStatuses = OrderStatus::all();
+        $orders = Order::where('order_status_id', $selectedStatus->id)
+            ->latest()
+            ->get();
+
+        return view(
+            'pages.dashboard.pesanan',
+            compact('selectedStatus', 'orderStatuses', 'orders')
+        );
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -97,6 +117,15 @@ class OrderController extends Controller
             ->firstOrFail();
 
         return view('pages.order', compact('order'));
+    }
+
+    /**
+     * Display the specified resource (Admin Only).
+     */
+    public function show_admin($orderId)
+    {
+        $order = Order::where('id', $orderId)->first();
+        return view('pages.dashboard.pesanan-detail', compact('order'));
     }
 
     /**

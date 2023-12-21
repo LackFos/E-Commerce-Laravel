@@ -20,6 +20,6 @@ class AdminOnly
             return $next($request);
         }
 
-        return redirect()->back();
+        return redirect()->route('home');
     }
 }
