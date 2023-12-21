@@ -52,3 +52,10 @@ input[type="checkbox"] + label .w-6.h-6 {
     width: 100%; /* Atur lebar sesuai kebutuhan */
     height: 100%; /* Atur tinggi sesuai kebutuhan, atau gunakan 'auto' */
 }
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    content: "";
+}
+.chevron-icon.rotate-180 {
+    transform: rotate(180deg);
+}

@@ -7,7 +7,7 @@
                 {{-- @foreach ($flashsale as $fs)
                     <x-product-card :product="$fs->product" :price_after_discount="$fs->price_after_discount" />
                 @endforeach --}}
-    <div class="overflow-hidden swiper-container">
+    <div class="overflow-hidden swiper-flash-sale">
         <div class="swiper-wrapper">
         <div class="swiper-slide">
             <div class="flex justify-start gap-4 px-6 ">
@@ -370,7 +370,9 @@
                 </div>
             </div>           
         </div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+    </div>
+    <div class="relative">
+        <div class="absolute flex items-center justify-center p-3 text-2xl text-gray-400 bg-white rounded-full left-[-2rem] w-14 h-14 swiper-button-prev top-[-14rem]"><x-icons.chevron class="rotate-180" /></div>
+        <div class="absolute flex items-center justify-center p-3 text-2xl text-gray-400 bg-white rounded-full right-[-2rem] w-14 h-14 swiper-button-next top-[-14rem]"><x-icons.chevron/></div>
     </div>
 </div>
