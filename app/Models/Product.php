@@ -19,4 +19,10 @@ class Product extends Model
     {
         return $this->hasOne(Flashsale::class);
     }
+
+    public function getPriceAfterDiscountAttribute()
+    {
+        return $this->flashsale?->price_after_discount ??
+            $this->attributes['price'];
+    }
 }

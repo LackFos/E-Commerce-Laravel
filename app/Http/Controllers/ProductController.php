@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
-     * Display the specified resource (filter by search keyword).
+     * Display the specified resource (filter by search keyword & sort).
      */
     public function search(Request $request)
     {

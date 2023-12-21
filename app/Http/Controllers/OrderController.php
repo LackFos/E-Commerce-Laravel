@@ -76,24 +76,50 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $userId = Auth::id();
-        $priceAmount = 0;
 
-        $cartItems = $request->products;
-        abort_if(!$cartItems, 403, 'Tidak ada barang dikeranjang');
-        foreach ($cartItems as $item) {
-            $product = Product::find($item['product_id']);
-            $priceAmount += $product->price * $item['product_quantity'];
+        $cartItems = $request->input('products');
+        if (!$cartItems) {
+            abort(403, 'Tidak ada barang dikeranjang');
         }
 
-        DB::transaction(function () use ($userId, $priceAmount, $cartItems) {
+        // Fetch all products at once
+        $productIds = array_column($cartItems, 'product_id');
+        $products = Product::whereIn('id', $productIds)
+            ->get()
+            ->keyBy('id');
+
+        $priceAmount = 0;
+        foreach ($cartItems as $item) {
+            $product = $products[$item['product_id']] ?? null;
+            abort_if(
+                !$product,
+                404,
+                'Terdapat produk yang sudah tidak ada dikeranjangmu'
+            );
+
+            $priceAmount +=
+                ($product->flashsale->price_after_discount ?? $product->price) *
+                $item['product_quantity'];
+        }
+
+        DB::transaction(function () use (
+            $userId,
+            $priceAmount,
+            $cartItems,
+            $products
+        ) {
             $order = new Order();
             $order->user_id = $userId;
             $order->price_amount = $priceAmount;
             $order->save();
 
-            $orderItems = array_map(function ($item) {
+            $orderItems = array_map(function ($item) use ($products) {
+                $product = $products[$item['product_id']];
                 return new OrderItem([
-                    'product_id' => $item['product_id'],
+                    'product_id' => $product->id,
+                    'price' =>
+                        $product->flashsale->price_after_discount ??
+                        $product->price,
                     'quantity' => $item['product_quantity'],
                 ]);
             }, $cartItems);
@@ -101,8 +127,7 @@ class OrderController extends Controller
             $order->orderItems()->saveMany($orderItems);
         });
 
-        $cookie = Cookie::forget('cart');
-        return redirect('/profile/orders/pending')->withCookie($cookie);
+        return redirect('/profile/orders/pending');
     }
 
     /**

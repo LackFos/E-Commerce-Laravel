@@ -8,7 +8,7 @@
         <div class="grid grid-cols-6 gap-4 max-lg:grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-2">
 
             @foreach ($products as $product)
-                <x-product-card :product="$product" />
+                <x-product-card :product="$product" :price_after_discount="$product->flashsale?->price_after_discount" />
             @endforeach
 
         </div>

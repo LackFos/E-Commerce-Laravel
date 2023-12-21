@@ -28,7 +28,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 */
 
 Route::get('/', HomeController::class)->name('home');
-Route::get('/produk/{products:slug}', [ProductController::class, 'show']);
+Route::get('/produk/{slug}', [ProductController::class, 'show']);
 Route::get('/search', [ProductController::class, 'search']);
 
 Route::middleware(RequireAuth::class)->group(function () {
@@ -36,85 +36,6 @@ Route::middleware(RequireAuth::class)->group(function () {
         Route::get('/cart', 'getCartItems');
         Route::post('/cart', 'addToCart');
         Route::delete('/cart/{product_id}', 'removeFromCart');
-    });
-});
-
-Route::prefix('/demodashboard')->group(function () {
-    Route::get('/', function () {
-        return view('pages.dashboard')->with('hideFooter', true);
-    });
-
-    Route::prefix('/product')->group(function () {
-        Route::get('/', function () {
-            return view('pages.dashboard-product')->with('hideFooter', true);
-        });
-
-        Route::get('/edit', function () {
-            // Dummy data for 'product' and 'flashsale'
-            $product = [
-                'id' => 1,
-                'name' => 'Sample Product',
-                'flashsale' => 'Ya', // 'Ya' or 'Tidak'
-            ];
-
-            $flashsale = $product['flashsale'];
-
-            return view(
-                'pages.dashboard-product-edit',
-                compact('product', 'flashsale')
-            )->with('hideFooter', true);
-        })->name('dashboard.product.edit');
-
-        Route::get('/add', function () {
-            // Dummy data for 'product' and 'flashsale'
-            $product = [
-                'id' => 1,
-                'name' => 'Sample Product',
-                'flashsale' => 'Tidak', // 'Ya' or 'Tidak'
-            ];
-
-            $flashsale = $product['flashsale'];
-
-            return view(
-                'pages.dashboard-product-add',
-                compact('product', 'flashsale')
-            )->with('hideFooter', true);
-        })->name('dashboard.product.add');
-
-        Route::get('/category', function () {
-            return view('pages.dashboard-product-category')->with(
-                'hideFooter',
-                true
-            );
-        })->name('dashboard.product.category');
-    });
-    Route::prefix('/banner')->group(function () {
-        Route::get('/', function () {
-            return view('pages.dashboard-banner')->with('hideFooter', true);
-        });
-
-        Route::get('/edit', function () {
-            return view('pages.dashboard-banner-edit')->with(
-                'hideFooter',
-                true
-            );
-        })->name('dashboard.banner.edit');
-
-        Route::get('/add', function () {
-            return view('pages.dashboard-banner-add')->with('hideFooter', true);
-        })->name('dashboard.banner.add');
-    });
-    Route::prefix('/pesanan')->group(function () {
-        Route::get('/', function () {
-            return view('pages.dashboard-pesanan')->with('hideFooter', true);
-        });
-
-        Route::get('/detail', function () {
-            return view('pages.dashboard-pesanan-detail')->with(
-                'hideFooter',
-                true
-            );
-        })->name('dashboard.pesanan.detail');
     });
 });
 

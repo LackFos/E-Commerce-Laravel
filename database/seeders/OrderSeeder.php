@@ -16,7 +16,7 @@ class OrderSeeder extends Seeder
         Order::create([
             'user_id' => User::first()->id,
             'payment_receipt' => 'storage/payment_images/bill.png',
-            'price_amount' => 130000,
+            'price_amount' => 160000,
         ]);
     }
 }

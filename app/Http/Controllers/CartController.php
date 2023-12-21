@@ -8,6 +8,19 @@ use Illuminate\Support\Facades\Cookie;
 
 class CartController extends Controller
 {
+    private function recalculateTotalPrice(&$cart)
+    {
+        $cart['total_price'] = array_reduce(
+            $cart['products'],
+            function ($total, $item) {
+                $product = Product::find($item['product_id']);
+                return $total +
+                    $product->price_after_discount * $item['product_quantity'];
+            },
+            0
+        );
+    }
+
     public function getCartItems(Request $request)
     {
         $cart = json_decode($request->cookie('cart'), true) ?? [
@@ -15,9 +28,23 @@ class CartController extends Controller
             'total_price' => 0,
         ];
 
-        foreach ($cart['products'] as &$cartProduct) {
-            $cartProduct['product'] = Product::find($cartProduct['product_id']);
+        $total_price = 0;
+        foreach ($cart['products'] as $key => &$cartProduct) {
+            $product = Product::find($cartProduct['product_id']);
+
+            if (!$product) {
+                unset($cart['products'][$key]);
+                continue;
+            }
+
+            $cartProduct['product'] = $product;
+            $total_price +=
+                $product->price_after_discount *
+                $cartProduct['product_quantity'];
         }
+
+        $cart['products'] = array_values($cart['products']);
+        $cart['total_price'] = $total_price;
 
         return view('pages.cart', compact('cart'));
     }
@@ -25,7 +52,7 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $product = Product::findOrFail($request->products[0]['product_id']);
-        $pricePerItem = $product->price;
+        $pricePerItem = $product->price_after_discount;
         $productQuantity = $request->products[0]['product_quantity'];
 
         if ($productQuantity > $product->stock) {
@@ -39,7 +66,6 @@ class CartController extends Controller
             'total_price' => 0,
         ];
 
-        // Find if item is in the cart, if found update items detail
         $productFound = false;
         foreach ($cart['products'] as &$cartProduct) {
             if ($cartProduct['product_id'] == $product->id) {
@@ -49,7 +75,6 @@ class CartController extends Controller
             }
         }
 
-        // Add item if not found
         if (!$productFound) {
             $cart['products'][] = [
                 'product_id' => $product->id,
@@ -58,15 +83,7 @@ class CartController extends Controller
             ];
         }
 
-        // Calc Cart Total Price
-        $cart['total_price'] = array_reduce(
-            $cart['products'],
-            function ($total, $item) {
-                return $total +
-                    $item['price_per_item'] * $item['product_quantity'];
-            },
-            0
-        );
+        $this->recalculateTotalPrice($cart);
 
         return back()
             ->withCookie(
@@ -89,18 +106,9 @@ class CartController extends Controller
             }
         }
 
-        // Re-index the products array to maintain sequential indices
         $cart['products'] = array_values($cart['products']);
 
-        // Recalculate Cart Total Price
-        $cart['total_price'] = array_reduce(
-            $cart['products'],
-            function ($total, $item) {
-                return $total +
-                    $item['price_per_item'] * $item['product_quantity'];
-            },
-            0
-        );
+        $this->recalculateTotalPrice($cart);
 
         return response()
             ->json($cart)

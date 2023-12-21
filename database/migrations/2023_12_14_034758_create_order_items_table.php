@@ -24,6 +24,7 @@ return new class extends Migration {
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
+            $table->integer('price');
             $table->integer('quantity');
             $table->unique(['order_id', 'product_id']);
         });

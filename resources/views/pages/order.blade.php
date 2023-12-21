@@ -15,7 +15,7 @@
                                 {{ $item->product->name }}
                                 <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs text-white">x{{ $item->quantity }}</span>
                             </div>
-                            <span class="text-gray-400">@money($item->product->price * $item->quantity)</span>
+                            <span class="text-gray-400">@money($item->price * $item->quantity)</span>
                         </div>
                     @endforeach
                 </div>
@@ -48,12 +48,12 @@
                         <div class="flex flex-col justify-between gap-2">
                             <span class="font-medium">{{ $item->product->name }}</span>
                             <span class="flex items-center justify-center rounded-full bg-gray-200 px-6 py-2">{{ $item->product->size }}</span>
-                            <span class="text-gray-400"> {{ $item->quantity }} x @money($item->product->price)</span>
+                            <span class="text-gray-400"> {{ $item->quantity }} x @money($item->price)</span>
                         </div>
                     </div>
                     <div class="flex flex-col gap-1">
                         <span>Total Harga</span>
-                        <span class="text-lg font-bold">@money($item->product->price * $item->quantity)</span>
+                        <span class="text-lg font-bold">@money($item->price * $item->quantity)</span>
                     </div>
                 </div>
             @endforeach

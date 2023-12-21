@@ -22,11 +22,18 @@
                 <div class="flex w-full flex-col gap-6 rounded-2xl border border-solid border-gray-300 bg-white p-6">
                     <div class="flex flex-col gap-4">
                         <span class="text-4xl font-bold text-black">{{ $product->name }}</span>
-                        <span class="text-2xl font-bold text-primary">@money($product->price)</span>
-                        <div class="flex items-center gap-2">
-                            <span class="rounded-full bg-primary-light px-3 py-2 text-sm font-medium text-primary">30%</span>
-                            <span class="text-sm text-gray-400 line-through">@money($product->price)</span>
-                        </div>
+                        <span class="text-2xl font-bold text-primary">
+                            @money($product->price_after_discount)
+                        </span>
+                        @if (isset($product->flashsale))
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="rounded-full bg-primary-light px-3 py-2 text-sm font-medium text-primary">{{ round((($product->price - $product->flashsale->price_after_discount) / $product->price) * 100) }}
+                                    %</span>
+                                <span class="text-sm text-gray-400 line-through">@money($product->price)</span>
+                            </div>
+                        @endif
+
                     </div>
                     <div class="flex flex-col">
                         <div class="flex justify-between border-b border-dashed py-2">
@@ -51,7 +58,7 @@
                 <form method='POST' action='' class="product flex h-fit min-w-[306px] flex-col gap-6 rounded-2xl border border-solid border-gray-300 bg-white p-6">
                     @csrf
                     <input type="hidden" id="product-id" name='products[0][product_id]' value="{{ $product->id }}">
-                    <input type="hidden" id="product-price" value="{{ $product->price }}">
+                    <input type="hidden" id="product-price" value="{{ $product->price_after_discount }}">
 
                     <span class="flex justify-start text-xl font-bold">Subtotal</span>
                     <div class="flex flex-col gap-8">
@@ -67,7 +74,9 @@
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-300">Sub Total</span>
-                            <span class="total-price text-xl font-bold text-primary">@money($product->price)</span>
+                            <span class="total-price text-xl font-bold text-primary">
+                                @money($product->price_after_discount)
+                            </span>
                         </div>
                     </div>
                     <div class="flex flex-col gap-2">

@@ -10,12 +10,12 @@
             <span class="text-base font-medium">{{ $product->name }}</span>
             <div class="flex flex-col gap-1">
                 <span class="text-xl font-bold text-primary">
-                    @money($product->price_after_discount ?? $product->price)
+                    @money($product->price_after_discount)
                 </span>
                 @isset($price_after_discount)
                     <div class="flex items-center gap-1">
                         <span
-                            class="rounded-full bg-primary-light px-2 py-1 text-xs font-medium text-primary">{{ (($product->price - $price_after_discount) / $product->price) * 100 }}%</span>
+                            class="rounded-full bg-primary-light px-2 py-1 text-xs font-medium text-primary">{{ round((($product->price - $price_after_discount) / $product->price) * 100) }}%</span>
                         <span class="text-xs text-gray-400 line-through">@money($product->price)</span>
                     </div>
                 @endisset

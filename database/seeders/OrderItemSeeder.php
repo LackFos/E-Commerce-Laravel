@@ -17,12 +17,14 @@ class OrderItemSeeder extends Seeder
         OrderItem::create([
             'order_id' => Order::first()->id,
             'product_id' => 1,
+            'price' => 50000,
             'quantity' => 2,
         ]);
 
         OrderItem::create([
             'order_id' => Order::first()->id,
             'product_id' => 2,
+            'price' => 30000,
             'quantity' => 2,
         ]);
     }

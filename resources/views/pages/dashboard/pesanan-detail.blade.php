@@ -56,7 +56,7 @@
                                                 <span class="rounded-full bg-gray-200 px-6 py-2">{{ $item->product->size }}</span>
                                                 <span class="rounded-full bg-gray-200 px-6 py-2">{{ $item->product->color }}</span>
                                             </div>
-                                            <span class="text-gray-400">{{ $item->quantity }} x <span class="text-gray-400">@money($item->product->price)</span></span>
+                                            <span class="text-gray-400">{{ $item->quantity }} x <span class="text-gray-400">@money($item->product->flashsale?->price_after_discount ?? $item->product->price)</span></span>
                                         </div>
                                     </div>
                                     <div class="flex flex-col justify-between">

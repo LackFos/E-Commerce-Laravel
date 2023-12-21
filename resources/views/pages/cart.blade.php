@@ -20,7 +20,7 @@
                     @foreach ($cart['products'] as $index => $cartItem)
                         <div class="product-card flex w-full gap-6 rounded-2xl border border-solid border-gray-200 bg-white p-6">
                             <input type="hidden" class="product_id" name="products[{{ $index }}][product_id]" value={{ $cartItem['product']->id }}>
-                            <input type="hidden" class="product_price" value={{ $cartItem['product']->price }}>
+                            <input type="hidden" class="product_price" value={{ $cartItem['product']->price_after_discount }}>
 
                             <div class="flex w-full justify-between">
                                 <div class="flex gap-6">
@@ -32,7 +32,7 @@
                                             <span class="rounded-full bg-gray-200 px-6 py-2">{{ $cartItem['product']->size }}</span>
                                             <span class="rounded-full bg-gray-200 px-6 py-2">{{ $cartItem['product']->color }}</span>
                                         </div>
-                                        <span class="text-lg font-bold">@money($cartItem['product']->price)<span class="text-xs leading-8">/ item</span></span>
+                                        <span class="text-lg font-bold">@money($cartItem['product']->price_after_discount)<span class="text-xs leading-8">/ item</span></span>
                                     </div>
                                 </div>
                                 <div class="flex flex-col justify-between">
@@ -70,7 +70,7 @@
                             <span class="font-medium">{{ $cartItem['product']->name }}</span>
                             <div class="product-quantity flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs text-white">{{ $cartItem['product_quantity'] }}</div>
                         </div>
-                        <span class='product-price'> @money($cartItem['product']->price * $cartItem['product_quantity'])</span>
+                        <span class='product-price'> @money($cartItem['product']->price_after_discount * $cartItem['product_quantity'])</span>
                     </div>
                 @endforeach
 
