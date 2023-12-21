@@ -20,7 +20,11 @@ class DashboardController extends Controller
                 'orders.order_status_id'
             )
             ->selectRaw('COUNT(orders.id) as total')
-            ->groupBy('order_statuses.id')
+            ->groupBy(
+                'order_statuses.id',
+                'order_statuses.slug',
+                'order_statuses.name'
+            )
             ->get()
             ->map(function ($item) {
                 return [
