@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Middleware\AdminOnly;
@@ -11,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
@@ -156,6 +158,8 @@ Route::prefix('profile')
 Route::prefix('dashboard')
     ->middleware(AdminOnly::class)
     ->group(function () {
+        Route::get('/', [DashboardController::class, 'index']);
+
         Route::controller(ProductController::class)->group(function () {
             Route::get('/produk/{product:slug}', 'show');
             Route::post('/produk/{product:slug}', 'store');

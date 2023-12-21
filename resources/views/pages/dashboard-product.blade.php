@@ -1,88 +1,88 @@
 @extends('index')
 
 @section('page')
-<div class="flex gap-2 ">
-    <x-layout.sidebar/>
-        <div class="flex justify-center max-w-[1440px] w-full p-10">
-            <div class="flex flex-col w-full gap-6">
+    <div class="flex gap-2">
+        <x-layout.sidebar />
+        <div class="flex w-full max-w-[1440px] justify-center p-10">
+            <div class="flex w-full flex-col gap-6">
                 <h2>Daftar Produk</h2>
-                <form class="flex w-full gap-6 p-6 bg-white rounded-lg">
-                    <input placeholder="Cari nama barang" class="w-1/2 px-4 py-1 border border-gray-200 border-solid rounded-lg" type="text" name="sort" id="sort" >
-                    <select id="sort" name="sort" class="w-[20%] py-2 pl-3 text-base text-black rounded-md bg-slate-200">
+                <form class="flex w-full gap-6 rounded-lg bg-white p-6">
+                    <input placeholder="Cari nama barang" class="w-1/2 rounded-lg border border-solid border-gray-200 px-4 py-1" type="text" name="sort" id="sort">
+                    <select id="sort" name="sort" class="w-[20%] rounded-md bg-slate-200 py-2 pl-3 text-base text-black">
                         <option value="harga-terendah">Pilih Kategori</option>
                         <option value="harga-tertinggi">Edit</option>
                         <option value="terbaru">Terbaru</option>
                     </select>
-                    <div class="flex items-center w-[20%] gap-4">
+                    <div class="flex w-[20%] items-center gap-4">
                         <input type="checkbox" id="outOfStock" name="product" class="hidden">
-                        <label for="outOfStock" class="relative flex w-full gap-4 text-base font-bold cursor-pointer">
-                          Tampilkan Produk Habis
-                          <div class="flex items-center justify-center w-6 h-6 bg-white border border-gray-300 rounded-md">
-                            <span class="absolute text-white transition-opacity" id="checkIcon">✓</span>
-                          </div>
-                        </label> 
+                        <label for="outOfStock" class="relative flex w-full cursor-pointer gap-4 text-base font-bold">
+                            Tampilkan Produk Habis
+                            <div class="flex h-6 w-6 items-center justify-center rounded-md border border-gray-300 bg-white">
+                                <span class="absolute text-white transition-opacity" id="checkIcon">✓</span>
+                            </div>
+                        </label>
                     </div>
-                    <button type="submit" class="w-[10%] py-1 px-2 left-8 font-semibold text-white flex justify-center items-center bg-primary rounded-md">Submit</button>
+                    <button type="submit" class="left-8 flex w-[10%] items-center justify-center rounded-md bg-primary px-2 py-1 font-semibold text-white">Submit</button>
                 </form>
-                <div class="flex flex-col w-full bg-white border border-gray-200 border-solid rounded-lg">
-                        <div class='flex items-center px-6 gap-6 min-h-[64px]'>
-                          <div class='flex w-full h-full min-h-[64px]'>
-                            <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Barang</div>
-                            <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Harga</div>
-                            <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Stok</div>
-                            <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Aksi</div>
-                          </div>
+                <div class="flex w-full flex-col rounded-lg border border-solid border-gray-200 bg-white">
+                    <div class='flex min-h-[64px] items-center gap-6 px-6'>
+                        <div class='flex h-full min-h-[64px] w-full'>
+                            <div class='g-4 flex w-full flex-col items-start justify-center font-bold'>Barang</div>
+                            <div class='g-4 flex w-full flex-col items-start justify-center font-bold'>Harga</div>
+                            <div class='g-4 flex w-full flex-col items-start justify-center font-bold'>Stok</div>
+                            <div class='g-4 flex w-full flex-col items-start justify-center font-bold'>Aksi</div>
                         </div>
-                        <div class='flex items-center border-t border-solid border-gray-200 px-6 gap-6 min-h-[64px]'>
-                          <div class='flex w-full h-full min-h-[64px]'>
-                            <div class='flex flex-col items-start justify-center w-full my-3 font-light text-gray-500'>
-                              <div class="flex items-center gap-4">
-                                <img src="" class="w-20 h-20 bg-gray-300 rounded-2xl" alt="">
-                                <span class="font-medium leading-8">Cardigan</span>
-                              </div>
-                            </div>
-                            <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
-                                    <span class="border max-w-[132px] px-4 py-2 w-fit border-gray-200 border-solid rounded-lg text-gray-600">Rp. 100.000</span>                                 
-                            </div>
-                            <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
-                                <div class="flex gap-4">
-                                  <span class="border w-[132px] px-4 py-2  border-gray-200 border-solid rounded-lg text-gray-600">10</span>   
+                    </div>
+                    <div class='flex min-h-[64px] items-center gap-6 border-t border-solid border-gray-200 px-6'>
+                        <div class='flex h-full min-h-[64px] w-full'>
+                            <div class='my-3 flex w-full flex-col items-start justify-center font-light text-gray-500'>
+                                <div class="flex items-center gap-4">
+                                    <img src="" class="h-20 w-20 rounded-2xl bg-gray-300" alt="">
+                                    <span class="font-medium leading-8">Cardigan</span>
                                 </div>
                             </div>
-                            <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
-                              <div class='flex items-center justify-start w-full gap-4 font-light text-gray-500'>
-                                  <a href="/demodashboard/product/edit">Edit</a>
-                                  <button>Hapus</button>
-                              </div>
+                            <div class='flex w-full flex-col items-start justify-center font-light text-gray-500'>
+                                <span class="w-fit max-w-[132px] rounded-lg border border-solid border-gray-200 px-4 py-2 text-gray-600">Rp. 100.000</span>
                             </div>
-                          </div>
-                </div>
-                <div class='flex items-center border-t border-solid border-gray-200 px-6 gap-6 min-h-[64px]'>
-                    <div class='flex w-full h-full min-h-[64px]'>
-                      <div class='flex flex-col items-start justify-center w-full my-3 font-light text-gray-500'>
-                        <div class="flex items-center gap-4">
-                          <img src="" class="w-20 h-20 bg-gray-300 rounded-2xl" alt="">
-                          <span class="font-medium leading-8">Cardigan</span>
+                            <div class='flex w-full flex-col items-start justify-center font-light text-gray-500'>
+                                <div class="flex gap-4">
+                                    <span class="w-[132px] rounded-lg border border-solid border-gray-200 px-4 py-2 text-gray-600">10</span>
+                                </div>
+                            </div>
+                            <div class='flex w-full flex-col items-start justify-center font-light text-gray-500'>
+                                <div class='flex w-full items-center justify-start gap-4 font-light text-gray-500'>
+                                    <a href="/demodashboard/product/edit">Edit</a>
+                                    <button>Hapus</button>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                      <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
-                        <span class="border max-w-[132px] px-4 py-2 w-fit border-gray-200 border-solid rounded-lg text-gray-600">Rp. 100.000</span>                                   
-                      </div>
-                      <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
-                        <div class="flex gap-4">
-                          <span class="border w-[132px] px-4 py-2 border-gray-200 border-solid rounded-lg text-gray-600">0</span>   
-                          <span class="flex items-center text-primary">Stok Habis</span>
-                        </div>
-                      </div>
-                      <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
-                        <div class='flex items-center justify-start w-full gap-4 font-light text-gray-500'>
-                          <a href="/demodashboard/product/edit">Edit</a>
-                          <button>Hapus</button>
-                      </div>
-                      </div>
                     </div>
-          </div>
+                    <div class='flex min-h-[64px] items-center gap-6 border-t border-solid border-gray-200 px-6'>
+                        <div class='flex h-full min-h-[64px] w-full'>
+                            <div class='my-3 flex w-full flex-col items-start justify-center font-light text-gray-500'>
+                                <div class="flex items-center gap-4">
+                                    <img src="" class="h-20 w-20 rounded-2xl bg-gray-300" alt="">
+                                    <span class="font-medium leading-8">Cardigan</span>
+                                </div>
+                            </div>
+                            <div class='flex w-full flex-col items-start justify-center font-light text-gray-500'>
+                                <span class="w-fit max-w-[132px] rounded-lg border border-solid border-gray-200 px-4 py-2 text-gray-600">Rp. 100.000</span>
+                            </div>
+                            <div class='flex w-full flex-col items-start justify-center font-light text-gray-500'>
+                                <div class="flex gap-4">
+                                    <span class="w-[132px] rounded-lg border border-solid border-gray-200 px-4 py-2 text-gray-600">0</span>
+                                    <span class="flex items-center text-primary">Stok Habis</span>
+                                </div>
+                            </div>
+                            <div class='flex w-full flex-col items-start justify-center font-light text-gray-500'>
+                                <div class='flex w-full items-center justify-start gap-4 font-light text-gray-500'>
+                                    <a href="/demodashboard/product/edit">Edit</a>
+                                    <button>Hapus</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
         </div>
-</div>
-@endsection
+    @endsection
