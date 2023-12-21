@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const swiperFlashSale = new Swiper('.swiper-flash-sale', {
         // Optional parameters
         direction: 'horizontal',
-        loop: true,
 
         // If we need pagination
         pagination: {
@@ -27,8 +26,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         // Navigation arrows
         navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+            nextEl: '.swiper-button-next-fs',
+            prevEl: '.swiper-button-prev-fs',
         },
 
         // And if we need scrollbar
