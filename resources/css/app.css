@@ -48,3 +48,8 @@ input[type="checkbox"] + label .w-6.h-6 {
     background-color: #fff; /* Warna latar belakang saat tidak dicentang */
     border-color: #ccc; /* Warna border saat tidak dicentang */
 }
+.swiper {
+    width: 100%; /* Atur lebar sesuai kebutuhan */
+    height: 100%; /* Atur tinggi sesuai kebutuhan, atau gunakan 'auto' */
+}
+

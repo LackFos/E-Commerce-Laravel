@@ -9,9 +9,9 @@
                 <div class="flex flex-col w-full bg-white border border-gray-200 border-solid rounded-lg">
                         <div class='flex items-center px-6 gap-6 min-h-[64px]'>
                           <div class='flex w-full h-full min-h-[64px]'>
-                            <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Banner</div>
-                            <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Nama</div>
-                            <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Aksi</div>
+                            <div class='flex flex-col items-start justify-center w-full font-bold'>Banner</div>
+                            <div class='flex flex-col items-start justify-center w-full font-bold'>Nama</div>
+                            <div class='flex flex-col items-start justify-center w-full font-bold'>Aksi</div>
                           </div>
                         </div>
                         <div class='flex items-center border-t border-solid border-gray-200 px-6 gap-6 min-h-[64px]'>

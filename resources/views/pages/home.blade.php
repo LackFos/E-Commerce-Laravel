@@ -10,3 +10,6 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    @vite('resources/js/swiper.js')
+@endpush
