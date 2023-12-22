@@ -18,6 +18,7 @@
                         </div>
                         <input class="w-1/2 rounded-lg border border-solid border-gray-200 px-4 py-1" type="text" name="" id="">
                     </div>
+<<<<<<< Updated upstream
                     <div class="px-6 py-4">
                         <button type="submit" class="flex w-full flex-col rounded-lg bg-primary px-6 py-2 font-semibold leading-8 text-white">Simpan</button>
                     </div>
@@ -35,6 +36,22 @@
                             <span for="outOfStock" class="relative flex w-full cursor-pointer items-center justify-between font-medium">Tampilkan Produk Habis</span>
                             <div class="flex w-1/2 justify-center gap-2">
                                 <button class="rounded-lg bg-primary px-4 py-2 text-white">dfd</button>
+=======
+                    <div class="flex flex-col w-full bg-white border border-gray-200 border-solid rounded-lg">
+                        <span class="flex justify-start p-6 text-lg font-bold bg-white border-b border-gray-200 border-solid rounded-t-lg"> Hapus Kategori</span>
+                        <div class="flex flex-col w-full gap-6 px-6 py-4">
+                            <div class="flex justify-between w-full ">
+                                <span for="outOfStock" class="relative flex items-center justify-between w-full font-medium cursor-pointer">Tampilkan Produk Habis</span> 
+                                <div class="flex justify-center w-1/2 gap-2">
+                                    <button class="px-2 py-2 text-white rounded-lg bg-primary"><x-icons.trash/></button>
+                                </div>
+                            </div>
+                            <div class="flex justify-between w-full ">
+                                <span for="outOfStock" class="relative flex items-center justify-between w-full font-medium cursor-pointer">Tampilkan Produk Habis</span> 
+                                <div class="flex justify-center w-1/2 gap-2">
+                                    <button class="px-2 py-2 text-white rounded-lg bg-primary"><x-icons.trash/></button>
+                                </div>
+>>>>>>> Stashed changes
                             </div>
                         </div>
                     </div>

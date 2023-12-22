@@ -53,10 +53,10 @@
                                         <span class="text-gray-600 rounded-lg w-fit">{{ $product->stock }}</span>
                                         <span class="flex items-center text-primary">Stok Habis</span>
                                     </div>
-                                    <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
-                                        <div class='flex items-center justify-start w-full gap-4 font-light text-gray-500'>
-                                            <a href="dashboard/produk/{{ $product->slug }}">Edit</a>
-                                            <button type="submit">Hapus</button>
+                                    <div class='flex flex-col items-start justify-center w-full'>
+                                        <div class='flex items-center justify-start w-full gap-4'>
+                                            <a class="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-400" href="dashboard/produk/{{ $product->slug }}">Edit</a>
+                                            <button class="px-2 py-2 rounded-lg bg-primary hover:bg-opacity-80" type="submit"><x-icons.trash/></button>
                                         </div>
                                     </div>
                                 </div>
@@ -78,10 +78,10 @@
                                     <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
                                         <span class="text-gray-600 rounded-lg w-fit">{{ $product->stock }}</span>
                                     </div>
-                                    <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
-                                        <div class='flex items-center justify-start w-full gap-4 font-light text-gray-500'>
-                                            <a href="dashboard/produk/{{ $product->slug }}">Edit</a>
-                                            <button type="submit">Hapus</button>
+                                    <div class='flex flex-col items-start justify-center w-full'>
+                                        <div class='flex items-center justify-start w-full gap-4'>
+                                            <a  class="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-400" href="dashboard/produk/{{ $product->slug }}">Edit</a>
+                                            <button class="px-2 py-2 rounded-lg bg-primary hover:bg-opacity-80" type="submit"><x-icons.trash/></button>
                                         </div>
                                     </div>
                                 </div>

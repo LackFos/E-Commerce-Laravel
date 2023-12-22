@@ -112,4 +112,7 @@ Route::prefix('dashboard')
             Route::patch('/kategori/{category:slug}', 'update');
             Route::delete('/kategori/{category:slug}/delete', 'destroy');
         });
+        Route::get('/others', function () {
+            return view('pages.dashboard.others');
+        });
     });
