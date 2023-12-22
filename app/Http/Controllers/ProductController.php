@@ -16,12 +16,20 @@ class ProductController extends Controller
         $keyword = $request->input('q', '');
         $sortParam = $request->query('sort', null);
 
-        $query = Product::where('name', 'like', '%' . $keyword . '%');
+        $query = Product::with(['category', 'flashsale'])->where(
+            'name',
+            'like',
+            '%' . $keyword . '%'
+        );
 
         if ($sortParam === 'highest') {
             $query->orderBy('price', 'desc');
         } elseif ($sortParam === 'lowest') {
             $query->orderBy('price', 'asc');
+        } elseif ($sortParam === 'newest') {
+            $query->latest();
+        } elseif ($sortParam === 'oldest') {
+            $query->oldest();
         }
 
         $products = $query->get();

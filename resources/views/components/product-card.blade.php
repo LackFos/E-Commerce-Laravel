@@ -2,7 +2,7 @@
 
 <a href="/produk/{{ $product->slug }}" class="flex flex-col rounded-2xl">
     <div class="block">
-        <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="h-60 w-full rounded-t-2xl bg-gray-300" />
+        <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="h-60 w-full rounded-t-2xl bg-gray-300 object-cover" />
     </div>
 
     <div class="flex w-full flex-col gap-4 rounded-b-2xl bg-white p-4">

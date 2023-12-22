@@ -1,14 +1,7 @@
 @extends('index')
 
 @section('page')
-    @if (session('success'))
-        <x-alert :message="session('success')" type="success" />
-    @endif
-
-    @if (session('error'))
-        <x-alert :message="session('error')" type="alert" />
-    @endif
-
+    <x-alert />
 
     <x-layout.profile :username="$user->username" :image="$user->image">
 

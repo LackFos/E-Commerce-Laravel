@@ -1,13 +1,7 @@
 @extends('index')
 
 @section('page')
-    @if (session('success'))
-        <x-alert :message="session('success')" type="success" />
-    @endif
-
-    @if (session('error'))
-        <x-alert :message="session('error')" type="alert" />
-    @endif
+    <x-alert />
 
     <div class="my-10 flex justify-center">
         <form action='/order' method='POST' class="flex w-full max-w-[1440px] justify-center gap-6">
@@ -35,7 +29,7 @@
                                     </div>
                                 </div>
                                 <div class="flex flex-col justify-between">
-                                    <div data-product-id={{ $cartItem['product']->id }} class="remove-from-cart flex justify-end">X</div>
+                                    <div data-product-id={{ $cartItem['product']->id }} class="remove-from-cart flex justify-end"><x-icons.close /></div>
 
                                     <div class="flex w-36 items-center justify-between rounded-full bg-gray-300 p-4">
                                         <div class="reduce-item w-9 text-center text-3xl font-bold">-</div>

@@ -16,7 +16,9 @@
 
                         <select id="sort" name="sort" class="w-full rounded-md bg-transparent py-2 pl-3 text-base text-primary">
                             <option value="" disabled selected>Pilih Opsi</option>
-                            <option value="lowest">Harga Terendah</option>
+                            <option value="newest">Produk Terbaru</option>
+                            <option value="oldest">Produk Terlama</option>
+                            <option value="lowest">Harga Tertinggi</option>
                             <option value="highest">Harga Tertinggi</option>
                         </select>
                     </div>
@@ -35,5 +37,5 @@
 @endsection
 
 @push('scripts')
-    @vite('resources/js/search.js')
+    @vite('resources/js/sort.js')
 @endpush

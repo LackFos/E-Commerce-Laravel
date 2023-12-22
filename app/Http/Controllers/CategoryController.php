@@ -42,11 +42,27 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($slug)
+    public function show(Request $request, $slug)
     {
         $categories = Category::all();
-        $selectedCategory = Category::where('slug', $slug)->firstOrFail();
-        $products = $selectedCategory->products;
+        $selectedCategory = $categories->where('slug', $slug)->first();
+
+        abort_if(!$selectedCategory, 404, 'Kategori Tidak ditemukan');
+
+        $sortParam = $request->query('sort', null);
+        $query = $selectedCategory->products()->with(['category', 'flashsale']);
+
+        if ($sortParam === 'highest') {
+            $query->orderBy('price', 'desc');
+        } elseif ($sortParam === 'lowest') {
+            $query->orderBy('price', 'asc');
+        } elseif ($sortParam === 'newest') {
+            $query->latest();
+        } elseif ($sortParam === 'oldest') {
+            $query->oldest();
+        }
+
+        $products = $query->get();
 
         return view(
             'pages.kategori',

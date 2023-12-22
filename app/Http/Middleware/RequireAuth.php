@@ -17,7 +17,9 @@ class RequireAuth
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check()) {
-            return redirect()->route('login.show');
+            return redirect()
+                ->route('login.show')
+                ->with('error', 'Silahkan Login Terlebih Dahulu');
         }
 
         return $next($request);

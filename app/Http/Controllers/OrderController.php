@@ -13,7 +13,6 @@ use App\Helpers\ImageUploadHelper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 use App\Http\Requests\UploadPaymentReceiptRequest;
 
 class OrderController extends Controller
@@ -23,12 +22,15 @@ class OrderController extends Controller
      */
     public function index($slug)
     {
-        $user = Auth::user();
-        $selectedStatus = OrderStatus::where('slug', $slug)->firstOrFail();
         $orderStatuses = OrderStatus::all();
+        $selectedStatus = $orderStatuses->where('slug', $slug)->first();
+        abort_if(!$selectedStatus, 404, 'Status order tidak valid');
+
+        $user = Auth::user();
         $paymentAccount = PaymentAccount::all();
 
-        $userOrders = Order::where('user_id', $user->id)
+        $userOrders = Order::with('orderItems.product')
+            ->where('user_id', $user->id)
             ->where('order_status_id', $selectedStatus->id)
             ->latest()
             ->get();
