@@ -7,7 +7,7 @@
             <div class="flex flex-col w-full gap-6">
                 <h2>Daftar Produk</h2>
                 <form class="flex w-full gap-6 p-6 bg-white rounded-lg">
-                    <input placeholder="Cari nama barang" class="w-1/2 px-4 py-1 border border-gray-200 border-solid rounded-lg" type="text" name="sort" id="sort">
+                    <input placeholder="Cari nama barang" class="w-2/5 px-4 py-1 border border-gray-200 border-solid rounded-lg" type="text" name="sort" id="sort">
                     <select id="sort" name="sort" class="w-[20%] rounded-md bg-slate-200 py-2 pl-3 text-base text-black">
                         <option value="harga-terendah">Pilih Kategori</option>
                         <option value="harga-tertinggi">Edit</option>
