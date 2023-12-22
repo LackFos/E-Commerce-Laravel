@@ -36,12 +36,7 @@
                     @foreach ($products as $product)
                         <div class='flex min-h-[64px] items-center gap-6 border-t border-solid border-gray-200 px-6'>
                             <div class='flex h-full min-h-[64px] w-full'>
-                                <div class='flex flex-col items-start justify-center w-full my-3 font-light text-gray-500'>
-                                    <a href='/produk/{{ $product->slug }}' class="flex items-center gap-4">
-                                        <img src="{{ asset($product->image) }}" class="w-20 h-20 bg-gray-300 rounded-2xl" alt="{{ $product->name }}">
-                                        <span class="font-medium leading-8">{{ $product->name }}</span>
-                                    </a>
-                                </div>
+                                <x-product-item :product="$product" />
                                 <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
                                     <span class="text-gray-600 rounded-lg w-fit">@money($product->price)</span>
                                 </div>
