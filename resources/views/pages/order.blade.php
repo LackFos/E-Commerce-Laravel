@@ -1,6 +1,24 @@
 @extends('index')
 
 @section('page')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li class="text-red-600">{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if (session('success'))
+        <x-alert :message="session('success')" type="success" />
+    @endif
+
+    @if (session('error'))
+        <x-alert :message="session('error')" type="alert" />
+    @endif
+
     <div class="flex justify-center py-10">
         <div class="flex w-full max-w-[1440px] flex-col gap-4">
             <div class="flex flex-col rounded-2xl bg-white">
@@ -25,16 +43,26 @@
                 </div>
                 <div class="flex items-center justify-between border-t border-solid border-gray-100 p-6">
                     <a href="/profile/orders/pending" class="flex justify-between gap-2 rounded-full border border-solid border-black bg-white px-6 py-2"><x-icons.arrowleft />Back</a>
-                    <form action="" class="flex flex-col justify-end">
+
+                    <form method="post" action="/order/payment" enctype="multipart/form-data" class="order flex flex-col justify-end">
+                        @csrf
+                        @method('PATCH')
+
                         <div class="flex gap-2">
-                            <label for="fileInput" class="flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-white">
+                            <label for="payment-image-[0]"
+                                class="relative flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-white">
                                 Upload Bukti
                                 <x-icons.archive />
-                                <input type="submit" type="file" id="fileInput" name="FotoProfil" class="absolute left-0 top-0 h-0 w-0 opacity-0" />
+                                <input type="hidden" name="order_id" value={{ $order->id }}>
+                                <input type="file" type="file" accept="image/*" id="payment-image-[0]" name="payment_receipt"
+                                    class="payment-receipt absolute left-0 top-0 h-0 w-0 opacity-0" />
                             </label>
-                            <button onclick="" class="flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-white">
+                            <div class="view-payment flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-white">
                                 Lihat Bukti
                                 <x-icons.paper />
+                            </div>
+                            <button type="submit" class="flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-white">
+                                Submit Bukti
                             </button>
                         </div>
                     </form>
@@ -61,4 +89,12 @@
 
         </div>
     </div>
+
+    <div id='payment-overlay' class="fixed inset-0 hidden items-center justify-center bg-black/75 p-20">
+        <img id='payment-image' class='w-1/2' src="" alt="">
+    </div>
 @endsection
+
+@push('scripts')
+    @vite('resources/js/orders.js')
+@endpush

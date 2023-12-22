@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Flashsale;
@@ -10,6 +11,7 @@ class HomeController extends Controller
 {
     public function __invoke()
     {
+        $banners = Banner::all();
         $flashsale = Flashsale::all();
         $categories = Category::all();
         $latestProducts = Product::latest()
@@ -18,7 +20,7 @@ class HomeController extends Controller
 
         return view(
             'Pages.home',
-            compact('flashsale', 'categories', 'latestProducts')
+            compact('banners', 'flashsale', 'categories', 'latestProducts')
         );
     }
 }

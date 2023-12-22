@@ -4,7 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdateUserDetailRequest extends FormRequest
 {
@@ -15,6 +18,21 @@ class UpdateUserDetailRequest extends FormRequest
     {
         $user = Auth::user();
         return $this->user()->id == $user->id;
+    }
+
+    /**
+     * Handle a failed validation attempt.
+     *
+     * @param \Illuminate\Contracts\Validation\Validator $validator
+     * @throws \Illuminate\Http\Exceptions\HttpResponseException
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        $errorMessages = $validator->errors()->first();
+
+        throw new HttpResponseException(
+            Redirect::route('profile')->with('error', $errorMessages)
+        );
     }
 
     /**

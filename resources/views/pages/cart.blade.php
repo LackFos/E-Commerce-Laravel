@@ -1,7 +1,6 @@
 @extends('index')
 
 @section('page')
-
     @if (session('success'))
         <x-alert :message="session('success')" type="success" />
     @endif
