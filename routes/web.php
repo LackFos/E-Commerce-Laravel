@@ -111,11 +111,14 @@ Route::prefix('dashboard')
         });
         Route::prefix('/others')->group(function () {
             Route::get('/', function () {
-                return view('pages.dashboard.others');
+                return view('pages.dashboard.others')->with('hideFooter', true);
             });
 
             Route::get('/tambah', function () {
-                return view('pages.dashboard.others-tambah');
+                return view('pages.dashboard.others-tambah')->with(
+                    'hideFooter',
+                    true
+                );
             })->name('dashboard.others.tambah');
         });
     });

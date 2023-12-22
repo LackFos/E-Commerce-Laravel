@@ -47,16 +47,28 @@
                     <div class="flex w-full gap-6 px-6 py-4">
 
                         @foreach ($categories as $category)
-                            <div class="flex justify-between w-1/2">
-                                <input type="checkbox" id="outOfStock" name="product" class="hidden">
-                                <label for="outOfStock" class="relative flex items-center justify-start w-full gap-8 font-medium cursor-pointer">
-                                    <div class="flex justify-start">
-                                        <div class="flex items-start justify-center w-6 h-6 bg-white border border-gray-300 rounded-md">
-                                            <span class="absolute text-white transition-opacity" id="checkIcon">✓</span>
-                                        </div>
-                                    </div>
+                            <div class="flex w-1/2 gap-20">
+                                <span for="outOfStock" class="relative flex items-center justify-start font-medium cursor-pointer">
                                     {{ $category->name }}
-                                </label>
+                                </span>
+                                <div class='flex gap-4'>
+                                    <label class='flex items-center'>
+                                      <input
+                                        type='radio'
+                                        name='kategori'
+                                        value='Ya'
+                                      />
+                                      <span class='ml-2'>Ya</span>
+                                    </label>
+                                    <label class='flex items-center'>
+                                      <input
+                                        type='radio'
+                                        name='kategori'
+                                        value='Tidak'
+                                      />
+                                      <span class='ml-2'>Tidak</span>
+                                    </label>
+                                  </div>
                             </div>
                         @endforeach
 
@@ -76,6 +88,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 <div class="flex flex-col w-full bg-white border border-gray-200 border-solid rounded-lg">
                     <span class="flex justify-start p-6 text-lg font-bold bg-white border-b border-gray-200 border-solid rounded-t-lg">Deskripsi Barang</span>
                     <div class="flex w-full gap-6 px-6 py-6">

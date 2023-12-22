@@ -81,10 +81,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view(
-            'pages.dashboard.produk-tambah',
-            compact('categories', 'flashsale')
-        );
+        return view('pages.dashboard.produk-tambah', compact('categories'));
     }
 
     /**
