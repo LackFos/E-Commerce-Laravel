@@ -12,9 +12,10 @@ class HomeController extends Controller
     public function __invoke()
     {
         $banners = Banner::all();
-        $flashsale = Flashsale::all();
+        $flashsale = Flashsale::with(['product.category'])->get();
         $categories = Category::all();
-        $latestProducts = Product::latest()
+        $latestProducts = Product::with(['category', 'flashsale'])
+            ->latest()
             ->take(10)
             ->get();
 

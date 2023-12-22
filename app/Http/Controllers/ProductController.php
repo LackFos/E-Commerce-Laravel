@@ -2,39 +2,68 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Utils\Utils;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Flashsale;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display the specified resource (filter by search keyword & sort).
-     */
     public function search(Request $request)
     {
+        $breadcrumb = [
+            ['name' => 'Home', 'link' => route('home')],
+            ['name' => 'Cari'],
+        ];
+
         $keyword = $request->input('q', '');
         $sortParam = $request->query('sort', null);
+        $categories = Category::all();
+        $products = Product::with(['category', 'flashsale'])
+            ->where('name', 'like', '%' . $keyword . '%')
+            ->get();
+        $products = Utils::sortProduct($products, $sortParam);
 
-        $query = Product::with(['category', 'flashsale'])->where(
-            'name',
-            'like',
-            '%' . $keyword . '%'
+        $heading = $keyword ? 'Produk' . ' "' . $keyword . '" ' : 'Produk';
+
+        return view(
+            'pages.archive',
+            compact(
+                'keyword',
+                'categories',
+                'heading',
+                'breadcrumb',
+                'products'
+            )
         );
+    }
 
-        if ($sortParam === 'highest') {
-            $query->orderBy('price', 'desc');
-        } elseif ($sortParam === 'lowest') {
-            $query->orderBy('price', 'asc');
-        } elseif ($sortParam === 'newest') {
-            $query->latest();
-        } elseif ($sortParam === 'oldest') {
-            $query->oldest();
-        }
+    public function flashsale(Request $request)
+    {
+        $breadcrumb = [
+            ['name' => 'Home', 'link' => route('home')],
+            ['name' => 'Flashsale'],
+        ];
 
-        $products = $query->get();
+        $sortParam = $request->query('sort', null);
+        $categories = Category::all();
+        $flashsales = Flashsale::all();
 
-        return view('pages.search', compact('keyword', 'products'));
+        $products = Flashsale::with('product')
+            ->get()
+            ->map(function ($flashsale) {
+                return $flashsale->product;
+            });
+
+        $products = Utils::sortProduct($products, $sortParam);
+
+        $heading = 'Flash Sale';
+
+        return view(
+            'pages.archive',
+            compact('categories', 'heading', 'breadcrumb', 'products')
+        );
     }
 
     /**
@@ -43,7 +72,6 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::latest()->get();
-
         return view('pages.dashboard.produk', compact('products'));
     }
 
@@ -53,7 +81,6 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $flashsale = 'Ya';
         return view(
             'pages.dashboard.produk-tambah',
             compact('categories', 'flashsale')

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helpers;
 use App\Models\Category;
+use App\Utils\Utils;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -46,27 +48,27 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
         $selectedCategory = $categories->where('slug', $slug)->first();
-
         abort_if(!$selectedCategory, 404, 'Kategori Tidak ditemukan');
 
+        $breadcrumb = [
+            ['name' => 'Home', 'link' => route('home')],
+            ['name' => 'Kategori'],
+            ['name' => $selectedCategory->name],
+        ];
+
+        $heading = $selectedCategory->name;
         $sortParam = $request->query('sort', null);
-        $query = $selectedCategory->products()->with(['category', 'flashsale']);
+        $products = $selectedCategory
+            ->products()
+            ->where('category_id', $selectedCategory->id)
+            ->with(['category', 'flashsale'])
+            ->get();
 
-        if ($sortParam === 'highest') {
-            $query->orderBy('price', 'desc');
-        } elseif ($sortParam === 'lowest') {
-            $query->orderBy('price', 'asc');
-        } elseif ($sortParam === 'newest') {
-            $query->latest();
-        } elseif ($sortParam === 'oldest') {
-            $query->oldest();
-        }
-
-        $products = $query->get();
+        $products = Utils::sortProduct($products, $sortParam);
 
         return view(
-            'pages.kategori',
-            compact('slug', 'categories', 'selectedCategory', 'products')
+            'pages.archive',
+            compact('slug', 'breadcrumb', 'categories', 'heading', 'products')
         );
     }
 

@@ -28,8 +28,11 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 */
 
 Route::get('/', HomeController::class)->name('home');
+Route::get('/flashsale', [ProductController::class, 'flashsale']);
+Route::get('/search', [ProductController::class, 'search'])->name(
+    'product.search'
+);
 Route::get('/produk/{slug}', [ProductController::class, 'show']);
-Route::get('/search', [ProductController::class, 'search']);
 
 Route::middleware(RequireAuth::class)->group(function () {
     Route::controller(CartController::class)->group(function () {

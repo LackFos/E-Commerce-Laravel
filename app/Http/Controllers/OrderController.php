@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UploadPaymentReceiptRequest;
+use App\Utils\Utils;
 
 class OrderController extends Controller
 {
@@ -184,16 +185,11 @@ class OrderController extends Controller
 
         try {
             if ($request->hasFile('payment_receipt')) {
-                $newImagePath = ImageUploadHelper::uploadPaymentReceipt(
-                    $request->file('payment_receipt')
+                $newImagePath = Utils::uploadImageAndDeleteOld(
+                    $request->file('payment_receipt'),
+                    'payment_images',
+                    $request->order->payment_receipt
                 );
-
-                // Delete the old receipt if it exists
-                if ($request->order->payment_receipt) {
-                    ImageUploadHelper::deleteOldReceipt(
-                        $request->order->payment_receipt
-                    );
-                }
 
                 // Update the order with the new receipt image path
                 $request->order->payment_receipt = $newImagePath;

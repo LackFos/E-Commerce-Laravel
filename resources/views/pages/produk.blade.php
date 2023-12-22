@@ -14,7 +14,9 @@
             <div class="flex w-full justify-start gap-2">
                 <span class="font-semibold"><a href="{{ route('home') }}" class="text-black">Home</a></span>
                 <span>•</span>
-                <span aria-current="page" class="text-gray-500 active:font-semibold">Product Detail</span>
+                <span aria-current="page" class="text-gray-500 active:font-semibold">Produk</span>
+                <span>•</span>
+                <span aria-current="page" class="text-gray-500 active:font-semibold">{{ $product->name }}</span>
             </div>
 
             <div class="flex gap-6">

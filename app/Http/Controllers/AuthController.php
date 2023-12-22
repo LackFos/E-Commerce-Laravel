@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Utils\Utils;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use App\Helpers\ImageUploadHelper;
@@ -31,10 +32,11 @@ class AuthController extends Controller
             $user->update($userData);
 
             if ($request->hasFile('image')) {
-                $newImagePath = ImageUploadHelper::uploadProfileImage(
-                    $request->file('image')
+                $newImagePath = Utils::uploadImageAndDeleteOld(
+                    $request->file('image'),
+                    'user_images',
+                    $user->image
                 );
-                ImageUploadHelper::deleteOldProfile($user->image);
 
                 $user->image = $newImagePath;
                 $user->save();
@@ -43,13 +45,13 @@ class AuthController extends Controller
             DB::commit();
             return redirect()
                 ->route('profile')
-                ->with('success', 'Profile updated successfully');
+                ->with('success', 'Profil berhasil diupdate');
         } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             return redirect()
                 ->route('profile')
-                ->with('error', 'Failed to update profile');
+                ->with('error', 'Profile gagal diupdate');
         }
     }
 

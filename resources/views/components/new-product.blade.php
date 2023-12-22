@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-4 rounded-lg py-6">
     <div class="flex justify-between">
         <span class="text-2xl font-bold">Produk Terbaru</span>
-        <a href="" class="font-semibold text-primary">Lihat Semua</a>
+        <a href={{ route('product.search', ['sort' => 'latest']) }} class="font-semibold text-primary">Lihat Semua</a>
     </div>
 
     <div class="flex flex-col gap-6">

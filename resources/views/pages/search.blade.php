@@ -3,11 +3,8 @@
 @section('page')
     <div class="my-10 flex justify-center">
         <div class="flex w-full max-w-[1440px] flex-col gap-10">
-            <div class="flex w-full justify-start gap-2">
-                <span class="font-semibold"><a href="{{ route('home') }}" class="text-black">Home</a></span>
-                <span>•</span>
-                <span aria-current="page" class="text-gray-500 active:font-semibold">Cari</span>
-            </div>
+            <x-breadcrumb :breadcrumb="$breadcrumb" />
+
             <div class="flex flex-col gap-4 rounded-lg py-6">
                 <div class="flex items-center justify-between">
                     <span class="text-4xl font-bold">Produk "{{ $keyword }}"</span>
@@ -18,8 +15,8 @@
                             <option value="" disabled selected>Pilih Opsi</option>
                             <option value="newest">Produk Terbaru</option>
                             <option value="oldest">Produk Terlama</option>
-                            <option value="lowest">Harga Tertinggi</option>
                             <option value="highest">Harga Tertinggi</option>
+                            <option value="lowest">Harga Terendah</option>
                         </select>
                     </div>
                 </div>
