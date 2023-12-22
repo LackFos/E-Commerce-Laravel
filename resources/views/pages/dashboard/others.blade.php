@@ -5,51 +5,40 @@
         <x-layout.sidebar />
         <div class="flex w-full max-w-[1440px] justify-center p-10">
             <form class="flex flex-col w-full gap-6">
+                <h2>Rekening</h2>
                 <div class="flex flex-col w-full bg-white border border-gray-200 border-solid rounded-lg">
-                    <span class="flex justify-start p-6 text-lg font-bold bg-white border-b border-gray-200 border-solid rounded-t-lg">Others</span>
-                    <div class="flex flex-col w-full px-6 py-4">
-                        <div class="flex flex-col w-full gap-4 p-6 bg-white border border-gray-200 border-solid rounded-lg">
-                            <div class="flex gap-6">
-                                <div class="flex items-center justify-start w-full gap-2">
-                                    <span class="w-64 font-medium">Nama Penerima:</span>
-                                    <span>John Doe</span>
-                                </div>
-                                <button href="" class="flex justify-end w-1/2 font-semibold text-primary">Hapus</button>
+                    <div class='flex min-h-[64px] items-center gap-6 px-6'>
+                        <div class='flex h-full min-h-[64px] w-full'>
+                            <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Nama</div>
+                            <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Bank</div>
+                            <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Nomor Rekening</div>
+                            <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Aksi</div>
+                        </div>
+                    </div>
+                    <div class='flex min-h-[64px] items-center gap-6 border-t border-solid border-gray-200 px-6'>
+                        <div class='flex h-full min-h-[64px] w-full'>
+                            <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
+                                <span class="text-gray-600 rounded-lg w-fit">John Doe</span>
                             </div>
-                            <div class="flex gap-6">
-                                <div class="flex items-center justify-start w-full gap-2">
-                                    <span class="w-64 font-medium">Nomor Rekening:</span>
-                                    <span class="font-bold">1821829383903</span>
-                                </div>
+                            <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
+                                <span class="text-gray-600 rounded-lg w-fit">BCA</span>
                             </div>
-                            <div class="flex gap-6">
-                                <div class="flex items-center justify-start w-full gap-2">
-                                    <span class="w-64 font-medium">Nama Bank:</span>
-                                    <span>BCA</span>
-                                </div>
+                            <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
+                                <div class="flex gap-4">
+                                    <span class="text-gray-600 rounded-lg w-fit">122344</span>
+                                 </div>
                             </div>
-                            <div class="flex gap-6">
-                                <div class="flex items-center justify-start w-full gap-2">
-                                    <span class="w-64 font-medium">Nomor Whatsapp:</span>
-                                    <span>081237849393</span>
-                                </div>
-                            </div>
-                            <div class="flex gap-6">
-                                <div class="flex items-center justify-start w-full gap-2">
-                                    <span class="w-64 font-medium">Link URL Instagram:</span>
-                                    <span>https://www.instagram.com/nanotech.dev?utm_source=ig_web_button_share_sheet&igsh=OGQ5ZDc2ODk2ZA==</span>
-                                </div>
-                            </div>
-                            <div class="flex gap-6">
-                                <div class="flex items-center justify-start w-full gap-2">
-                                    <span class="w-64 font-medium">Link URL Facebook:</span>
-                                    <span>https://www.instagram.com/nanotech.dev?utm_source=ig_web_button_share_sheet&igsh=OGQ5ZDc2ODk2ZA==</span>
+                            <div class='flex flex-col items-start justify-center w-full'>
+                                <div class='flex items-center justify-start w-full gap-4'>
+                                    <button class="px-2 py-2 rounded-lg bg-primary hover:bg-opacity-80" type="submit"><x-icons.trash/></button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class='flex min-h-[64px] items-center gap-6 border-t border-solid border-gray-200 px-6'>
+                        <a href="/dashboard/others/tambah" class="font-medium text-primary">+ Tambah Rekening</a>
+                    </div>
                 </div>
-                <button type="submit" class="w-full px-6 py-2 font-semibold leading-8 text-center text-white rounded-lg bg-primary">Simpan</button>
             </form>
         </div>
     </div>

@@ -37,7 +37,7 @@
                     <x-icons.document />
                     Others
                 </span>
-                <a href="/dashboard/others" class="w-full py-2 px-14">Others</a>
+                <a href="/dashboard/others" class="w-full py-2 px-14">Rekening</a>
             </li>
         </ul>
     </div>
