@@ -2,9 +2,9 @@
 
 @section('page')
     <div class="flex gap-2">
-        <x-layout.sidebar />
-        <div class="flex w-full max-w-[1440px] justify-center p-10">
-            <div class="flex flex-col w-full gap-6">
+        <div class="flex w-full max-w-[1440px] justify-center">
+            <x-layout.sidebar />
+            <div class="flex flex-col w-full gap-6 p-10">
                 <h2>Banner</h2>
                 <div class="flex flex-col w-full bg-white border border-gray-200 border-solid rounded-lg">
                     <div class='flex min-h-[64px] items-center gap-6 px-6'>

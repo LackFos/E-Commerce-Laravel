@@ -29,7 +29,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 
 Route::get('/', HomeController::class)->name('home');
 Route::get('/produk/{slug}', [ProductController::class, 'show']);
-Route::get('/search', [ProductController::class, 'search']);
+Route::get('/search', [ProductController::class, 'search'])->name('product.search');
 
 Route::middleware(RequireAuth::class)->group(function () {
     Route::controller(CartController::class)->group(function () {

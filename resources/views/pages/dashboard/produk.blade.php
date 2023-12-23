@@ -2,9 +2,9 @@
 
 @section('page')
     <div class="flex gap-2">
-        <x-layout.sidebar />
-        <div class="flex w-full max-w-[1440px] justify-center p-10">
-            <div class="flex flex-col w-full gap-6">
+        <div class="flex w-full max-w-[1440px] justify-center">
+            <x-layout.sidebar />
+            <div class="flex flex-col w-full gap-6 p-10">
                 <h2>Daftar Produk</h2>
                 <form class="flex w-full gap-6 p-6 bg-white rounded-lg">
                     <input placeholder="Cari nama barang" class="w-2/5 px-4 py-1 border border-gray-200 border-solid rounded-lg" type="text" name="sort" id="sort">

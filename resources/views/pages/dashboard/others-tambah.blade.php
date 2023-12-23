@@ -2,9 +2,9 @@
 
 @section('page')
     <div class="flex gap-2">
-        <x-layout.sidebar />
-        <div class="flex w-full max-w-[1440px] justify-center p-10">
-            <form class="flex flex-col w-full gap-6">
+        <div class="flex w-full max-w-[1440px] justify-center">
+            <x-layout.sidebar />
+            <form class="flex flex-col w-full gap-6 p-10">
                 <div class="flex justify-start w-full gap-2">
                     <span class="font-semibold"><a href="/dashboard/others" class="text-black">Rekening</a></span>
                     <span>•</span>

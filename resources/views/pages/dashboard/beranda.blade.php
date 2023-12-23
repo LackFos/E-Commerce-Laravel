@@ -2,19 +2,20 @@
 
 @section('page')
     <div class="flex gap-2">
-        <x-layout.sidebar />
-        <div class="flex w-full max-w-[1440px] justify-center p-10">
-            <div class="flex flex-col w-full gap-12">
+        
+        <div class="flex w-full max-w-[1440px] justify-center">
+                <x-layout.sidebar/> 
+                <div class="flex flex-col w-full gap-12 p-10">
                 <div class="flex flex-col w-full gap-6">
                     <h2>Beranda</h2>
 
                     <div class="flex gap-4">
                         @foreach ($orderStatuses as $orderStatus)
-                            <a href="" class="flex flex-col w-full p-6 bg-white rounded-lg">
+                        <a href="" class="flex flex-col w-full p-6 bg-white rounded-lg">
                                 <span class="leading-8">{{ $orderStatus['name'] }}</span>
                                 <span class="text-xl font-bold">{{ $orderStatus['total'] }}</span>
                             </a>
-                        @endforeach
+                            @endforeach
 
                         <div class="flex flex-col w-full p-6 bg-white rounded-lg">
                             <span class="leading-8">Stok Habis</span>
