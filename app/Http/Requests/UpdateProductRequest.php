@@ -50,7 +50,7 @@ class UpdateProductRequest extends FormRequest
             'price' => 'bail|required|integer|min:1',
             'image' => 'bail|nullable|image',
             'stock' => 'bail|required|integer',
-            'flashsale' => 'bail|nullable|integer',
+            'flashsale' => 'bail|nullable|integer|min:0',
             'category_id' => 'bail|exists:categories,id',
             'description' => 'bail',
             'color' => '',

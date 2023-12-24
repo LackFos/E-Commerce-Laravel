@@ -148,11 +148,15 @@ class ProductController extends Controller
         }
 
         if (isset($validated['flashsale'])) {
-            Flashsale::updateOrCreate([
-                'product_id' => $product->id
-            ], [
-                'price_after_discount' => $validated['flashsale']
-            ]);
+            Flashsale::updateOrCreate(
+                ['product_id' => $product->id],
+                ['price_after_discount' => $validated['flashsale']]
+            );
+        } else {
+            $existingFlashsale = Flashsale::where('product_id', $product->id)->first();
+            if ($existingFlashsale) {
+                $existingFlashsale->delete();
+            }
         }
 
         return redirect()->back()->with('success', 'Produk berhasil diperbarui');
