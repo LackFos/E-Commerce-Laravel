@@ -5,11 +5,6 @@
         <div class="flex w-full max-w-[1440px] justify-center">
             <x-layout.sidebar />
             <form class="flex flex-col w-full gap-6 p-10">
-                <div class="flex justify-start w-full gap-2">
-                    <span class="font-semibold"><a href="/demodashboard/product" class="text-black">Produk</a></span>
-                    <span>•</span>
-                    <span aria-current="page" class="text-gray-500 active:font-semibold">Tambah Kategori</span>
-                </div>
                 <div class="flex flex-col w-full bg-white border border-gray-200 border-solid rounded-lg">
                     <span class="flex justify-start p-6 text-lg font-bold bg-white border-b border-gray-200 border-solid rounded-t-lg">Kategori</span>
                     <div class="flex gap-6 px-6 py-4">

@@ -15,7 +15,7 @@
                     </select>
                     <div class="flex w-[20%] items-center gap-4">
                         <input type="checkbox" id="outOfStock" name="product" class="hidden">
-                        <label for="outOfStock" class="relative flex w-full gap-4 text-base font-bold cursor-pointer">
+                        <label for="outOfStock" class="relative flex items-center w-full gap-4 text-base font-bold cursor-pointer">
                             Tampilkan Produk Habis
                             <div class="flex items-center justify-center w-6 h-6 bg-white border border-gray-300 rounded-md">
                                 <span class="absolute text-white transition-opacity" id="checkIcon">✓</span>
@@ -30,6 +30,7 @@
                             <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Barang</div>
                             <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Harga</div>
                             <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Stok</div>
+                            <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Harga Setelah Diskon</div>
                             <div class='flex flex-col items-start justify-center w-full font-bold g-4'>Aksi</div>
                         </div>
                     </div>
@@ -44,6 +45,9 @@
                                     <div class="flex gap-4">
                                         <span class="text-gray-600 rounded-lg w-fit">{{ $product->stock }}</span>
                                     </div>
+                                </div>
+                                <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
+                                    <span class="text-gray-600 rounded-lg w-fit">@money(100000)</span>
                                 </div>
                                 <div class='flex flex-col items-start justify-center w-full'>
                                     <div class='flex items-center justify-start w-full gap-4'>
