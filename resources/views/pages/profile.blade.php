@@ -1,8 +1,6 @@
 @extends('index')
 
 @section('page')
-    <x-alert />
-
     <x-layout.profile :username="$user->username" :image="$user->image">
 
         <div class='flex flex-col gap-6 rounded-2xl bg-white p-6'>

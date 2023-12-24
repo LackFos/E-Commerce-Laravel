@@ -2,15 +2,24 @@
 
 namespace App\Http\Requests;
 
+use App\Utils\Utils;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateUserDetailRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
+    private $product;
+
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return Utils::isAdmin();
+    }
 
     /**
      * Handle a failed validation attempt.
@@ -23,9 +32,10 @@ class UpdateUserDetailRequest extends FormRequest
         $errorMessages = $validator->errors()->first();
 
         throw new HttpResponseException(
-            Redirect::route('profile')->with('error', $errorMessages)
+            Redirect::back()->withInput()->with('error', $errorMessages)
         );
     }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -34,23 +44,17 @@ class UpdateUserDetailRequest extends FormRequest
      */
     public function rules(): array
     {
+        $this->product = $this->route('product');
         return [
-            'username' => 'bail|required|string|max:30',
-            'email' => [
-                'bail',
-                'required',
-                'email',
-                Rule::unique('users')->ignore($this->user()->id),
-            ],
-            'phone_number' => [
-                'bail',
-                'required',
-                'regex:/^\d{1,13}$/',
-                Rule::unique('users', 'phone_number')->ignore(
-                    $this->user()->id
-                ),
-            ],
-            'image' => 'bail|nullable|image|max:5120',
+            'name' => ['bail', Rule::unique('products')->ignore($this->product->id)],
+            'price' => 'bail|required|integer|min:1',
+            'image' => 'bail|nullable|image',
+            'stock' => 'bail|required|integer',
+            'flashsale' => 'bail|nullable|integer',
+            'category_id' => 'bail|exists:categories,id',
+            'description' => 'bail',
+            'color' => '',
+            'size' => ''
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateProductRequest;
 use App\Utils\Utils;
 use App\Models\Product;
 use App\Models\Category;
@@ -134,27 +135,27 @@ class ProductController extends Controller
         );
     }
 
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $validated = $request->validate([
-            'name' => 'bail|required|unique:products,name',
-            'price' => 'bail|required|integer',
-            'image' => 'bail|image',
-            'color' => 'bail|string',
-            'stock' => 'bail|required|integer',
-            'description' => 'bail',
-            'category_id' => 'bail|exists:categories',
-        ]);
+        $validated = $request->validated();
+        $product->update($validated);
 
-        $product->update([
-            'name' => $validated['name'],
-            'price' => $validated['price'],
-            'image' => $validated['image'],
-            'color' => $validated['color'],
-            'stock' => $validated['stock'],
-            'description' => $validated['description'],
-            'category_id' => $validated['category_id'],
-        ]);
+
+        if ($request->hasFile('image')) {
+            $newImagePath = Utils::uploadImageAndDeleteOld($request->file('image'), 'upload_images', $product->image);
+            $product->image = $newImagePath;
+            $product->save();
+        }
+
+        if (isset($validated['flashsale'])) {
+            Flashsale::updateOrCreate([
+                'product_id' => $product->id
+            ], [
+                'price_after_discount' => $validated['flashsale']
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Produk berhasil diperbarui');
     }
 
     /**
@@ -163,5 +164,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+        return redirect()->with('success', 'Produk berhasil dihapus');
     }
 }

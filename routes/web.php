@@ -94,7 +94,7 @@ Route::prefix('dashboard')
             Route::get('/produk/{slug}', 'edit');
             Route::post('/produk/{product:slug}', 'store');
             Route::patch('/produk/{product:slug}', 'update');
-            Route::delete('/produk/{product:slug}', 'destroy');
+            Route::delete('/produk/{product:slug}', 'destroy')->name('product.destroy');
         });
 
         Route::controller(OrderController::class)->group(function () {

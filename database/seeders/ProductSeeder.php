@@ -21,7 +21,7 @@ class ProductSeeder extends Seeder
             'stock' => '5',
             'size' => 'XL',
             'description' =>
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
             'category_id' => 1,
         ]);
 
@@ -34,7 +34,7 @@ class ProductSeeder extends Seeder
             'stock' => '1',
             'size' => 'XL',
             'description' =>
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
             'category_id' => 1,
         ]);
 
@@ -47,7 +47,7 @@ class ProductSeeder extends Seeder
             'stock' => '10',
             'size' => 'XL',
             'description' =>
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
             'category_id' => 2,
         ]);
 
@@ -60,7 +60,7 @@ class ProductSeeder extends Seeder
             'stock' => '2',
             'size' => 'XL',
             'description' =>
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
             'category_id' => 2,
         ]);
 
@@ -73,7 +73,7 @@ class ProductSeeder extends Seeder
             'stock' => '2',
             'size' => 'XL',
             'description' =>
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
             'category_id' => 2,
         ]);
 
@@ -86,8 +86,21 @@ class ProductSeeder extends Seeder
             'stock' => '2',
             'size' => 'XL',
             'description' =>
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
             'category_id' => 2,
+        ]);
+
+        Product::create([
+            'name' => 'Product #7',
+            'slug' => 'product-7',
+            'image' => null,
+            'price' => 0,
+            'color' => '-',
+            'stock' => '0',
+            'size' => '-',
+            'description' =>
+            '-',
+            'category_id' => null,
         ]);
     }
 }

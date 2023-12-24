@@ -2,6 +2,7 @@
 
 namespace App\Utils;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class Utils
@@ -50,5 +51,10 @@ class Utils
         }
 
         return $newFileUrl;
+    }
+
+    public static function isAdmin()
+    {
+        return Auth::user()->is_admin == 1;
     }
 }

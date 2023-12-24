@@ -21,6 +21,6 @@
                 @endisset
             </div>
         </div>
-        <div class="text-sm text-gray-400">{{ $product->category->name }}</div>
+        <div class="text-sm text-gray-400">{{ $product->category?->name }}</div>
     </div>
 </a>

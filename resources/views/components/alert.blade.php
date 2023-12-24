@@ -19,7 +19,7 @@
 @endphp
 
 @if ($message)
-    <div class="toast fixed top-2 flex w-full justify-center">
+    <div class="toast fixed top-20 z-10 flex w-full justify-center">
         <div
             class="{{ $alertStyles['borderColor'] }} {{ $alertStyles['bgColor'] }} {{ $alertStyles['textColor'] }} text-md absolute top-4 z-10 flex items-center gap-4 rounded-xl border p-4 text-sm">
             <div class="flex items-center gap-2">

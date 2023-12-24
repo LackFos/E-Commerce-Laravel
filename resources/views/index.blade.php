@@ -19,6 +19,8 @@
     </head>
 
     <body>
+        <x-alert/>
+
         @if (!isset($hideHeader))
             <x-layout.header :user="$user" />
         @endif
