@@ -74,7 +74,7 @@
 
                     </div>
                     <div class='flex min-h-[64px] items-center gap-6 border-t border-solid border-gray-200 px-6'>
-                        <a href="/demodashboard/product/category" class="font-medium text-primary">+ Tambah Kategori</a>
+                        <a href="/dashboard/kategori" class="font-medium text-primary">+ Tambah Kategori</a>
                     </div>
                 </div>
                 <div class="flex flex-col w-full bg-white border border-gray-200 border-solid rounded-lg">
