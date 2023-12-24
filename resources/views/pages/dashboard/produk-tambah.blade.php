@@ -47,29 +47,16 @@
                     <div class="flex w-full gap-6 px-6 py-4">
 
                         @foreach ($categories as $category)
-                            <div class="flex w-1/2 gap-20">
-                                <span for="outOfStock" class="relative flex items-center justify-start font-medium cursor-pointer">
-                                    {{ $category->name }}
-                                </span>
-                                <div class='flex gap-4'>
-                                    <label class='flex items-center'>
-                                      <input
-                                        type='radio'
-                                        name='kategori'
-                                        value='Ya'
-                                      />
-                                      <span class='ml-2'>Ya</span>
-                                    </label>
-                                    <label class='flex items-center'>
-                                      <input
-                                        type='radio'
-                                        name='kategori'
-                                        value='Tidak'
-                                      />
-                                      <span class='ml-2'>Tidak</span>
-                                    </label>
-                                  </div>
-                            </div>
+                        <div class="flex w-1/2 gap-3">
+                            <input
+                              type='radio'
+                              name='kategori'
+                              value='Ya'
+                            />
+                            <span for="outOfStock" class="flex items-center justify-start font-medium cursor-pointer">
+                                {{ $category->name }}
+                            </span>
+                        </div>
                         @endforeach
 
                     </div>
