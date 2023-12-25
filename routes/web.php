@@ -87,7 +87,7 @@ Route::prefix('dashboard')
             Route::get('/banner', 'index');
             Route::get('/banner/tambah', 'create')->name('banner.create');
             Route::post('/banner', 'store')->name('banner.store');
-            Route::get('/banner/{banner:id}', 'edit')->name('banner.edit');
+            Route::get('/banner/{:id}', 'edit')->name('banner.edit');
             Route::patch('/banner/{banner:id}', 'update')->name('banner.update');
             Route::delete('/banner/{banner:id}', 'destroy')->name('banner.destroy');
         });
@@ -115,5 +115,7 @@ Route::prefix('dashboard')
         Route::controller(PaymentAccountController::class)->group(function () {
             Route::get('/rekening', 'index');
             Route::get('/rekening/tambah', 'create')->name('paymentaccount.create');
+            Route::post('/rekening', 'store')->name('paymentaccount.store');
+            Route::delete('/rekening/{paymentAccount}', 'destroy')->name('paymentaccount.destroy');
         });
     });

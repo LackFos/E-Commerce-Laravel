@@ -2,10 +2,10 @@
 
 namespace App\Rules;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Validation\Rule;
 
-class ValidBankDetails implements Rule
+class UniqueBankNameAndNumber implements Rule
 {
     public function passes($attribute, $value)
     {
@@ -14,7 +14,7 @@ class ValidBankDetails implements Rule
         $bankNumber = request('bank_number');
 
         // Check if the combination exists in the database
-        $exists = DB::table('your_table_name') // Replace with your actual table name
+        $exists = DB::table('payment_accounts') // Replace with your actual table name
             ->where('bank_name', $bankName)
             ->where('bank_number', $bankNumber)
             ->exists();
@@ -25,6 +25,6 @@ class ValidBankDetails implements Rule
 
     public function message()
     {
-        return 'The combination of bank name and bank number must be unique.';
+        return 'Nomor rekening dari bank ini sudah terdaftar';
     }
 }
