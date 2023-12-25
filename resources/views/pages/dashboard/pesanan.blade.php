@@ -53,7 +53,7 @@
                                 <div class='flex flex-col justify-between gap-4 py-4'>
                                     <span class='text-lg font-bold'>Bukti Pembayaran</span>
                                     @if (isset($order->payment_receipt))
-                                        <img class="w-1/4" src="{{ asset($order->payment_receipt) }}" alt="{{ $order->id }}">
+                                        <img class="w-1/6" src="{{ asset($order->payment_receipt) }}" alt="{{ $order->id }}">
                                     @else
                                         <span class='text-red-600'>Belum ada bukti pembayaran</span>
                                     @endif
