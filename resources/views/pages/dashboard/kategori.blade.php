@@ -17,7 +17,7 @@
                         <input class="w-1/2 px-4 py-1 border border-gray-200 border-solid rounded-lg" type="text" name="name" id="">
                     </div>
                     <div class="px-6 py-4">
-                        <button type="submit" class="flex flex-col w-full px-6 py-2 font-semibold leading-8 text-white rounded-lg bg-primary">Simpan</button>
+                        <button type="submit" class="flex justify-center w-full px-6 py-2 font-semibold leading-8 text-white rounded-lg bg-primary">Simpan</button>
                     </div>
                 </form>
 
@@ -30,7 +30,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <span for="outOfStock" class="relative flex items-center justify-between w-full font-medium cursor-pointer">{{ $category->name }}</span>
-                                <div class="flex justify-center w-1/2 gap-2">
+                                <div class="flex justify-end w-1/2 gap-2">
                                     <button type="submit" class="px-2 py-2 text-white rounded-lg bg-primary"><x-icons.trash /></button>
                                 </div>
                             </form>

@@ -64,14 +64,16 @@
                     <span class="flex justify-start p-6 text-lg font-bold bg-white border-b border-gray-200 border-solid rounded-t-lg">Kategori</span>
                     <div class="flex w-full gap-6 px-6 py-4">
 
-                        @foreach ($categories as $category)
-                            <label class="flex w-1/2 gap-3">
-                                <input type='radio' name='category_id' value='{{ $category->id }}' @if (old('category_id') == $category->id) checked @endif />
-                                <span for="outOfStock" class="flex items-center justify-start font-medium cursor-pointer">
-                                    {{ $category->name }}
-                                </span>
-                            </label>
-                        @endforeach
+                        <div class="grid w-full grid-cols-2 gap-4">
+                            @foreach ($categories as $category)
+                                <label class="flex w-full gap-3">
+                                    <input type='radio' name='category_id' value='{{ $category->id }}' @if (old('category_id') == $category->id) checked @endif />
+                                    <span class="flex items-center justify-start font-medium cursor-pointer">
+                                        {{ $category->name }}
+                                    </span>
+                                </label>
+                            @endforeach
+                        </div>
 
                     </div>
                     <div class='flex min-h-[64px] items-center gap-6 border-t border-solid border-gray-200 px-6'>
