@@ -19,19 +19,10 @@
     </head>
 
     <body>
-        <x-alert/>
+        <x-alert />
 
-        @if (!isset($hideHeader))
-            <x-layout.header :user="$user" />
-        @endif
+        @yield('page')
 
-        <main class="min-h-[calc(100vh-392px)] pb-10">
-            @yield('page')
-        </main>
-
-        @if (!isset($hideFooter))
-            <x-layout.footer />
-        @endif
     </body>
     @stack('scripts')
 

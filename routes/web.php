@@ -26,6 +26,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 */
 
 Route::get('/', HomeController::class)->name('home');
+Route::get('/flashsale', [ProductController::class, 'flashsale']);
 Route::get('/produk/{product:slug}', [ProductController::class, 'show']);
 Route::get('/search', [ProductController::class, 'search'])->name('product.search');
 
