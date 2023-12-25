@@ -2,14 +2,16 @@
 
 @section('page')
     <div class="flex gap-2">
-        <div class="flex w-full max-w-[1440px] justify-center">
+        <div class="flex w-full max-w-[1440px]">
             <x-layout.sidebar />
-            <div class="flex flex-col w-full gap-6 p-10">
-                <div class="flex justify-start w-full gap-2">
-                    <span class="font-semibold"><a href="/demodashboard/pesanan" class="text-black">Pesanan</a></span>
-                    <span>•</span>
-                    <span aria-current="page" class="text-gray-500 active:font-semibold">Detail Pesanan</span>
-                </div>
+            <x-layout.content>
+
+                <div class="flex flex-col w-full gap-6 p-10">
+                    <div class="flex justify-start w-full gap-2">
+                        <span class="font-semibold"><a href="/dashboard/pesanan/?status=pending" class="text-black">Pesanan</a></span>
+                        <span>•</span>
+                        <span aria-current="page" class="text-gray-500 active:font-semibold">Detail Pesanan</span>
+                    </div>
                 <h2>Rincian Pesanan</h2>
                 <div class="flex flex-col w-full gap-4 p-6 bg-white border border-gray-200 border-solid rounded-lg">
                     <div class="flex gap-6">
@@ -41,7 +43,7 @@
                 <div class="flex flex-col w-full pb-6 bg-white border border-gray-200 border-solid rounded-lg">
                     <span class="flex justify-start p-6 text-lg font-bold bg-white rounded-t-lg">Informasi Pesanan</span>
                     <div class="flex flex-col gap-6 px-6">
-
+                        
 
                         @foreach ($order->orderItems as $item)
                             <div class="flex w-full gap-6 p-6 bg-white border border-gray-200 border-solid product-card rounded-2xl">
@@ -74,10 +76,10 @@
                     </div>
                     <div class="flex flex-col">
                         @foreach ($order->orderItems as $item)
-                            <div class="flex justify-between px-6 py-4">
-                                <div class='flex gap-2'>
-                                    {{ $item->product->name }}
-                                    <span class="flex items-center justify-center w-6 h-6 text-xs text-white rounded-full bg-primary">x{{ $item->quantity }}</span>
+                        <div class="flex justify-between px-6 py-4">
+                            <div class='flex gap-2'>
+                                {{ $item->product->name }}
+                                <span class="flex items-center justify-center w-6 h-6 text-xs text-white rounded-full bg-primary">x{{ $item->quantity }}</span>
                                 </div>
                                 <span class="text-gray-400">@money($item->product->price)</span>
                             </div>
@@ -89,6 +91,7 @@
                     </div>
                 </div>
             </div>
+        </x-layout.content>
         </div>
     </div>
-@endsection
+    @endsection

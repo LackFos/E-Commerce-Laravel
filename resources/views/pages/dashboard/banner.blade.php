@@ -2,16 +2,18 @@
 
 @section('page')
     <div class="flex gap-2">
-        <div class="flex w-full max-w-[1440px] justify-center">
+        <div class="flex w-full max-w-[1440px]">
             <x-layout.sidebar />
-            <div class="flex w-full flex-col gap-6 p-10">
-                <h2>Banner</h2>
-                <div class="flex w-full flex-col rounded-lg border border-solid border-gray-200 bg-white">
+            <x-layout.content>
+
+                <div class="flex flex-col w-full gap-6 p-10">
+                    <h2>Banner</h2>
+                    <div class="flex flex-col w-full bg-white border border-gray-200 border-solid rounded-lg">
                     <div class='flex min-h-[64px] items-center gap-6 px-6'>
                         <div class='flex h-full min-h-[64px] w-full'>
-                            <div class='flex w-full flex-col items-start justify-center font-bold'>Banner</div>
-                            <div class='flex w-full flex-col items-start justify-center font-bold'>Nama</div>
-                            <div class='flex w-full flex-col items-start justify-center font-bold'>Aksi</div>
+                            <div class='flex flex-col items-start justify-center w-full font-bold'>Banner</div>
+                            <div class='flex flex-col items-start justify-center w-full font-bold'>Nama</div>
+                            <div class='flex flex-col items-start justify-center w-full font-bold'>Aksi</div>
                         </div>
                     </div>
 
@@ -21,20 +23,20 @@
                             @csrf
                             @method('DELETE')
                             <div class='flex h-full min-h-[64px] w-full'>
-                                <div class='my-3 flex w-full flex-col items-start justify-center font-light text-gray-500'>
+                                <div class='flex flex-col items-start justify-center w-full my-3 font-light text-gray-500'>
                                     <div class="flex items-center gap-4">
-                                        <img src="{{ asset($banner->image) }}" class="h-28 w-72 rounded-2xl bg-gray-300 object-cover" alt="{{ $banner->name }}">
+                                        <img src="{{ asset($banner->image) }}" class="object-cover bg-gray-300 h-28 w-72 rounded-2xl" alt="{{ $banner->name }}">
                                     </div>
                                 </div>
-                                <div class='flex w-full flex-col items-start justify-center font-light text-gray-500'>
+                                <div class='flex flex-col items-start justify-center w-full font-light text-gray-500'>
                                     <div class="flex gap-4">
                                         <span class="font-medium leading-8">{{ $banner->name }}</span>
                                     </div>
                                 </div>
-                                <div class='flex w-full items-center justify-start gap-4'>
-                                    <a class="rounded-lg bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-400"
+                                <div class='flex items-center justify-start w-full gap-4'>
+                                    <a class="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-400"
                                         href="{{ route('banner.edit', ['banner' => $banner->id]) }}">Edit</a>
-                                    <button class="rounded-lg bg-primary px-2 py-2 hover:bg-opacity-80" type="submit"><x-icons.trash /></button>
+                                    <button class="px-2 py-2 rounded-lg bg-primary hover:bg-opacity-80" type="submit"><x-icons.trash /></button>
                                 </div>
                             </div>
                         </form>
@@ -45,6 +47,7 @@
                     </div>
                 </div>
             </div>
+        </x-layout.content>
         </div>
     </div>
 @endsection

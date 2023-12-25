@@ -1,4 +1,4 @@
-<div class="flex h-full w-full max-w-[284px] border-t border-solid border-gray-100 bg-white p-6">
+<div class="flex fixed h-full w-full max-w-[284px] border-t border-solid border-gray-100 bg-white p-6">
     <!-- Sidebar content goes here -->
     <div class="flex flex-col gap-4">
         <ul>

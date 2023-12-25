@@ -2,23 +2,23 @@
 
 @section('page')
     <div class="flex gap-2">
-        <div class="flex w-full max-w-[1440px] justify-center">
+        <div class="flex w-full max-w-[1440px]">
             <x-layout.sidebar />
-            <div class="flex flex-col w-full gap-6 p-10">
-                <h2>Pesanan</h2>
-                <div class="flex flex-col w-full overflow-hidden bg-white border border-gray-200 border-solid rounded-lg">
-                    <div class='flex min-h-[64px] items-center gap-6'>
+            <x-layout.content>
+                <div class="flex flex-col w-full gap-6 p-10">
+                    <h2>Pesanan</h2>
+                    <div class="flex flex-col w-full overflow-hidden bg-white border border-gray-200 border-solid rounded-lg">
+                        <div class='flex min-h-[64px] items-center gap-6'>
                         <div class='flex h-full min-h-[64px] w-full'>
-
+                            
                             @foreach ($orderStatuses as $status)
                                 <a href="?status={{ $status->slug }}"
                                     class='{{ $selectedStatus->slug === $status->slug ? 'border-b-4 border-solid' : 'border-b-4 border-solid border-transparent' }} border-primary g-4 flex w-full flex-col items-center justify-center font-bold'>{{ $status->name }}</a>
-                            @endforeach
+                                    @endforeach
 
                         </div>
                     </div>
                 </div>
-
                 @foreach ($orders as $order)
                     <div class='flex flex-col w-full gap-6 p-6 bg-white border border-gray-100 border-solid rounded-2xl'>
                         <div class='flex items-center justify-between'>
@@ -27,7 +27,7 @@
                             </div>
                             <a href="/dashboard/pesanan/{{ $order->id }}" class='text-base font-semibold text-primary'>Detail Transaksi</a>
                         </div>
-
+                        
                         @foreach ($order->orderItems as $item)
                             <div class='flex justify-start gap-6'>
                                 <img src="{{ $item->product->image }}" alt="{{ $item->product->name }}" class='bg-gray-200 h-36 w-36 rounded-2xl'>
@@ -76,5 +76,7 @@
                 @endforeach
 
             </div>
+        </x-layout.content>
         </div>
+    </div>
     @endsection
