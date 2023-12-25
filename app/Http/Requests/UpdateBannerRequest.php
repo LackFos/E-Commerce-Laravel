@@ -9,10 +9,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateProductRequest extends FormRequest
+class UpdateBannerRequest extends FormRequest
 {
-    private $product;
-
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -44,17 +42,9 @@ class UpdateProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        $this->product = $this->route('product');
         return [
-            'name' => ['bail', 'required', Rule::unique('products')->ignore($this->product->id)],
-            'price' => 'bail|required|integer|min:1',
-            'color' => 'nullable',
-            'size' => 'nullable',
-            'stock' => 'bail|required|integer',
+            'name' => ['bail', 'required', Rule::unique('banners')->ignore($this->banner->id)],
             'image' => 'bail|nullable|image',
-            'category_id' => 'bail|exists:categories,id',
-            'flashsale' => 'bail|nullable|integer|min:0',
-            'description' => 'nullable',
         ];
     }
 }

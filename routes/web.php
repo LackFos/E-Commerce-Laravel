@@ -14,6 +14,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PaymentAccountController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
@@ -84,15 +85,18 @@ Route::prefix('dashboard')
 
         Route::controller(BannerController::class)->group(function () {
             Route::get('/banner', 'index');
-            Route::get('/banner/tambah', 'create');
-            Route::get('/banner/{slug}', 'edit');
+            Route::get('/banner/tambah', 'create')->name('banner.create');
+            Route::post('/banner', 'store')->name('banner.store');
+            Route::get('/banner/{banner:id}', 'edit')->name('banner.edit');
+            Route::patch('/banner/{banner:id}', 'update')->name('banner.update');
+            Route::delete('/banner/{banner:id}', 'destroy')->name('banner.destroy');
         });
 
         Route::controller(ProductController::class)->group(function () {
             Route::get('/produk', 'index');
             Route::get('/produk/tambah', 'create');
-            Route::get('/produk/{slug}', 'edit');
-            Route::post('/produk/{product:slug}', 'store');
+            Route::post('/produk', 'store')->name('product.store');
+            Route::get('/produk/{product:slug}', 'edit')->name('product.edit');
             Route::patch('/produk/{product:slug}', 'update');
             Route::delete('/produk/{product:slug}', 'destroy')->name('product.destroy');
         });
@@ -103,22 +107,13 @@ Route::prefix('dashboard')
         });
 
         Route::controller(CategoryController::class)->group(function () {
-            Route::get('/kategori', 'index');
-            Route::get('/kategori/{category:slug}', 'show');
-            Route::post('/kategori/{category:slug}', 'store');
-            Route::patch('/kategori/{category:slug}', 'update');
-            Route::delete('/kategori/{category:slug}/delete', 'destroy');
+            Route::get('/kategori', 'index')->name('category');
+            Route::post('/kategori', 'store');
+            Route::delete('/kategori/{category:slug}', 'destroy')->name('category.destroy');
         });
-        Route::prefix('/others')->group(function () {
-            Route::get('/', function () {
-                return view('pages.dashboard.others')->with('hideFooter', true);
-            });
 
-            Route::get('/tambah', function () {
-                return view('pages.dashboard.others-tambah')->with(
-                    'hideFooter',
-                    true
-                );
-            })->name('dashboard.others.tambah');
+        Route::controller(PaymentAccountController::class)->group(function () {
+            Route::get('/rekening', 'index');
+            Route::get('/rekening/tambah', 'create')->name('paymentaccount.create');
         });
     });

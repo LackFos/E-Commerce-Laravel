@@ -30,7 +30,7 @@ class OrderController extends Controller
         $user = Auth::user();
         $paymentAccount = PaymentAccount::all();
 
-        $userOrders = Order::with('orderItems.product')
+        $userOrders = Order::with('orderItems')
             ->where('user_id', $user->id)
             ->where('order_status_id', $selectedStatus->id)
             ->latest()
@@ -121,7 +121,7 @@ class OrderController extends Controller
                 return new OrderItem([
                     'product_id' => $product->id,
                     'price' =>
-                        $product->flashsale->price_after_discount ??
+                    $product->flashsale->price_after_discount ??
                         $product->price,
                     'quantity' => $item['product_quantity'],
                 ]);

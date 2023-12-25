@@ -13,7 +13,7 @@ class PaymentAccountController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.dashboard.rekening')->with('hideFooter', true);
     }
 
     /**
@@ -21,6 +21,7 @@ class PaymentAccountController extends Controller
      */
     public function create()
     {
+        return view('pages.dashboard.rekening-tambah')->with('hideFooter', true);
     }
 
     /**

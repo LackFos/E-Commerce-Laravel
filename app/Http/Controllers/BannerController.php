@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
-use Illuminate\Http\Request;
+use App\Utils\Utils;
+use App\Http\Requests\StoreBannerRequest;
+use App\Http\Requests\UpdateBannerRequest;
 
 class BannerController extends Controller
 {
@@ -27,9 +29,12 @@ class BannerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBannerRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $validated['image'] = Utils::uploadImage($request->file('image'), 'banner_images');
+        Banner::create($validated);
+        return redirect()->back()->with('success', 'Banner berhasil ditambahkan');
     }
 
     /**
@@ -43,18 +48,26 @@ class BannerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($slug)
+    public function edit(Banner $banner)
     {
-        $banner = Banner::where('slug', $slug)->firstOrFail();
         return view('pages.dashboard.banner-edit', compact('banner'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Banner $banner)
+    public function update(UpdateBannerRequest $request, Banner $banner)
     {
-        //
+        $validated = $request->validated();
+        $banner->update($validated);
+
+        if ($request->hasFile('image')) {
+            $newImagePath = Utils::uploadImage($request->file('image'), 'banner_images', $banner->image);
+            $banner->image = $newImagePath;
+            $banner->save();
+        }
+
+        return redirect()->back()->with('success', 'Banner berhasil diperbarui');
     }
 
     /**
@@ -62,6 +75,7 @@ class BannerController extends Controller
      */
     public function destroy(Banner $banner)
     {
-        //
+        $banner->delete();
+        return redirect()->back()->with('success', 'Banner berhasil dihapus');
     }
 }

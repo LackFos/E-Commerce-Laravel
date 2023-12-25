@@ -28,19 +28,22 @@ class CartController extends Controller
             'total_price' => 0,
         ];
 
+        $productIds = array_column($cart['products'], 'product_id');
+
+        $products = Product::whereIn('id', $productIds)->with(['flashsale'])->get()->keyBy('id');
+
         $total_price = 0;
         foreach ($cart['products'] as $key => &$cartProduct) {
-            $product = Product::find($cartProduct['product_id']);
+            $productId = $cartProduct['product_id'];
 
-            if (!$product) {
+            if (!isset($products[$productId])) {
                 unset($cart['products'][$key]);
                 continue;
             }
 
+            $product = $products[$productId];
             $cartProduct['product'] = $product;
-            $total_price +=
-                $product->price_after_discount *
-                $cartProduct['product_quantity'];
+            $total_price += $product->price_after_discount * $cartProduct['product_quantity'];
         }
 
         $cart['products'] = array_values($cart['products']);
@@ -48,7 +51,6 @@ class CartController extends Controller
 
         return view('pages.cart', compact('cart'));
     }
-
     public function addToCart(Request $request)
     {
         $product = Product::findOrFail($request->products[0]['product_id']);

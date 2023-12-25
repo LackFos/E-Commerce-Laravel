@@ -23,10 +23,10 @@ class Utils
         }
     }
 
-    public static function uploadImageAndDeleteOld(
+    public static function uploadImage(
         $image,
         $targetDirectory,
-        $oldFilePath
+        $oldFilePath = ''
     ) {
         // Validate image
         if (!$image || !$image->isValid()) {

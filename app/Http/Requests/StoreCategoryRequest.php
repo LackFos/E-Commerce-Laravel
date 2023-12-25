@@ -3,16 +3,13 @@
 namespace App\Http\Requests;
 
 use App\Utils\Utils;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateProductRequest extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
-    private $product;
-
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -44,17 +41,8 @@ class UpdateProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        $this->product = $this->route('product');
         return [
-            'name' => ['bail', 'required', Rule::unique('products')->ignore($this->product->id)],
-            'price' => 'bail|required|integer|min:1',
-            'color' => 'nullable',
-            'size' => 'nullable',
-            'stock' => 'bail|required|integer',
-            'image' => 'bail|nullable|image',
-            'category_id' => 'bail|exists:categories,id',
-            'flashsale' => 'bail|nullable|integer|min:0',
-            'description' => 'nullable',
+            'name' => 'bail|required|unique:categories',
         ];
     }
 }

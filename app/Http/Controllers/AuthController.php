@@ -32,7 +32,7 @@ class AuthController extends Controller
             $user->update($userData);
 
             if ($request->hasFile('image')) {
-                $newImagePath = Utils::uploadImageAndDeleteOld(
+                $newImagePath = Utils::uploadImage(
                     $request->file('image'),
                     'user_images',
                     $user->image

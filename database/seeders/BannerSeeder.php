@@ -15,7 +15,6 @@ class BannerSeeder extends Seeder
         Banner::create([
             'image' => '/storage/banner_images/banner1.png',
             'name' => '12.12',
-            'slug' => '12-12',
         ]);
     }
 }

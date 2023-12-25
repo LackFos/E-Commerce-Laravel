@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
 use App\Utils\Utils;
 use Illuminate\Support\Str;
@@ -15,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard.kategori');
+        $categories = Category::all();
+        return view('pages.dashboard.kategori', compact('categories'));
     }
 
     /**
@@ -29,16 +31,16 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'bail|required|unique:categories|string',
-        ]);
+        $validated = $request->validated();
 
         Category::create([
             'name' => $validated['name'],
             'slug' => Str::slug($validated['name'], '-'),
         ]);
+
+        return redirect()->back()->with('success', 'Kategori berhasil ditambahkan');
     }
 
     /**
@@ -84,14 +86,6 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $validated = $request->validate([
-            'name' => 'bail|required|unique:categories,name|string',
-        ]);
-
-        $category->update([
-            'name' => $validated['name'],
-            'slug' => Str::slug($validated['name'], '-'),
-        ]);
     }
 
     /**
@@ -100,5 +94,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+        return redirect()->back()->with('success', 'Kategori berhasil dihapus');
     }
 }

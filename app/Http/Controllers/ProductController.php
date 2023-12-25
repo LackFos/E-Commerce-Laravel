@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateProductRequest;
 use App\Utils\Utils;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Flashsale;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -88,28 +91,23 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'bail|required|unique:products',
-            'price' => 'bail|required|integer',
-            'image' => 'bail|required|image',
-            'color' => 'bail|required|string',
-            'stock' => 'bail|required|integer',
-            'description' => 'bail|required',
-            'category_id' => 'bail|required|exists:categories',
-        ]);
+        $validated = $request->validated();
+        $validated['slug'] = Str::slug($validated['name'], '-');
+        $validated['image'] = Utils::uploadImage($request->file('image'), 'upload_images');
 
-        $product = new Product([
-            'name' => $validated['name'],
-            'price' => $validated['price'],
-            'image' => $validated['image'],
-            'color' => $validated['color'],
-            'stock' => $validated['stock'],
-            'description' => $validated['description'],
-            'category_id' => $validated['category_id'],
-        ]);
+        $product = new Product($validated);
         $product->save();
+
+        if (isset($validated['flashsale'])) {
+            Flashsale::updateOrCreate(
+                ['product_id' => $product->id],
+                ['price_after_discount' => $validated['flashsale']]
+            );
+        }
+
+        return redirect()->back()->with('success', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -142,7 +140,7 @@ class ProductController extends Controller
 
 
         if ($request->hasFile('image')) {
-            $newImagePath = Utils::uploadImageAndDeleteOld($request->file('image'), 'upload_images', $product->image);
+            $newImagePath = Utils::uploadImage($request->file('image'), 'upload_images', $product->image);
             $product->image = $newImagePath;
             $product->save();
         }
@@ -168,6 +166,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->with('success', 'Produk berhasil dihapus');
+        return redirect()->back()->with('success', 'Produk berhasil dihapus');
     }
 }

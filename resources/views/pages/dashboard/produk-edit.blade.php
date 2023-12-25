@@ -27,7 +27,8 @@
                         <span class="flex w-1/2 items-center justify-start font-medium">Harga Barang</span>
                         <div class="relative w-1/2">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-gray-600">Rp.</span>
-                            <input type="number" class="w-full rounded-lg border border-solid border-gray-200 px-4 py-1 pl-8" name="price" value="{{ $product->price }}">
+                            <input type="number" class="w-full rounded-lg border border-solid border-gray-200 px-4 py-1 pl-8" name="price" placeholder="-"
+                                value="{{ $product->price }}" min="1">
                         </div>
                     </div>
 
