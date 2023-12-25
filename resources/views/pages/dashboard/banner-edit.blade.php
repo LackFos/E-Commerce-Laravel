@@ -5,7 +5,9 @@
         <div class="flex w-full max-w-[1440px]">
             <x-layout.sidebar/>
             <x-layout.content>
-                <form class="flex flex-col w-full gap-12 p-10">
+                <form action="{{ route('banner.update', ['banner' => $banner->id]) }}" method="POST" enctype="multipart/form-data" class="flex flex-col w-full gap-12 p-10">
+                    @csrf
+                    @method('PATCH')
                     <div class="flex justify-start w-full gap-2">
                         <span class="font-semibold"><a href="/dashboard/banner" class="text-black">Banner</a></span>
                     <span>•</span>
