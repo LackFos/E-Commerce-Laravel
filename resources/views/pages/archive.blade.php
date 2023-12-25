@@ -2,9 +2,9 @@
 
 @section('page')
     <x-layout.user>
-        <div class="my-10 flex justify-center">
-            <div class="flex w-full max-w-[1440px] flex-col gap-10">
-                <div class="flex w-full justify-start gap-2">
+        <div class="flex justify-center my-10">
+            <div class="flex w-full max-w-[1440px] flex-col px-8 gap-10">
+                <div class="flex justify-start w-full gap-2">
                     <x-breadcrumb :breadcrumb="$breadcrumb" />
                 </div>
 
@@ -15,7 +15,7 @@
                             <x-icons.filter />
                         </div>
 
-                        <div class="h-px w-full border-t border-gray-300"></div>
+                        <div class="w-full h-px border-t border-gray-300"></div>
                         <div class="flex flex-col gap-2">
                             @foreach ($categories as $category)
                                 <a href='/kategori/{{ $category->slug }}'
@@ -24,13 +24,13 @@
                         </div>
                     </div>
 
-                    <div class="flex w-full flex-col gap-4 rounded-lg py-6">
+                    <div class="flex flex-col w-full gap-4 py-6 rounded-lg">
                         <div class="flex items-center justify-between">
                             <span class="text-4xl font-bold">{{ $heading }}</span>
                             <div class="flex items-center gap-2">
                                 <span>Urutkan:</span>
                                 <div class="">
-                                    <select id="sort" name="sort" class="w-full rounded-md bg-transparent py-2 pl-3 text-base text-primary">
+                                    <select id="sort" name="sort" class="w-full py-2 pl-3 text-base bg-transparent rounded-md text-primary">
                                         <option value="" disabled selected>Pilih Opsi</option>
                                         <option value="latest">Produk Terbaru</option>
                                         <option value="oldest">Produk Terlama</option>
