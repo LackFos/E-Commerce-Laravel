@@ -1,22 +1,22 @@
 <x-layout.user>
     <div class='flex justify-center py-10'>
-        <div class='flex w-full max-w-[1440px] gap-6'>
-            <div class='flex w-72 flex-col justify-start gap-6'>
-                <div class='flex flex-col rounded-2xl border border-solid border-gray-100 bg-white'>
-                    <div class='flex h-32 items-center justify-start gap-6 p-6'>
-                        <img src={{ asset($image) }} class='h-20 w-20 rounded-full bg-white object-cover'></img><span>{{ $username }}</span>
+        <div class='flex w-full max-w-[1440px] px-8 gap-6'>
+            <div class='flex flex-col justify-start gap-6 w-72'>
+                <div class='flex flex-col bg-white border border-gray-100 border-solid rounded-2xl'>
+                    <div class='flex items-center justify-start h-32 gap-6 p-6'>
+                        <img src={{ asset($image) }} class='object-cover w-20 h-20 bg-white rounded-full'></img><span>{{ $username }}</span>
                     </div>
-                    <div class='flex h-16 items-center justify-start gap-4 px-6 py-4'>
+                    <div class='flex items-center justify-start h-16 gap-4 px-6 py-4'>
                         <x-icons.user />
                         <a href="{{ route('profile') }}" class='text-base text-black'>Profil Akun</a>
                     </div>
-                    <div class='flex h-16 items-center justify-start gap-4 px-6 py-4'>
+                    <div class='flex items-center justify-start h-16 gap-4 px-6 py-4'>
                         <x-icons.document />
                         <a href="/profile/orders/pending" class='text-base text-black'>Daftar Pesanan</a>
                     </div>
                 </div>
 
-                <form action={{ route('logout') }} method="POST" class='flex h-16 items-center rounded-2xl bg-white px-6'>
+                <form action={{ route('logout') }} method="POST" class='flex items-center h-16 px-6 bg-white rounded-2xl'>
                     @csrf
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <button class="flex gap-4" type="submit">
