@@ -91,7 +91,7 @@
     </div>
 
     <div id='payment-overlay' class="fixed inset-0 hidden items-center justify-center bg-black/75 p-20">
-        <img id='payment-image' class='w-1/2' src="" alt="">
+        <img id='payment-image' class='h-full w-1/2' src="" alt="">
     </div>
 @endsection
 

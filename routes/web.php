@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\Order;
-use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Http\Middleware\AdminOnly;
 use App\Http\Middleware\RequireAuth;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +26,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 */
 
 Route::get('/', HomeController::class)->name('home');
-Route::get('/produk/{slug}', [ProductController::class, 'show']);
+Route::get('/produk/{product:slug}', [ProductController::class, 'show']);
 Route::get('/search', [ProductController::class, 'search'])->name('product.search');
 
 Route::middleware(RequireAuth::class)->group(function () {
@@ -87,7 +84,7 @@ Route::prefix('dashboard')
             Route::get('/banner', 'index');
             Route::get('/banner/tambah', 'create')->name('banner.create');
             Route::post('/banner', 'store')->name('banner.store');
-            Route::get('/banner/{:id}', 'edit')->name('banner.edit');
+            Route::get('/banner/{banner}', 'edit')->name('banner.edit');
             Route::patch('/banner/{banner:id}', 'update')->name('banner.update');
             Route::delete('/banner/{banner:id}', 'destroy')->name('banner.destroy');
         });
@@ -102,7 +99,7 @@ Route::prefix('dashboard')
         });
 
         Route::controller(OrderController::class)->group(function () {
-            Route::get('/pesanan', 'index_admin');
+            Route::get('/pesanan', 'index_admin')->name('order');
             Route::get('/pesanan/{order_id}', 'show_admin');
         });
 

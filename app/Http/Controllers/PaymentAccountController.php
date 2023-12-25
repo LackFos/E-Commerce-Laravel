@@ -65,6 +65,6 @@ class PaymentAccountController extends Controller
     public function destroy(PaymentAccount $paymentAccount)
     {
         $paymentAccount->delete();
-        return redirect()->back()->with('success', 'Bank berhasil dihapus');
+        return redirect()->back()->with('success', 'Nomor Rekening berhasil dihapus');
     }
 }

@@ -28,7 +28,7 @@
                             <span class="text-sm text-gray-400">Pastikan ukuran gambar maksimal 5MB dan berformat .JPG / .PNG / .JPLG</span>
                         </div>
                         <div class="flex w-1/2 flex-col items-start justify-start gap-2">
-                            <img class="h-32 w-80 rounded-2xl bg-gray-300" src="{{ asset($banner->image) }}" alt="{{ $banner->name }}">
+                            <img class="h-32 w-80 rounded-2xl bg-gray-300 object-cover" src="{{ asset($banner->image) }}" alt="{{ $banner->name }}" id="imagePreview">
                             <label for="imageInput" class="flex cursor-pointer justify-start font-semibold text-primary">
                                 Ubah Foto Banner
                                 <input type="file" id="imageInput" name="image" class="absolute left-0 top-0 h-0 w-0 opacity-0" name="image" accept="image/*" />
@@ -41,3 +41,7 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    @vite('resources/js/imageInput.js')
+@endpush

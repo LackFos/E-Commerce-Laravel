@@ -51,7 +51,7 @@
                         <span class="font-medium leading-8">Foto Produk</span>
                         <label for="imageInput" class="flex cursor-pointer justify-start text-2xl font-semibold text-gray-400">
                             <div class="flex h-20 w-20 items-center justify-center rounded-lg bg-transparent">
-                                <img class="h-20 w-20 rounded-2xl bg-gray-300" src="{{ asset($product->image) }}" alt="{{ $product->name }}">
+                                <img class="h-20 w-20 rounded-2xl bg-gray-300" src="{{ asset($product->image) }}" alt="{{ $product->name }}" id="imagePreview">
                                 <input type="file" id="imageInput" name="image" class="absolute left-0 top-0 h-0 w-0 opacity-0" accept="image/*" />
                             </div>
                         </label>
@@ -96,3 +96,7 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    @vite('resources/js/imageInput.js')
+@endpush

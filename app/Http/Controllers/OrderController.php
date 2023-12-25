@@ -30,7 +30,11 @@ class OrderController extends Controller
         $user = Auth::user();
         $paymentAccount = PaymentAccount::all();
 
-        $userOrders = Order::with('orderItems')
+        $userOrders = Order::with(['orderItems' => function ($query) {
+            $query->with(['product' => function ($query) {
+                $query->withTrashed();
+            }]);
+        }])
             ->where('user_id', $user->id)
             ->where('order_status_id', $selectedStatus->id)
             ->latest()
@@ -57,6 +61,9 @@ class OrderController extends Controller
         $selectedStatus = OrderStatus::where('slug', $status)->firstOrFail();
         $orderStatuses = OrderStatus::all();
         $orders = Order::where('order_status_id', $selectedStatus->id)
+            ->with(['orderItems.product' => function ($query) {
+                $query->withTrashed();
+            }])
             ->latest()
             ->get();
 
@@ -185,7 +192,7 @@ class OrderController extends Controller
 
         try {
             if ($request->hasFile('payment_receipt')) {
-                $newImagePath = Utils::uploadImageAndDeleteOld(
+                $newImagePath = Utils::uploadImage(
                     $request->file('payment_receipt'),
                     'payment_images',
                     $request->order->payment_receipt

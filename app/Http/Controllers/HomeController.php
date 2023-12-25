@@ -12,7 +12,11 @@ class HomeController extends Controller
     public function __invoke()
     {
         $banners = Banner::all();
-        $flashsale = Flashsale::with(['product.category'])->get();
+        $flashsale = Flashsale::with(['product.category'])
+            ->whereHas('product', function ($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->get();
         $categories = Category::all();
         $latestProducts = Product::with(['category', 'flashsale'])
             ->latest()

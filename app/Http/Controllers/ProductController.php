@@ -113,9 +113,8 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($slug)
+    public function show(Product $product)
     {
-        $product = Product::where('slug', $slug)->firstOrFail();
         return view('pages.produk', compact('product'));
     }
 

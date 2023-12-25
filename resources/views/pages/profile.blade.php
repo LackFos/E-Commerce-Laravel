@@ -44,5 +44,5 @@
 @endsection
 
 @push('scripts')
-    @vite('resources/js/profile.js')
+    @vite('resources/js/imageInput.js')
 @endpush

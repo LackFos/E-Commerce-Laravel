@@ -44,7 +44,7 @@
                         </div>
                         <div class="flex justify-between border-b border-dashed py-2">
                             <span>Kategori</span>
-                            <a href="/kategori/{{ $product->category->slug }}" class="font-semibold text-primary">{{ $product->category->name }}</a>
+                            <a href="/kategori/{{ $product->category?->slug }}" class="font-semibold text-primary">{{ $product->category?->name }}</a>
                         </div>
                     </div>
                 </div>
