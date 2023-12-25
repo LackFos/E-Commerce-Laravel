@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->integer('price');
-            $table->string('image')->nullable();
+            $table->string('image')->nullable()->default('/storage/assets/no-image.png');
             $table->string('color')->nullable();
             $table->string('size')->nullable();
             $table->integer('stock')->nullable();

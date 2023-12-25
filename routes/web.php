@@ -56,7 +56,6 @@ Route::middleware(RedirectIfAuthenticated::class)->group(function () {
 Route::middleware(RequireAuth::class)->group(function () {
     Route::controller(OrderController::class)->group(function () {
         Route::post('/order', 'store');
-        Route::patch('/order/status', 'updateOrderStatus');
         Route::patch('/order/payment', 'updateOrderPayment');
     });
 });
@@ -100,7 +99,10 @@ Route::prefix('dashboard')
 
         Route::controller(OrderController::class)->group(function () {
             Route::get('/pesanan', 'index_admin')->name('order');
-            Route::get('/pesanan/{order_id}', 'show_admin');
+            Route::get('/pesanan/{order}', 'show_admin');
+            Route::patch('/pesanan/{order}/accept', 'acceptOrder')->name('order.accept');
+            Route::patch('/pesanan/{order}/complete', 'completeOrder')->name('order.complete');
+            Route::patch('/pesanan/{order}/reject', 'rejectOrder')->name('order.reject');
         });
 
         Route::controller(CategoryController::class)->group(function () {

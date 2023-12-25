@@ -93,7 +93,6 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Product #7',
             'slug' => 'product-7',
-            'image' => null,
             'price' => 0,
             'color' => '-',
             'stock' => '0',

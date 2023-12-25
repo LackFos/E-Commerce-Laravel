@@ -95,7 +95,10 @@ class ProductController extends Controller
     {
         $validated = $request->validated();
         $validated['slug'] = Str::slug($validated['name'], '-');
-        $validated['image'] = Utils::uploadImage($request->file('image'), 'upload_images');
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = Utils::uploadImage($request->file('image'), 'upload_images');
+        }
 
         $product = new Product($validated);
         $product->save();

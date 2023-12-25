@@ -86,14 +86,9 @@ class AuthController extends Controller
 
     public function register(RegisterUserRequest $request)
     {
-        $credentials = $request->validated();
+        $validated = $request->validated();
 
-        $user = User::create([
-            'username' => $credentials['username'],
-            'email' => $credentials['email'],
-            'phone_number' => $credentials['phone_number'],
-            'password' => bcrypt($credentials['password']),
-        ]);
+        $user = User::create($validated);
 
         Auth::login($user);
 

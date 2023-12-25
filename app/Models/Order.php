@@ -12,7 +12,7 @@ class Order extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $fillable = ['status'];
+    protected $fillable = ['order_status_id', 'payment_receipt'];
 
     public function user()
     {

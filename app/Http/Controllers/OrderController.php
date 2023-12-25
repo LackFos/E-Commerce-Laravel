@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Utils\Utils;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrderItem;
@@ -13,8 +14,8 @@ use App\Helpers\ImageUploadHelper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UpdateOrderStatusRequest;
 use App\Http\Requests\UploadPaymentReceiptRequest;
-use App\Utils\Utils;
 
 class OrderController extends Controller
 {
@@ -157,9 +158,8 @@ class OrderController extends Controller
     /**
      * Display the specified resource (Admin Only).
      */
-    public function show_admin($orderId)
+    public function show_admin(Order $order)
     {
-        $order = Order::where('id', $orderId)->first();
         return view('pages.dashboard.pesanan-detail', compact('order'));
     }
 
@@ -174,13 +174,22 @@ class OrderController extends Controller
     /**
      * Update the  status of specified resource in storage.
      */
-    public function updateOrderStatus(Request $request, Order $order)
+    public function acceptOrder(Order $order)
     {
-        $validated = $request->validate([
-            'status' => 'exists:order_statuses,name',
-        ]);
+        $order->update(['order_status_id' => 2]);
+        return redirect()->back()->with('success', 'Pesanan diterima');
+    }
 
-        $order->update(['status' => $validated['status']]);
+    public function completeOrder(Order $order)
+    {
+        $order->update(['order_status_id' => 3]);
+        return redirect()->back()->with('success', 'Pesanan selesai');
+    }
+
+    public function rejectOrder(Order $order)
+    {
+        $order->update(['order_status_id' => 4]);
+        return redirect()->back()->with('success', 'Pesanan dibatalkan');
     }
 
     /**

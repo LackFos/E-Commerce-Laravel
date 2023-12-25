@@ -33,7 +33,7 @@ class PaymentAccountController extends Controller
         $validated = $request->validated();
         $paymentAccount = new PaymentAccount($validated);
         $paymentAccount->save();
-        return redirect()->back()->with("Success", "Nomor Rekening berhasil ditambah");
+        return redirect()->back()->with("success", "Nomor Rekening berhasil ditambah");
     }
 
     /**
