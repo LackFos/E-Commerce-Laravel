@@ -11,8 +11,8 @@
                             <div class='flex h-full min-h-[64px] w-full'>
 
                                 @foreach ($orderStatuses as $status)
-                                    <a href="?status={{ $status->slug }}"
-                                        class='{{ $selectedStatus->slug === $status->slug ? 'border-b-4 border-solid' : 'border-b-4 border-solid border-transparent' }} g-4 flex w-full flex-col items-center justify-center border-primary font-bold'>{{ $status->name }}</a>
+                                    <a href="{{ route('order', ['orderStatus' => $status]) }}"
+                                        class='{{ $orderStatus->slug === $status->slug ? 'border-b-4 border-solid' : 'border-b-4 border-solid border-transparent' }} g-4 flex w-full flex-col items-center justify-center border-primary font-bold'>{{ $status->name }}</a>
                                 @endforeach
 
                             </div>
@@ -60,7 +60,7 @@
                                 </div>
 
                                 <div class='flex justify-end py-4'>
-                                    @if ($selectedStatus->slug === 'pending')
+                                    @if ($orderStatus->slug === 'pending')
                                         <form method="POST">
                                             @csrf
                                             @method('patch')
@@ -77,7 +77,7 @@
                                                 </button>
                                             </div>
                                         </form>
-                                    @elseif($selectedStatus->slug === 'on-going')
+                                    @elseif($orderStatus->slug === 'on-going')
                                         <form action="{{ $order->id }}" method="POST">
                                             @csrf
                                             @method('patch')
@@ -97,6 +97,8 @@
                                     @endif
                                 </div>
                             </div>
+
+                            {{ $orders->links() }}
                         @endforeach
                     @else
                         <div class='flex w-full flex-col justify-center gap-6 rounded-2xl border border-solid border-gray-200 bg-white p-6'>

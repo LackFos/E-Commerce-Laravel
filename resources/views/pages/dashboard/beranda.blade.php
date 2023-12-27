@@ -12,7 +12,7 @@
 
                         <div class="flex gap-4">
                             @foreach ($orderStatuses as $orderStatus)
-                                <a href="{{ route('order', ['status' => $orderStatus['slug']]) }}" class="flex w-full flex-col rounded-lg bg-white p-6">
+                                <a href="{{ route('order', ['orderStatus' => $orderStatus['slug']]) }}" class="flex w-full flex-col rounded-lg bg-white p-6">
                                     <span class="leading-8">{{ $orderStatus['name'] }}</span>
                                     <span class="text-xl font-bold">{{ $orderStatus['total'] }}</span>
                                 </a>

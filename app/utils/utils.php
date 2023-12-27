@@ -7,22 +7,6 @@ use Illuminate\Support\Facades\Storage;
 
 class Utils
 {
-    public static function sortProduct($collection, $sort)
-    {
-        switch ($sort) {
-            case 'highest':
-                return $collection->sortByDesc('price');
-            case 'lowest':
-                return $collection->sortBy('price');
-            case 'latest':
-                return $collection->sortByDesc('created_at');
-            case 'oldest':
-                return $collection->sortBy('created_at');
-            default:
-                return $collection;
-        }
-    }
-
     public static function uploadImage(
         $image,
         $targetDirectory,

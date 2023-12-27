@@ -40,7 +40,9 @@ class CategoryController extends Controller
             'slug' => Str::slug($validated['name'], '-'),
         ]);
 
-        return redirect()->back()->with('success', 'Kategori berhasil ditambahkan');
+        return redirect()
+            ->back()
+            ->with('success', 'Kategori berhasil ditambahkan');
     }
 
     /**
@@ -64,9 +66,21 @@ class CategoryController extends Controller
             ->products()
             ->where('category_id', $selectedCategory->id)
             ->with(['category', 'flashsale'])
-            ->get();
-
-        $products = Utils::sortProduct($products, $sortParam);
+            ->when($sortParam, function ($query, $sortParam) {
+                switch ($sortParam) {
+                    case 'highest':
+                        return $query->orderBy('price', 'desc');
+                    case 'lowest':
+                        return $query->orderBy('price', 'asc');
+                    case 'latest':
+                        return $query->orderBy('created_at', 'desc');
+                    case 'oldest':
+                        return $query->orderBy('created_at', 'asc');
+                    default:
+                        return $query;
+                }
+            })
+            ->paginate(20);
 
         return view(
             'pages.archive',
@@ -94,6 +108,8 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->back()->with('success', 'Kategori berhasil dihapus');
+        return redirect()
+            ->back()
+            ->with('success', 'Kategori berhasil dihapus');
     }
 }

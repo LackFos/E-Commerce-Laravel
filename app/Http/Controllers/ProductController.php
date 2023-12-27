@@ -16,13 +16,31 @@ class ProductController extends Controller
 {
     public function search(Request $request)
     {
+        $breadcrumb = [
+            ['name' => 'Home', 'link' => route('home')],
+            ['name' => 'Cari'],
+        ];
+
         $keyword = $request->input('q', '');
         $sortParam = $request->query('sort', null);
         $categories = Category::all();
         $products = Product::with(['category', 'flashsale'])
             ->where('name', 'like', '%' . $keyword . '%')
-            ->get();
-        $products = Utils::sortProduct($products, $sortParam);
+            ->when($sortParam, function ($query, $sortParam) {
+                switch ($sortParam) {
+                    case 'highest':
+                        return $query->orderBy('price', 'desc');
+                    case 'lowest':
+                        return $query->orderBy('price', 'asc');
+                    case 'latest':
+                        return $query->orderBy('created_at', 'desc');
+                    case 'oldest':
+                        return $query->orderBy('created_at', 'asc');
+                    default:
+                        return $query;
+                }
+            })
+            ->paginate(20);
 
         $heading = $keyword ? 'Produk' . ' "' . $keyword . '" ' : 'Produk';
 
@@ -40,17 +58,20 @@ class ProductController extends Controller
 
     public function flashsale(Request $request)
     {
+        $breadcrumb = [
+            ['name' => 'Home', 'link' => route('home')],
+            ['name' => 'Flashsale'],
+        ];
+
         $sortParam = $request->query('sort', null);
         $categories = Category::all();
         $flashsales = Flashsale::all();
 
         $products = Flashsale::with('product')
-            ->get()
             ->map(function ($flashsale) {
                 return $flashsale->product;
-            });
-
-        $products = Utils::sortProduct($products, $sortParam);
+            })
+            ->paginate(20);
 
         $heading = 'Flash Sale';
 
@@ -74,12 +95,24 @@ class ProductController extends Controller
 
         $products = Product::with(['category', 'flashsale'])
             ->where('name', 'like', '%' . $keyword . '%')
+            ->when($sortParam, function ($query, $sortParam) {
+                switch ($sortParam) {
+                    case 'highest':
+                        return $query->orderBy('price', 'desc');
+                    case 'lowest':
+                        return $query->orderBy('price', 'asc');
+                    case 'latest':
+                        return $query->orderBy('created_at', 'desc');
+                    case 'oldest':
+                        return $query->orderBy('created_at', 'asc');
+                    default:
+                        return $query;
+                }
+            })
             ->when($showEmptyProduct, function ($query) {
                 return $query->where('stock', '=', 0);
             })
-            ->get();
-
-        $products = Utils::sortProduct($products, $sortParam);
+            ->paginate(20);
 
         return view(
             'pages.dashboard.produk',

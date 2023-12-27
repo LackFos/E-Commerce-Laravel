@@ -28,7 +28,9 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 Route::get('/', HomeController::class)->name('home');
 Route::get('/flashsale', [ProductController::class, 'flashsale']);
 Route::get('/produk/{product:slug}', [ProductController::class, 'show']);
-Route::get('/search', [ProductController::class, 'search'])->name('product.search');
+Route::get('/search', [ProductController::class, 'search'])->name(
+    'product.search'
+);
 
 Route::middleware(RequireAuth::class)->group(function () {
     Route::controller(CartController::class)->group(function () {
@@ -85,8 +87,12 @@ Route::prefix('dashboard')
             Route::get('/banner/tambah', 'create')->name('banner.create');
             Route::post('/banner', 'store')->name('banner.store');
             Route::get('/banner/{banner}', 'edit')->name('banner.edit');
-            Route::patch('/banner/{banner:id}', 'update')->name('banner.update');
-            Route::delete('/banner/{banner:id}', 'destroy')->name('banner.destroy');
+            Route::patch('/banner/{banner:id}', 'update')->name(
+                'banner.update'
+            );
+            Route::delete('/banner/{banner:id}', 'destroy')->name(
+                'banner.destroy'
+            );
         });
 
         Route::controller(ProductController::class)->group(function () {
@@ -95,27 +101,44 @@ Route::prefix('dashboard')
             Route::post('/produk', 'store')->name('product.store');
             Route::get('/produk/{product:slug}', 'edit')->name('product.edit');
             Route::patch('/produk/{product:slug}', 'update');
-            Route::delete('/produk/{product:slug}', 'destroy')->name('product.destroy');
+            Route::delete('/produk/{product:slug}', 'destroy')->name(
+                'product.destroy'
+            );
         });
 
         Route::controller(OrderController::class)->group(function () {
-            Route::get('/pesanan', 'index_admin')->name('order');
+            Route::get(
+                '/pesanan/status/{orderStatus:slug}',
+                'index_admin'
+            )->name('order');
             Route::get('/pesanan/{order}', 'show_admin');
-            Route::patch('/pesanan/{order}/accept', 'acceptOrder')->name('order.accept');
-            Route::patch('/pesanan/{order}/complete', 'completeOrder')->name('order.complete');
-            Route::patch('/pesanan/{order}/reject', 'rejectOrder')->name('order.reject');
+            Route::patch('/pesanan/{order}/accept', 'acceptOrder')->name(
+                'order.accept'
+            );
+            Route::patch('/pesanan/{order}/complete', 'completeOrder')->name(
+                'order.complete'
+            );
+            Route::patch('/pesanan/{order}/reject', 'rejectOrder')->name(
+                'order.reject'
+            );
         });
 
         Route::controller(CategoryController::class)->group(function () {
             Route::get('/kategori', 'index')->name('category');
             Route::post('/kategori', 'store');
-            Route::delete('/kategori/{category:slug}', 'destroy')->name('category.destroy');
+            Route::delete('/kategori/{category:slug}', 'destroy')->name(
+                'category.destroy'
+            );
         });
 
         Route::controller(PaymentAccountController::class)->group(function () {
             Route::get('/rekening', 'index');
-            Route::get('/rekening/tambah', 'create')->name('paymentaccount.create');
+            Route::get('/rekening/tambah', 'create')->name(
+                'paymentaccount.create'
+            );
             Route::post('/rekening', 'store')->name('paymentaccount.store');
-            Route::delete('/rekening/{paymentAccount}', 'destroy')->name('paymentaccount.destroy');
+            Route::delete('/rekening/{paymentAccount}', 'destroy')->name(
+                'paymentaccount.destroy'
+            );
         });
     });

@@ -31,11 +31,15 @@ class OrderController extends Controller
         $user = Auth::user();
         $paymentAccount = PaymentAccount::all();
 
-        $userOrders = Order::with(['orderItems' => function ($query) {
-            $query->with(['product' => function ($query) {
-                $query->withTrashed();
-            }]);
-        }])
+        $userOrders = Order::with([
+            'orderItems' => function ($query) {
+                $query->with([
+                    'product' => function ($query) {
+                        $query->withTrashed();
+                    },
+                ]);
+            },
+        ])
             ->where('user_id', $user->id)
             ->where('order_status_id', $selectedStatus->id)
             ->latest()
@@ -56,21 +60,21 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource (Admin Only).
      */
-    public function index_admin(Request $request)
+    public function index_admin(OrderStatus $orderStatus)
     {
-        $status = $request->input('status', '');
-        $selectedStatus = OrderStatus::where('slug', $status)->firstOrFail();
         $orderStatuses = OrderStatus::all();
-        $orders = Order::where('order_status_id', $selectedStatus->id)
-            ->with(['orderItems.product' => function ($query) {
-                $query->withTrashed();
-            }])
+        $orders = Order::where('order_status_id', $orderStatus->id)
+            ->with([
+                'orderItems.product' => function ($query) {
+                    $query->withTrashed();
+                },
+            ])
             ->latest()
-            ->get();
+            ->paginate(10);
 
         return view(
             'pages.dashboard.pesanan',
-            compact('selectedStatus', 'orderStatuses', 'orders')
+            compact('orderStatus', 'orderStatuses', 'orders')
         );
     }
 
@@ -129,7 +133,7 @@ class OrderController extends Controller
                 return new OrderItem([
                     'product_id' => $product->id,
                     'price' =>
-                    $product->flashsale->price_after_discount ??
+                        $product->flashsale->price_after_discount ??
                         $product->price,
                     'quantity' => $item['product_quantity'],
                 ]);
@@ -177,19 +181,25 @@ class OrderController extends Controller
     public function acceptOrder(Order $order)
     {
         $order->update(['order_status_id' => 2]);
-        return redirect()->back()->with('success', 'Pesanan diterima');
+        return redirect()
+            ->back()
+            ->with('success', 'Pesanan diterima');
     }
 
     public function completeOrder(Order $order)
     {
         $order->update(['order_status_id' => 3]);
-        return redirect()->back()->with('success', 'Pesanan selesai');
+        return redirect()
+            ->back()
+            ->with('success', 'Pesanan selesai');
     }
 
     public function rejectOrder(Order $order)
     {
         $order->update(['order_status_id' => 4]);
-        return redirect()->back()->with('success', 'Pesanan dibatalkan');
+        return redirect()
+            ->back()
+            ->with('success', 'Pesanan dibatalkan');
     }
 
     /**

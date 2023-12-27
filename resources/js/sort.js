@@ -1,23 +1,17 @@
 $(function () {
-    $('#sort').on('change', function (e) {
-        var newSortValue = e.target.value;
+    function updateUrlAndReload(key, value) {
         var currentUrl = new URL(window.location);
-        // Use URLSearchParams for query string manipulation
-        var searchParams = currentUrl.searchParams;
-        searchParams.set('sort', newSortValue); // Set or update the 'sort' parameter
-
-        // Update the URL in the address bar and reload the page
+        currentUrl.searchParams.set(key, value);
         window.location.href = currentUrl.toString();
+    }
+
+    $('#sort').on('change', function () {
+        var sortValue = $(this).val();
+        updateUrlAndReload('sort', sortValue);
     });
 
-    $('#outofstock').on('change', function (e) {
-        var newSortValue = $(this).is(':checked');
-        var currentUrl = new URL(window.location);
-        // Use URLSearchParams for query string manipulation
-        var searchParams = currentUrl.searchParams;
-        searchParams.set('empty', newSortValue); // Set or update the 'sort' parameter
-
-        // Update the URL in the address bar and reload the page
-        window.location.href = currentUrl.toString();
+    $('#outofstock').on('change', function () {
+        var isOutOfStockChecked = $(this).is(':checked');
+        updateUrlAndReload('empty', isOutOfStockChecked);
     });
 });
