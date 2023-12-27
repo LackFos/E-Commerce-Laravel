@@ -80,7 +80,7 @@
                                         {{ $item->product->name }}
                                         <span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs text-white">x{{ $item->quantity }}</span>
                                     </div>
-                                    <span class="text-gray-400">@money($item->product->price)</span>
+                                    <span class="text-gray-400">@money($item->price)</span>
                                 </div>
                             @endforeach
                         </div>

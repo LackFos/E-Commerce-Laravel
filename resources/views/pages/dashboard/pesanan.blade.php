@@ -40,7 +40,7 @@
                                             <div class='flex items-center justify-center rounded-full bg-gray-200 px-6 py-2'><span
                                                     class='text-black opacity-60'>{{ $item->product->size }}</span>
                                             </div>
-                                            <span class='text-lg font-bold'>@money($item->product->price) x {{ $item->quantity }}</span>
+                                            <span class='text-lg font-bold'>@money($item->price) x {{ $item->quantity }}</span>
                                         </div>
                                     </div>
                                 @endforeach
