@@ -66,11 +66,11 @@
                                             @method('patch')
 
                                             <div class="flex justify-end gap-2">
-                                                <button formaction="{{ $order->id }}/accept" type="submit"
+                                                <button formaction="{{ route('order.accept', ['order' => $order->id]) }}" type="submit"
                                                     class="flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-white">
                                                     Terima Pesanan
                                                 </button>
-                                                <button formaction="{{ $order->id }}/reject" type="submit"
+                                                <button formaction="{{ route('order.reject', ['order' => $order->id]) }}" type="submit"
                                                     class="flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-white">
                                                     Batalkan Pesanan
                                                     <x-icons.cancel />
@@ -83,11 +83,11 @@
                                             @method('patch')
 
                                             <div class="flex justify-end gap-2">
-                                                <button formaction="{{ $order->id }}/complete" type="submit"
+                                                <button formaction="{{ route('order.complete', ['order' => $order->id]) }}" type="submit"
                                                     class="flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-white">
                                                     Pesanan Selesai
                                                 </button>
-                                                <button formaction="{{ $order->id }}/reject" type="submit"
+                                                <button formaction="{{ route('order.reject', ['order' => $order->id]) }}" type="submit"
                                                     class="flex cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-6 py-2 text-sm font-medium text-white">
                                                     Batalkan Pesanan
                                                     <x-icons.cancel />
