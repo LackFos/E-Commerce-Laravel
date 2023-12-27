@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Banner;
 use App\Utils\Utils;
+use App\Models\Banner;
+use Illuminate\Support\Arr;
 use App\Http\Requests\StoreBannerRequest;
 use App\Http\Requests\UpdateBannerRequest;
 
@@ -31,11 +32,16 @@ class BannerController extends Controller
      */
     public function store(StoreBannerRequest $request)
     {
-        $validated = $request->validated();
-        $validated['image'] = Utils::uploadImage(
-            $request->file('image'),
-            'banner_images'
-        );
+        $validated = Arr::except($request->validated(), ['image']);
+
+        if ($request->hasFile('image')) {
+            $imagePath = Utils::uploadImage(
+                $request->file('image'),
+                'banner_images'
+            );
+            $validated['image'] = $imagePath;
+        }
+
         Banner::create($validated);
         return redirect()
             ->back()
@@ -65,7 +71,6 @@ class BannerController extends Controller
     {
         $validated = $request->validated();
         $banner->update($validated);
-
         if ($request->hasFile('image')) {
             $newImagePath = Utils::uploadImage(
                 $request->file('image'),
