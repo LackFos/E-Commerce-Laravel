@@ -10,11 +10,9 @@ use App\Models\OrderItem;
 use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 use App\Models\PaymentAccount;
-use App\Helpers\ImageUploadHelper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\UpdateOrderStatusRequest;
 use App\Http\Requests\UploadPaymentReceiptRequest;
 
 class OrderController extends Controller
@@ -43,7 +41,7 @@ class OrderController extends Controller
             ->where('user_id', $user->id)
             ->where('order_status_id', $selectedStatus->id)
             ->latest()
-            ->get();
+            ->paginate(10);
 
         return view(
             'pages.orders',

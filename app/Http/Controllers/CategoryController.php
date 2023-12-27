@@ -107,9 +107,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
-        return redirect()
-            ->back()
-            ->with('success', 'Kategori berhasil dihapus');
+        if (Utils::isAdmin()) {
+            $category->delete();
+            return redirect()
+                ->back()
+                ->with('success', 'Kategori berhasil dihapus');
+        }
     }
 }

@@ -95,6 +95,8 @@
                     </div>
                 </div>
             @endforeach
+
+            {{ $userOrders->links() }}
         @else
             <div class='flex w-full flex-col justify-center gap-6 rounded-2xl border border-solid border-gray-100 bg-white p-6'>
                 <div class="flex flex-col items-center justify-center gap-2 py-10">

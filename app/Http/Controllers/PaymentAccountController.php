@@ -14,7 +14,10 @@ class PaymentAccountController extends Controller
     public function index()
     {
         $paymentAccounts = PaymentAccount::all();
-        return view('pages.dashboard.rekening', compact('paymentAccounts'))->with('hideFooter', true);
+        return view(
+            'pages.dashboard.rekening',
+            compact('paymentAccounts')
+        )->with('hideFooter', true);
     }
 
     /**
@@ -22,7 +25,10 @@ class PaymentAccountController extends Controller
      */
     public function create()
     {
-        return view('pages.dashboard.rekening-tambah')->with('hideFooter', true);
+        return view('pages.dashboard.rekening-tambah')->with(
+            'hideFooter',
+            true
+        );
     }
 
     /**
@@ -33,7 +39,9 @@ class PaymentAccountController extends Controller
         $validated = $request->validated();
         $paymentAccount = new PaymentAccount($validated);
         $paymentAccount->save();
-        return redirect()->back()->with("success", "Nomor Rekening berhasil ditambah");
+        return redirect()
+            ->back()
+            ->with('success', 'Nomor Rekening berhasil ditambah');
     }
 
     /**
@@ -64,7 +72,11 @@ class PaymentAccountController extends Controller
      */
     public function destroy(PaymentAccount $paymentAccount)
     {
-        $paymentAccount->delete();
-        return redirect()->back()->with('success', 'Nomor Rekening berhasil dihapus');
+        if (Utils::isAdmin()) {
+            $paymentAccount->delete();
+            return redirect()
+                ->back()
+                ->with('success', 'Nomor Rekening berhasil dihapus');
+        }
     }
 }

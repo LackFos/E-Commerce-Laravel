@@ -32,9 +32,14 @@ class BannerController extends Controller
     public function store(StoreBannerRequest $request)
     {
         $validated = $request->validated();
-        $validated['image'] = Utils::uploadImage($request->file('image'), 'banner_images');
+        $validated['image'] = Utils::uploadImage(
+            $request->file('image'),
+            'banner_images'
+        );
         Banner::create($validated);
-        return redirect()->back()->with('success', 'Banner berhasil ditambahkan');
+        return redirect()
+            ->back()
+            ->with('success', 'Banner berhasil ditambahkan');
     }
 
     /**
@@ -62,12 +67,18 @@ class BannerController extends Controller
         $banner->update($validated);
 
         if ($request->hasFile('image')) {
-            $newImagePath = Utils::uploadImage($request->file('image'), 'banner_images', $banner->image);
+            $newImagePath = Utils::uploadImage(
+                $request->file('image'),
+                'banner_images',
+                $banner->image
+            );
             $banner->image = $newImagePath;
             $banner->save();
         }
 
-        return redirect()->back()->with('success', 'Banner berhasil diperbarui');
+        return redirect()
+            ->back()
+            ->with('success', 'Banner berhasil diperbarui');
     }
 
     /**
@@ -75,7 +86,11 @@ class BannerController extends Controller
      */
     public function destroy(Banner $banner)
     {
-        $banner->delete();
-        return redirect()->back()->with('success', 'Banner berhasil dihapus');
+        if (Utils::isAdmin()) {
+            $banner->delete();
+            return redirect()
+                ->back()
+                ->with('success', 'Banner berhasil dihapus');
+        }
     }
 }
