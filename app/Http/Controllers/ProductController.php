@@ -16,11 +16,6 @@ class ProductController extends Controller
 {
     public function search(Request $request)
     {
-        $breadcrumb = [
-            ['name' => 'Home', 'link' => route('home')],
-            ['name' => 'Cari'],
-        ];
-
         $keyword = $request->input('q', '');
         $sortParam = $request->query('sort', null);
         $categories = Category::all();
@@ -45,11 +40,6 @@ class ProductController extends Controller
 
     public function flashsale(Request $request)
     {
-        $breadcrumb = [
-            ['name' => 'Home', 'link' => route('home')],
-            ['name' => 'Flashsale'],
-        ];
-
         $sortParam = $request->query('sort', null);
         $categories = Category::all();
         $flashsales = Flashsale::all();
@@ -73,10 +63,28 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::latest()->get();
-        return view('pages.dashboard.produk', compact('products'));
+        $keyword = $request->input('q', '');
+        $sortParam = $request->query('sort', null);
+        $showEmptyProduct = filter_var(
+            $request->query('empty'),
+            FILTER_VALIDATE_BOOLEAN
+        );
+
+        $products = Product::with(['category', 'flashsale'])
+            ->where('name', 'like', '%' . $keyword . '%')
+            ->when($showEmptyProduct, function ($query) {
+                return $query->where('stock', '=', 0);
+            })
+            ->get();
+
+        $products = Utils::sortProduct($products, $sortParam);
+
+        return view(
+            'pages.dashboard.produk',
+            compact('products', 'showEmptyProduct')
+        );
     }
 
     /**
@@ -97,7 +105,10 @@ class ProductController extends Controller
         $validated['slug'] = Str::slug($validated['name'], '-');
 
         if ($request->hasFile('image')) {
-            $validated['image'] = Utils::uploadImage($request->file('image'), 'upload_images');
+            $validated['image'] = Utils::uploadImage(
+                $request->file('image'),
+                'upload_images'
+            );
         }
 
         $product = new Product($validated);
@@ -110,7 +121,9 @@ class ProductController extends Controller
             );
         }
 
-        return redirect()->back()->with('success', 'Produk berhasil ditambahkan');
+        return redirect()
+            ->back()
+            ->with('success', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -140,9 +153,12 @@ class ProductController extends Controller
         $validated = $request->validated();
         $product->update($validated);
 
-
         if ($request->hasFile('image')) {
-            $newImagePath = Utils::uploadImage($request->file('image'), 'upload_images', $product->image);
+            $newImagePath = Utils::uploadImage(
+                $request->file('image'),
+                'upload_images',
+                $product->image
+            );
             $product->image = $newImagePath;
             $product->save();
         }
@@ -153,13 +169,18 @@ class ProductController extends Controller
                 ['price_after_discount' => $validated['flashsale']]
             );
         } else {
-            $existingFlashsale = Flashsale::where('product_id', $product->id)->first();
+            $existingFlashsale = Flashsale::where(
+                'product_id',
+                $product->id
+            )->first();
             if ($existingFlashsale) {
                 $existingFlashsale->delete();
             }
         }
 
-        return redirect()->back()->with('success', 'Produk berhasil diperbarui');
+        return redirect()
+            ->back()
+            ->with('success', 'Produk berhasil diperbarui');
     }
 
     /**
@@ -168,6 +189,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->back()->with('success', 'Produk berhasil dihapus');
+        return redirect()
+            ->back()
+            ->with('success', 'Produk berhasil dihapus');
     }
 }

@@ -31,8 +31,9 @@
                             </div>
                             <div class="flex w-1/2 items-start justify-start">
                                 <label for="imageInput" class="flex cursor-pointer justify-start text-2xl font-semibold text-gray-400">
-                                    <div class="flex h-32 w-80 items-center justify-center rounded-lg border border-dashed border-gray-300 bg-transparent">
+                                    <div class="relative flex h-32 w-80 items-center justify-center rounded-lg border border-dashed border-gray-300 bg-transparent">
                                         +
+                                        <img class="absolute object-cover h-full w-full rounded-lg border border-dashed border-gray-300" id='imagePreview' />
                                         <input type="file" id="imageInput" name="image" class="absolute left-0 top-0 h-0 w-0 opacity-0" accept="image/*" />
                                     </div>
                                 </label>
@@ -45,3 +46,8 @@
         </div>
     </x-layout.admin>
 @endsection
+
+
+@push('scripts')
+    @vite('resources/js/imageInput.js')
+@endpush
