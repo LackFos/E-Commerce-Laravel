@@ -69,7 +69,7 @@ class BannerController extends Controller
      */
     public function update(UpdateBannerRequest $request, Banner $banner)
     {
-        $validated = $request->validated();
+        $validated = Arr::except($request->validated(), ['image']);
         $banner->update($validated);
         if ($request->hasFile('image')) {
             $newImagePath = Utils::uploadImage(
@@ -92,6 +92,7 @@ class BannerController extends Controller
     public function destroy(Banner $banner)
     {
         if (Utils::isAdmin()) {
+            Utils::deleteImage($banner->image, 'banner_images');
             $banner->delete();
             return redirect()
                 ->back()

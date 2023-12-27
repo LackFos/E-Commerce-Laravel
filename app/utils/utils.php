@@ -28,13 +28,25 @@ class Utils
 
         // Delete old file if it exists
         if ($oldFilePath) {
-            $oldFileFullPath = str_replace('/storage/', '', $oldFilePath);
-            if (Storage::disk('public')->exists($oldFileFullPath)) {
-                Storage::disk('public')->delete($oldFileFullPath);
-            }
+            self::deleteImage($oldFilePath, $targetDirectory);
         }
 
         return $newFileUrl;
+    }
+
+    public static function deleteImage($imagePath, $targetDirectory)
+    {
+        $fileBasename = basename($imagePath);
+
+        if (
+            Storage::disk('public')->exists(
+                $targetDirectory . '/' . $fileBasename
+            )
+        ) {
+            Storage::disk('public')->delete(
+                $targetDirectory . '/' . $fileBasename
+            );
+        }
     }
 
     public static function isAdmin()

@@ -29,6 +29,7 @@ class AuthController extends Controller
 
         try {
             $userData = Arr::except($request->validated(), ['image']);
+
             $user->update($userData);
 
             if ($request->hasFile('image')) {
