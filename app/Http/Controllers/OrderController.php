@@ -186,7 +186,38 @@ class OrderController extends Controller
 
     public function completeOrder(Order $order)
     {
-        $order->update(['order_status_id' => 3]);
+        DB::beginTransaction();
+        try {
+            $order->update(['order_status_id' => 3]);
+            $orderItems = $order->orderItems;
+
+            foreach ($orderItems as $orderItem) {
+                $product = $orderItem->product;
+                if ($product->stock < $orderItem->quantity) {
+                    DB::rollBack();
+                    return redirect()
+                        ->back()
+                        ->with(
+                            'error',
+                            'Stok ' .
+                                $product->name .
+                                ' Tidak cukup untuk memenuhi pesanan'
+                        );
+                }
+
+                $product->stock -= $orderItem->quantity;
+                $product->save();
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            // Optionally log the error or handle it as required
+            return redirect()
+                ->back()
+                ->with('error', 'Terjadi error, silahkan coba lagi.');
+        }
+
         return redirect()
             ->back()
             ->with('success', 'Pesanan selesai');
@@ -214,7 +245,6 @@ class OrderController extends Controller
                     'payment_images',
                     $request->order->payment_receipt
                 );
-
                 // Update the order with the new receipt image path
                 $request->order->payment_receipt = $newImagePath;
                 $request->order->save();
