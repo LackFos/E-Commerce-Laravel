@@ -43,10 +43,12 @@ class ProductController extends Controller
             ->paginate(20);
 
         $heading = $keyword ? 'Produk' . ' "' . $keyword . '" ' : 'Produk';
+        $metaTitle = 'Produk' . ' "' . $keyword . '"';
 
         return view(
             'pages.archive',
             compact(
+                'metaTitle',
                 'keyword',
                 'categories',
                 'heading',
@@ -63,21 +65,46 @@ class ProductController extends Controller
             ['name' => 'Flashsale'],
         ];
 
-        $sortParam = $request->query('sort', null);
-        $categories = Category::all();
-        $flashsales = Flashsale::all();
-
-        $products = Flashsale::with('product')
-            ->map(function ($flashsale) {
-                return $flashsale->product;
-            })
-            ->paginate(20);
-
         $heading = 'Flash Sale';
+        $categories = Category::all();
+        $sortParam = $request->query('sort', null);
+        $metaTitle = 'Flashsale';
+
+        $productsQuery = Product::select('products.*')
+            ->join('flashsales', 'flashsales.product_id', '=', 'products.id')
+            ->with('flashsale')
+            ->when($sortParam, function ($query, $sortParam) {
+                switch ($sortParam) {
+                    case 'highest':
+                        return $query->orderBy(
+                            'flashsales.price_after_discount',
+                            'desc'
+                        );
+                    case 'lowest':
+                        return $query->orderBy(
+                            'flashsales.price_after_discount',
+                            'asc'
+                        );
+                    case 'latest':
+                        return $query->orderBy('products.created_at', 'desc');
+                    case 'oldest':
+                        return $query->orderBy('products.created_at', 'asc');
+                    default:
+                        return $query;
+                }
+            });
+
+        $products = $productsQuery->paginate(20);
 
         return view(
             'pages.archive',
-            compact('categories', 'heading', 'breadcrumb', 'products')
+            compact(
+                'metaTitle',
+                'categories',
+                'heading',
+                'breadcrumb',
+                'products'
+            )
         );
     }
 
@@ -114,9 +141,11 @@ class ProductController extends Controller
             })
             ->paginate(20);
 
+        $metaTitle = 'Daftar Produk';
+
         return view(
             'pages.dashboard.produk',
-            compact('products', 'showEmptyProduct')
+            compact('metaTitle', 'products', 'showEmptyProduct')
         );
     }
 
@@ -126,7 +155,11 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('pages.dashboard.produk-tambah', compact('categories'));
+        $metaTitle = 'Tambah Produk';
+        return view(
+            'pages.dashboard.produk-tambah',
+            compact('metaTitle', 'categories')
+        );
     }
 
     /**
@@ -164,7 +197,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('pages.produk', compact('product'));
+        $metaTitle = $product->name;
+        return view('pages.produk', compact('metaTitle', 'product'));
     }
 
     /**
@@ -172,12 +206,13 @@ class ProductController extends Controller
      */
     public function edit($slug)
     {
+        $metaTitle = 'Edit Produk';
         $product = Product::where('slug', $slug)->firstOrFail();
         $categories = Category::all();
 
         return view(
             'pages.dashboard.produk-edit',
-            compact('product', 'categories')
+            compact('metaTitle', 'product', 'categories')
         );
     }
 

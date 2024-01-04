@@ -43,9 +43,14 @@ class OrderController extends Controller
             ->latest()
             ->paginate(10);
 
+        $metaTitle = $selectedStatus
+            ? 'Pesanan ' . $selectedStatus->name
+            : 'Pesanan Saya';
+
         return view(
             'pages.orders',
             compact(
+                'metaTitle',
                 'user',
                 'selectedStatus',
                 'orderStatuses',
@@ -60,6 +65,7 @@ class OrderController extends Controller
      */
     public function index_admin(OrderStatus $orderStatus)
     {
+        $metaTitle = 'Pesanan';
         $orderStatuses = OrderStatus::all();
         $orders = Order::where('order_status_id', $orderStatus->id)
             ->with([
@@ -72,7 +78,7 @@ class OrderController extends Controller
 
         return view(
             'pages.dashboard.pesanan',
-            compact('orderStatus', 'orderStatuses', 'orders')
+            compact('metaTitle', 'orderStatus', 'orderStatuses', 'orders')
         );
     }
 

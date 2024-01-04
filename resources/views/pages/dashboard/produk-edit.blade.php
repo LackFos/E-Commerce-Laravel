@@ -64,7 +64,7 @@
                             <div class="grid w-full grid-cols-2 gap-4">
                                 @foreach ($categories as $category)
                                     <label class="flex w-full gap-3">
-                                        <input type='radio' name='category_id' value='{{ $category->id }}' @if ($product->category->id == $category->id) checked @endif />
+                                        <input type='radio' name='category_id' value='{{ $category?->id }}' @if ($product->category?->id == $category?->id) checked @endif />
                                         <span class="flex cursor-pointer items-center justify-start font-medium">
                                             {{ $category->name }}
                                         </span>

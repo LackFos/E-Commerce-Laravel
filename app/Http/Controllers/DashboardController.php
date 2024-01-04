@@ -40,9 +40,12 @@ class DashboardController extends Controller
             ->orderBy('stock')
             ->get();
 
+        $metaTitle = 'Dashboard';
+
         return view(
             'Pages.dashboard.beranda',
             compact(
+                'metaTitle',
                 'orderStatuses',
                 'emptyStockProduct',
                 'almostEmptyStockProduct'

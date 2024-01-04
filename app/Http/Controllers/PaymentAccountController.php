@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Utils\Utils;
 use App\Http\Requests\StorePaymentAccountRequest;
 use Illuminate\Http\Request;
 use App\Models\PaymentAccount;
@@ -13,10 +14,12 @@ class PaymentAccountController extends Controller
      */
     public function index()
     {
+        $metaTitle = 'Rekening';
+
         $paymentAccounts = PaymentAccount::all();
         return view(
             'pages.dashboard.rekening',
-            compact('paymentAccounts')
+            compact('metaTitle', 'paymentAccounts')
         )->with('hideFooter', true);
     }
 
@@ -25,10 +28,12 @@ class PaymentAccountController extends Controller
      */
     public function create()
     {
-        return view('pages.dashboard.rekening-tambah')->with(
-            'hideFooter',
-            true
-        );
+        $metaTitle = 'Tambah Rekening';
+
+        return view(
+            'pages.dashboard.rekening-tambah',
+            compact('metaTitle')
+        )->with('hideFooter', true);
     }
 
     /**

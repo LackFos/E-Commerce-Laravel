@@ -18,7 +18,8 @@ class AuthController extends Controller
 {
     public function show()
     {
-        return view('pages.profile');
+        $metaTitle = 'Profil Akun';
+        return view('pages.profile', compact('metaTitle'));
     }
 
     public function update(UpdateUserDetailRequest $request)
@@ -58,7 +59,9 @@ class AuthController extends Controller
 
     public function showLoginForm()
     {
-        return view('pages.login')
+        $metaTitle = 'Login';
+
+        return view('pages.login', compact('metaTitle'))
             ->with('hideHeader', true)
             ->with('hideFooter', true);
     }
@@ -80,7 +83,9 @@ class AuthController extends Controller
 
     public function showRegisterForm()
     {
-        return view('pages.register')
+        $metaTitle = 'Daftar Akun';
+
+        return view('pages.register', compact('metaTitle'))
             ->with('hideHeader', true)
             ->with('hideFooter', true);
     }

@@ -17,7 +17,12 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('pages.dashboard.kategori', compact('categories'));
+        $metaTitle = 'Semua Kategori';
+
+        return view(
+            'pages.dashboard.kategori',
+            compact('metaTitle', 'categories')
+        );
     }
 
     /**
@@ -52,6 +57,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
         $selectedCategory = $categories->where('slug', $slug)->first();
+        $metaTitle = $selectedCategory->name;
         abort_if(!$selectedCategory, 404, 'Kategori Tidak ditemukan');
 
         $breadcrumb = [
@@ -84,7 +90,14 @@ class CategoryController extends Controller
 
         return view(
             'pages.archive',
-            compact('slug', 'breadcrumb', 'categories', 'heading', 'products')
+            compact(
+                'metaTitle',
+                'slug',
+                'breadcrumb',
+                'categories',
+                'heading',
+                'products'
+            )
         );
     }
 

@@ -15,8 +15,9 @@ class BannerController extends Controller
      */
     public function index()
     {
+        $metaTitle = 'Banner';
         $banners = Banner::latest()->get();
-        return view('pages.dashboard.banner', compact('banners'));
+        return view('pages.dashboard.banner', compact('metaTitle', 'banners'));
     }
 
     /**
@@ -24,7 +25,8 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('pages.dashboard.banner-tambah');
+        $metaTitle = 'Tambah Banner';
+        return view('pages.dashboard.banner-tambah', compact('metaTitle'));
     }
 
     /**
@@ -61,7 +63,11 @@ class BannerController extends Controller
      */
     public function edit(Banner $banner)
     {
-        return view('pages.dashboard.banner-edit', compact('banner'));
+        $metaTitle = 'Edit  Banner';
+        return view(
+            'pages.dashboard.banner-edit',
+            compact('metaTitle', 'banner')
+        );
     }
 
     /**

@@ -23,6 +23,8 @@ class CartController extends Controller
 
     public function getCartItems(Request $request)
     {
+        $metaTitle = 'Keranjang';
+
         $cart = json_decode($request->cookie('cart'), true) ?? [
             'products' => [],
             'total_price' => 0,
@@ -30,7 +32,10 @@ class CartController extends Controller
 
         $productIds = array_column($cart['products'], 'product_id');
 
-        $products = Product::whereIn('id', $productIds)->with(['flashsale'])->get()->keyBy('id');
+        $products = Product::whereIn('id', $productIds)
+            ->with(['flashsale'])
+            ->get()
+            ->keyBy('id');
 
         $total_price = 0;
         foreach ($cart['products'] as $key => &$cartProduct) {
@@ -43,13 +48,15 @@ class CartController extends Controller
 
             $product = $products[$productId];
             $cartProduct['product'] = $product;
-            $total_price += $product->price_after_discount * $cartProduct['product_quantity'];
+            $total_price +=
+                $product->price_after_discount *
+                $cartProduct['product_quantity'];
         }
 
         $cart['products'] = array_values($cart['products']);
         $cart['total_price'] = $total_price;
 
-        return view('pages.cart', compact('cart'));
+        return view('pages.cart', compact('metaTitle', 'cart'));
     }
     public function addToCart(Request $request)
     {
