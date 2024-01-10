@@ -2,17 +2,23 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "serve": "php artisan serve",
         "dev": "vite",
         "build": "vite build",
-        "format": "blade-formatter resources/**/*.blade.php"
+        "migrate": "php artisan migrate:fresh --seed"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.16",
-        "axios": "^1.6.1",
+        "axios": "^1.6.2",
         "blade-formatter": "^1.38.6",
         "laravel-vite-plugin": "^0.8.0",
         "postcss": "^8.4.32",
         "tailwindcss": "^3.3.6",
         "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "jquery": "^3.7.1",
+        "swiper": "^11.0.5",
+        "tailwindcss-rtl": "^0.9.0"
     }
 }

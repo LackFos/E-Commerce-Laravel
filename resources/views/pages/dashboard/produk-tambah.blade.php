@@ -1,0 +1,110 @@
+@extends('index')
+
+@section('page')
+    <x-layout.admin>
+
+        <div class="flex gap-2">
+            <div class="flex w-full">
+                <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data" class="flex w-full flex-col gap-6 p-10">
+                    @csrf
+                    <div class="flex w-full justify-start gap-2">
+                        <span class="font-semibold"><a href="/dashboard/produk" class="text-black">Produk</a></span>
+                        <span>•</span>
+                        <span aria-current="page" class="text-gray-500 active:font-semibold">Tambah Produk</span>
+                    </div>
+
+                    <div class="flex w-full flex-col rounded-lg border border-solid border-gray-200 bg-white">
+                        <span class="flex justify-start rounded-t-lg border-b border-solid border-gray-200 bg-white p-6 text-lg font-bold">Tambah Produk</span>
+                        <div class="flex gap-6 px-6 py-4">
+                            <span class="flex w-1/2 items-center justify-start font-medium">Nama Barang</span>
+                            <input class="w-1/2 rounded-lg border border-solid border-gray-200 px-4 py-1" placeholder="Masukan Nama Barang" type="text" name="name" id=""
+                                value={{ old('name') }}>
+                        </div>
+
+                        <div class="flex gap-6 px-6 py-4">
+                            <span class="flex w-1/2 items-center justify-start font-medium">Harga Barang</span>
+                            <div class="relative w-1/2">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-gray-600">Rp.</span>
+                                <input type="number" class="w-full rounded-lg border border-solid border-gray-200 px-4 py-1 pl-8 placeholder:text-black" placeholder="-" min="1"
+                                    name="price" id="rupiahInput" value={{ old('price') }}>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-6 px-6 py-4">
+                            <span class="flex w-1/2 items-center justify-start font-medium">Warna</span>
+                            <input class="w-1/2 rounded-lg border border-solid border-gray-200 px-4 py-1" placeholder="Masukan Warna" type="text" name="color" id=""
+                                value={{ old('color') }}>
+                        </div>
+
+                        <div class="flex gap-6 px-6 py-4">
+                            <span class="flex w-1/2 items-center justify-start font-medium">Ukuran</span>
+                            <input class="w-1/2 rounded-lg border border-solid border-gray-200 px-4 py-1" placeholder="Masukan Ukuran" type="text" name="size"
+                                value={{ old('size') }}>
+                        </div>
+
+                        <div class="flex gap-6 px-6 py-4">
+                            <span class="flex w-1/2 items-center justify-start font-medium">Stock</span>
+                            <input class="w-1/2 rounded-lg border border-solid border-gray-200 px-4 py-1" placeholder="Masukan Stok" type="number" name="stock"
+                                value={{ old('stock') }}>
+                        </div>
+
+                        <div class="flex flex-col justify-start gap-4 px-6 py-6 pt-4">
+                            <span class="font-medium leading-8">Foto Produk</span>
+                            <label for="imageInput" class="flex cursor-pointer justify-start text-2xl font-semibold text-gray-400">
+                                <div class="relative flex h-20 w-20 items-center justify-center bg-transparent">
+                                    +
+                                    <img class="absolute h-full w-full rounded-lg border border-dashed border-gray-300" id='imagePreview' />
+                                    <input type="file" id="imageInput" name="image" class="absolute left-0 top-0 h-0 w-0 opacity-0" accept="image/*" />
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="flex w-full flex-col rounded-lg border border-solid border-gray-200 bg-white">
+                        <span class="flex justify-start rounded-t-lg border-b border-solid border-gray-200 bg-white p-6 text-lg font-bold">Kategori</span>
+                        <div class="flex w-full gap-6 px-6 py-4">
+
+                            <div class="grid w-full grid-cols-2 gap-4">
+                                @foreach ($categories as $category)
+                                    <label class="flex w-full gap-3">
+                                        <input type='radio' name='category_id' value='{{ $category->id }}' @if (old('category_id') == $category->id) checked @endif />
+                                        <span class="flex cursor-pointer items-center justify-start font-medium">
+                                            {{ $category->name }}
+                                        </span>
+                                    </label>
+                                @endforeach
+                            </div>
+
+                        </div>
+                        <div class='flex min-h-[64px] items-center gap-6 border-t border-solid border-gray-200 px-6'>
+                            <a href="{{ route('category') }}" class="font-medium text-primary">+ Tambah Kategori</a>
+                        </div>
+                    </div>
+                    <div class="flex w-full flex-col rounded-lg border border-solid border-gray-200 bg-white">
+                        <div class="flex w-full flex-col rounded-lg border border-solid border-gray-200 bg-white">
+                            <span class="flex justify-start rounded-t-lg border-b border-solid border-gray-200 bg-white p-6 text-lg font-bold">Flash Sale</span>
+                            <div class="flex justify-between px-6 py-4">
+                                <span class="flex w-1/2 items-center justify-start font-medium">Harga Flashsale</span>
+                                <div class="relative w-40">
+                                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-black">Rp.</span>
+                                    <input type="number" class="w-full rounded-lg border border-solid border-gray-200 px-4 py-1 pl-10" name="flashsale" id="rupiahInput"
+                                        value="{{ old('flashsale') }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex w-full flex-col rounded-lg border border-solid border-gray-200 bg-white">
+                        <span class="flex justify-start rounded-t-lg border-b border-solid border-gray-200 bg-white p-6 text-lg font-bold">Deskripsi Barang</span>
+                        <div class="flex w-full gap-6 px-6 py-6">
+                            <textarea class="h-60 max-h-60 w-full rounded-lg border border-solid border-gray-200 px-4 py-2 text-left" name="description">{{ old('description') }}</textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full rounded-lg bg-primary px-6 py-2 text-center font-semibold leading-8 text-white">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </x-layout.admin>
+@endsection
+
+@push('scripts')
+    @vite('resources/js/imageInput.js')
+@endpush
